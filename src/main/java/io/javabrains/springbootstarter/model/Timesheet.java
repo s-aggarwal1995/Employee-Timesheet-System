@@ -13,26 +13,36 @@ public class Timesheet {
 
     @Id
     private String id;
-    private Date startDate;
-    private Date endDate;
-    private User user;
-    private List<Task> tasks;
+    private String startDate;
 
-    public Date getStartDate() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
+    private String endDate;
+    private User user;
+    private List<Task> tasks;
+
 
     public User getUser() {
         return user;

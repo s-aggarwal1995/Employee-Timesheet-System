@@ -1,7 +1,8 @@
 package io.javabrains.springbootstarter.bao;
 
 import io.javabrains.springbootstarter.dao.TimesheetRepository;
-import io.javabrains.springbootstarter.dao.UserRepository;
+import io.javabrains.springbootstarter.model.Task;
+import io.javabrains.springbootstarter.model.TaskData;
 import io.javabrains.springbootstarter.model.Timesheet;
 import io.javabrains.springbootstarter.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +11,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TimesheetService {
+public class TimesheetService  implements  TimesheetServiceIfc{
 
-    @Autowired
-    private  UserRepository userRepository;
 
     @Autowired
     private TimesheetRepository timesheetRepository;
 
 
     public List<User> getUsersData(){
-       return userRepository.getUsers();
+        return timesheetRepository.getUsers();
     }
 
     public void setUserData(User user){
-        userRepository.setUser(user);
+        timesheetRepository.setUser(user);
     }
 
 
@@ -35,5 +34,9 @@ public class TimesheetService {
     public List<Timesheet> getTimesheets(){
         return timesheetRepository.getAllTimesheets();
     }
+
+    @Override
+    public List<TaskData> getTasksData() {
+        return  timesheetRepository.getTasksData();
+    }
 }
-// alt + ctrl+ O to clear not used dependencies.

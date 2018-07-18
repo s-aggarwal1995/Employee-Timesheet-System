@@ -3,11 +3,8 @@ package io.javabrains.springbootstarter.model;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
-
 
 import java.util.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

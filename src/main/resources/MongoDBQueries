@@ -1,0 +1,29 @@
+db.Users.insert({
+	"userId": "31",
+	"userName": "tanuj",
+	"managerEmail": "dkumar@svam.com",
+	"clientEmail": "omar@tfa.com",
+	"stakeholdersEmail": [
+		"ruchi@svam.com",
+		"venu@tfa.com"
+	]
+})
+
+----------------------------------------------tasks------------------------------------
+db.tasks.insert([{
+			"taskID": 1,
+			"taskName": "Development"
+		}, {
+			"taskID": 2,
+			"taskName": "Testing"
+		}, {
+			"taskID": 3,
+			"taskName": "Client call"
+		}, {
+			"taskID": 4,
+			"taskName": "Consultant unpaid "
+		}, {
+			"taskID": 5,
+			"taskName": "Others"
+		}
+	])

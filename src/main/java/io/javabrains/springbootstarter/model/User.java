@@ -11,12 +11,21 @@ import java.util.ArrayList;
 @Document (collection = "Users")
 public class User {
 
-     @Id
-     String userId;
-     String userName;
-     String managerEmail;
-     String clientEmail;
-    ArrayList<Stakeholder> stakeholdersEmail;
+    @Id
+    String userId;
+    String userName;
+    String managerEmail;
+    String clientEmail;
+
+    public ArrayList<String> getStakeholdersEmail() {
+        return stakeholdersEmail;
+    }
+
+    public void setStakeholdersEmail(ArrayList<String> stakeholdersEmail) {
+        this.stakeholdersEmail = stakeholdersEmail;
+    }
+
+    ArrayList<String> stakeholdersEmail;
 
     public String getUserId() {
         return userId;
@@ -50,15 +59,9 @@ public class User {
         this.clientEmail = clientEmail;
     }
 
-    public ArrayList<Stakeholder> getStakeholdersEmail() {
-        return stakeholdersEmail;
-    }
 
-    public void setStakeholdersEmail(ArrayList<Stakeholder> stakeholdersEmail) {
-        this.stakeholdersEmail = stakeholdersEmail;
-    }
 
-     public User() {
-     }
+    public User() {
+    }
 
 }

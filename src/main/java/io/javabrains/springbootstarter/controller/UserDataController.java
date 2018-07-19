@@ -39,7 +39,7 @@ public class UserDataController implements UserDataControllerIfc{
 
 
     // post timesheet
-    @RequestMapping(value="/posttimesheet",method=RequestMethod.POST)
+    @RequestMapping(value="/posttimesheetdata",method=RequestMethod.POST)
     public void setTimesheet(@RequestBody Timesheet timesheet)
     {
         timesheetService.addTimesheet(timesheet);

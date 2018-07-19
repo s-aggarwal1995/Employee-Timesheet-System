@@ -5,6 +5,7 @@ import io.javabrains.springbootstarter.model.Task;
 import io.javabrains.springbootstarter.model.TaskData;
 import io.javabrains.springbootstarter.model.Timesheet;
 import io.javabrains.springbootstarter.model.User;
+import io.javabrains.springbootstarter.util.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class TimesheetService  implements  TimesheetServiceIfc{
 
 
     public void addTimesheet(Timesheet timesheet){
+        ExcelService.createExcelSheet(timesheet);
         timesheetRepository.addNewTimesheet(timesheet);
     }
 
@@ -39,4 +41,5 @@ public class TimesheetService  implements  TimesheetServiceIfc{
     public List<TaskData> getTasksData() {
         return  timesheetRepository.getTasksData();
     }
+
 }

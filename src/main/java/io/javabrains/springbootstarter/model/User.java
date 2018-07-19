@@ -16,6 +16,7 @@ public class User {
     String userName;
     String managerEmail;
     String clientEmail;
+    ArrayList<String> stakeholdersEmail;
 
     public ArrayList<String> getStakeholdersEmail() {
         return stakeholdersEmail;
@@ -25,7 +26,7 @@ public class User {
         this.stakeholdersEmail = stakeholdersEmail;
     }
 
-    ArrayList<String> stakeholdersEmail;
+
 
     public String getUserId() {
         return userId;

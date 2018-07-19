@@ -27,3 +27,22 @@ db.tasks.insert([{
 			"taskName": "Others"
 		}
 	])
+
+	-------------------------------postTimesheet-----------------------------------
+	{
+    "startDate":"7/6/2018",
+    "endDate":"6/7/2019",
+    "user":{
+    "userId":"1",
+    "userName":"sanchit",
+    "managerEmail":"djsir@gmail.com",
+    "clientEmail":"sulekha@gmail.com",
+    "stakeholdersEmail":["pmo@gmail.com","xyz@gmail.com"]
+    },
+    "tasks":[{
+    	"taskName":"R&d",
+    	"dayOneHours":"8","dayTwoHours":"8","dayThreeHours":"5","dayFourHours":"6","dayFiveHours":"8","daySixHours":"6","daySevenHours":"5"},
+    {"taskName":"Testing",
+    "dayOneHours":"8","dayTwoHours":"8","dayThreeHours":"8","dayFourHours":"8","dayFiveHours":"8","daySixHours":"8","daySevenHours":"8"}
+    ]
+    }

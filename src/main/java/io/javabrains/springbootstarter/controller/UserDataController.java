@@ -25,24 +25,52 @@ public class UserDataController implements UserDataControllerIfc{
 
     //post user data
     @RequestMapping(value="/postuser",method=RequestMethod.POST)
-    public void setUsersData(@RequestBody User user) {
-
+    public String setUsersData(@RequestBody User user) {
         timesheetService.setUserData(user);
+        return "{\"response\":\"user successfully registered\"}";
+    }
+
+    //update project manager name
+    @RequestMapping(value="/updateprojectmanagername",method=RequestMethod.POST)
+    public String updateProjectManagerName(@RequestBody User user) {
+        timesheetService.setUserData(user);
+        return "{\"response\":\"Project Manager Name Successfully Updated\"}";
+    }
+
+    // update client manager name
+    @RequestMapping(value="/updateclientmanagername",method=RequestMethod.POST)
+    public String updateClientManagerName(@RequestBody User user) {
+        timesheetService.setUserData(user);
+        return "{\"response\":\"Client Manager Name Successfully Updated\"}";
+    }
+
+    // add stakeholder email
+    @RequestMapping(value="/addstakeholderemail",method=RequestMethod.POST)
+    public String addStakeholderEmail(@RequestBody User user) {
+        timesheetService.setUserData(user);
+        return "{\"response\":\"StakeholderEmail is successfully Added\"}";
+    }
+
+    // delete stakeholder email
+    @RequestMapping(value="/deletestakeholderemail",method=RequestMethod.POST)
+    public String deleteStakeholderEmail(@RequestBody User user) {
+        timesheetService.setUserData(user);
+        return "{\"response\":\"StakeholderEmail is successfully Deleted\"}";
     }
 
     // get all users
     @RequestMapping("/getusers")
     public List<User> getUsersData() {
-
         return timesheetService.getUsersData();
     }
 
 
     // post timesheet
     @RequestMapping(value="/posttimesheetdata",method=RequestMethod.POST)
-    public void setTimesheet(@RequestBody Timesheet timesheet)
+    public String setTimesheet(@RequestBody Timesheet timesheet)
     {
         timesheetService.addTimesheet(timesheet);
+        return "{\"response\":\"Timesheet is Successfully Submitted\"}";
     }
 
     // get all timesheets
@@ -52,6 +80,7 @@ public class UserDataController implements UserDataControllerIfc{
         return timesheetService.getTimesheets();
     }
 
+    // get taskData
     @RequestMapping("/gettasksdata")
     public List<TaskData> getTasksData()
     {

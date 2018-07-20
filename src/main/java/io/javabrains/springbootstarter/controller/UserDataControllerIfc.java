@@ -10,9 +10,13 @@ import java.util.List;
 
 public interface UserDataControllerIfc {
 
-    public void setUsersData(@RequestBody User user);
+    public String setUsersData(@RequestBody User user);
+    public String updateProjectManagerName(@RequestBody User user);
+    public String updateClientManagerName(@RequestBody User user);
+    public String addStakeholderEmail(@RequestBody User user);
+    public String deleteStakeholderEmail(@RequestBody User user);
     public List<User> getUsersData();
-    public void setTimesheet(@RequestBody Timesheet timesheet);
+    public String setTimesheet(@RequestBody Timesheet timesheet);
     public List<Timesheet> getTimesheet();
     public List<TaskData> getTasksData();
 

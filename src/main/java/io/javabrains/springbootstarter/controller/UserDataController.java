@@ -73,6 +73,13 @@ public class UserDataController implements UserDataControllerIfc{
         return "{\"response\":\"Timesheet is Successfully Submitted\"}";
     }
 
+    @RequestMapping(value="/exporttoexcel",method=RequestMethod.POST)
+    public String exportToExcel(@RequestBody Timesheet timesheet)
+    {
+        timesheetService.exportToExcel(timesheet);
+        return "{\"response\":\"ExcelSheet is Successfully Created At The Backend\"}";
+    }
+
     // get all timesheets
     @RequestMapping(value="/gettimesheets")
     public List<Timesheet> getTimesheet(){

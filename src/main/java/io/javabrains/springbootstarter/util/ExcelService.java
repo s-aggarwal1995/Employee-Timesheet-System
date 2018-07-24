@@ -59,16 +59,14 @@ public class ExcelService {
             Cell getWeekCell = getWeekRow.getCell(1);
             getWeekCell.setCellValue(timesheet.getStartDate() + "-" + timesheet.getEndDate());
 
-            // arrange dates in different cells of a row
-//            Row getDatesRow = generatedSheet.getRow(6);
-//            for (int j = 5; j < 12; j++) {
-//                Cell DatesCell = getDatesRow.getCell(j);
-//                if(DatesCell == null) {
-//                    //do something with an empty cell
-//                    continue;
-//                }
-//                //your logic
-//            }
+             //arrange dates in different cells of a row
+           Row getDatesRow = generatedSheet.getRow(6);
+           int d=4;
+           for(String date : timesheet.getDates()) {
+               Cell DatesCell = getDatesRow.getCell(d);
+                DatesCell.setCellValue(date);
+                d++;
+           }
 
 
             int i=8;
@@ -77,7 +75,9 @@ public class ExcelService {
                 int j=1;
                 while(j<10){
                     Cell cell = row.getCell(j);
-                    cell.setCellValue(t.getTaskName()+" ( " + t.getTaskDescription());
+                    if(t.getTaskDescription()!="")
+                    cell.setCellValue(t.getTaskName()+" ( " + t.getTaskDescription() + " ) ");
+                    else cell.setCellValue(t.getTaskName());
                     j=j+3;
                     cell = row.getCell(j);
                     cell.setCellValue(t.getDayOneHours());
@@ -103,12 +103,30 @@ public class ExcelService {
                 i++;
             }
 
+
+                // individual date hour sum.
+            Row getHoursRow = generatedSheet.getRow(17);
+            int th=4;
+            for(Number eachDate : timesheet.getTotalHoursForEachDate()) {
+                    Cell hoursCell = getHoursRow.getCell(th);
+                    hoursCell.setCellValue((int) eachDate);
+                    th++;
+            }
+
+
+            // get total weekly hours sum
+            Row getTotalWeeklyHours = generatedSheet.getRow(18);
+            Cell totalWeeklyHoursCell = getTotalWeeklyHours.getCell(3);
+            totalWeeklyHoursCell.setCellValue((int)timesheet.getTotalWeeklyHours());
+
+
+
             // get row for project managerName
             Row getProjectManagerRow = generatedSheet.getRow(21);
 
             // get cell of a project manager
             Cell getProjectManagerNameCell = getProjectManagerRow.getCell(1);
-            getProjectManagerNameCell.setCellValue(timesheet.getUser().getManagerEmail());
+            getProjectManagerNameCell.setCellValue("Offshore Consultant's Project Manager's Name :" + timesheet.getUser().getManagerEmail());
 
 
             // get row for client manager name
@@ -132,25 +150,4 @@ public class ExcelService {
     }
 
 
-//    public void getCompleteWeek(String startDate)  {
-//        //06/07/2018
-//        //String startDate = startDate;
-//        System.out.println("Date we get:" + timesheet.getStartDate());
-//        weekArray.add(timesheet.getStartDate());
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//        Calendar c = Calendar.getInstance();
-//        try {
-//            c.setTime(sdf.parse(timesheet.getStartDate()));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        for (int i = 0; i < 7; i++) {
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            String val = sdf.format(c.getTime());
-//            weekArray.add(val);
-//            i++;
-//        }
-//
-//    }
 }

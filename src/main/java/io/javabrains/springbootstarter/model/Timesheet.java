@@ -13,15 +13,6 @@ public class Timesheet {
 
     @Id
     private String id;
-    private String startDate;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getStartDate() {
         return startDate;
@@ -31,6 +22,14 @@ public class Timesheet {
         this.startDate = startDate;
     }
 
+    private String startDate;
+    private String endDate;
+    private List<String> dates;
+    private List<Number> totalHoursForEachDate;
+    private User user;
+    private List<Task> tasks;
+    private Number totalWeeklyHours;
+
     public String getEndDate() {
         return endDate;
     }
@@ -39,10 +38,29 @@ public class Timesheet {
         this.endDate = endDate;
     }
 
-    private String endDate;
-    private User user;
-    private List<Task> tasks;
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<String> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<String> dates) {
+        this.dates = dates;
+    }
+
+    public List<Number> getTotalHoursForEachDate() {
+        return totalHoursForEachDate;
+    }
+
+    public void setTotalHoursForEachDate(List<Number> totalHoursForEachDate) {
+        this.totalHoursForEachDate = totalHoursForEachDate;
+    }
 
     public User getUser() {
         return user;
@@ -60,6 +78,13 @@ public class Timesheet {
         this.tasks = tasks;
     }
 
+    public Number getTotalWeeklyHours() {
+        return totalWeeklyHours;
+    }
+
+    public void setTotalWeeklyHours(Number totalWeeklyHours) {
+        this.totalWeeklyHours = totalWeeklyHours;
+    }
 
 
     public Timesheet(){

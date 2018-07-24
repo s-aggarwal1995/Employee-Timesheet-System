@@ -14,5 +14,5 @@ public interface TimesheetServiceIfc {
     public void addTimesheet(Timesheet timesheet);
     public List<Timesheet> getTimesheets();
     public List<TaskData> getTasksData();
-
+    public void exportToExcel(Timesheet timesheet);
 }

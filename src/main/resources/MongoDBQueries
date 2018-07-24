@@ -30,19 +30,60 @@ db.tasks.insert([{
 
 	-------------------------------postTimesheet-----------------------------------
 	{
-    "startDate":"7/6/2018",
-    "endDate":"6/7/2019",
-    "user":{
-    "userId":"1",
-    "userName":"sanchit",
-    "managerEmail":"djsir@gmail.com",
-    "clientEmail":"sulekha@gmail.com",
-    "stakeholdersEmail":["pmo@gmail.com","xyz@gmail.com"]
+     "startDate":"7/16/2018",
+     "endDate":"7/22/2018",
+    "dates":["16-jul","17-jul","18-jul","19-jul","20-jun","21-jul","22-jul"],
+    "totalHoursForEachDate":[8,8,8,8,8],
+    "totalWeeklyHours":40,
+    "user":
+    {
+            "userId": "1",
+            "userName": "Vineet Rajput",
+            "managerEmail": "Dhananjay Kumar",
+            "clientEmail": "Omar Colon",
+            "stakeholdersEmail": [
+                "roopali@svam.com",
+                "PMO@svam.com",
+                "Dkumar@svam.com",
+                "veronica.seet@teachforamerica.org"
+            ]
+
     },
     "tasks":[{
-    	"taskName":"R&d",
-    	"dayOneHours":"8","dayTwoHours":"8","dayThreeHours":"5","dayFourHours":"6","dayFiveHours":"8","daySixHours":"6","daySevenHours":"5"},
-    {"taskName":"Testing",
-    "dayOneHours":"8","dayTwoHours":"8","dayThreeHours":"8","dayFourHours":"8","dayFiveHours":"8","daySixHours":"8","daySevenHours":"8"}
+    	"taskName":"Developement",
+    	"taskDescription":"",
+    	"dayOneHours":"8","dayTwoHours":"8","dayThreeHours":"8","dayFourHours":"8","dayFiveHours":"8","daySixHours":"","daySevenHours":""}
     ]
     }
+
+
+    ------------------------users------------------------------------------------------
+
+    [
+        {
+            "userId": "1",
+            "userName": "Tanuj Kathuria",
+            "managerEmail": "Dhananjay Kumar",
+            "clientEmail": "Omar Colon",
+            "stakeholdersEmail": [
+                "Omar.Colon@teachforamerica.org",
+                "roopali@svam.com",
+                "PMO@svam.com",
+                "Dkumar@svam.com",
+                "veronica.seet@teachforamerica.org"
+            ]
+        },
+        {
+            "userId": "2",
+            "userName": "Vineet Rajput",
+            "managerEmail": "Dhananjay Kumar",
+            "clientEmail": "Omar Colon",
+            "stakeholdersEmail": [
+                "Omar.Colon@teachforamerica.org",
+                "roopali@svam.com",
+                "PMO@svam.com",
+                "Dkumar@svam.com",
+                "veronica.seet@teachforamerica.org"
+            ]
+        }
+    ]

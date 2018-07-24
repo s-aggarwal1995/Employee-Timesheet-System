@@ -1,0 +1,231 @@
+<div class="wrapper wrapperpadding">
+    <div class="container">
+        <div *ngIf="!selectedResourceValue" class="col-md-6 centered text-center col-centered">
+            <p>
+                <select name="resource" class="form-control" [(ngModel)]="selectedResourceValue">
+                    <option value="undefined" selected disabled>Select the resource name</option>
+                    <option *ngFor="let resource of resources" [ngValue]="resource">{{resource.userName}}</option>
+                </select>
+            </p>
+        </div>
+    </div>
+</div>
+<div *ngIf="selectedResourceValue">
+    <div class="wrapper">
+        <!-- first column of row -->
+        <!-- second column of row -->
+        <div class="col-md-8" style="background-color:#00303c; color:#ffffff">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Resource Name
+                        <select name="resource" class="form-control" [(ngModel)]="selectedResourceValue">
+                            <option value="" selected disabled>Select the resource name</option>
+                            <option *ngFor="let resource of resources" [ngValue]="resource">{{resource.userName}}</option>
+                        </select>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p>Name of the Project
+                        <input type="text" class="form-control" value="Teach For America" readonly>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p>Select Date:
+                        <p-calendar class="form-control" [disabledDays]="[0,2,3,4,5,6]" [(ngModel)]="startDate" (onSelect)="getWeekFromDate(startDate)"></p-calendar>
+                    </p>
+                </div>
+            </div>
+            <div class="timesheettablediv" style="width:100%">
+                <table style="width:100%;" class="taskstable">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;text-align:center">Task Name</th>
+                            <th style="width:15%;text-align:center">Description</th>
+                            <th style="width:10%" *ngFor="let date of dates">{{date}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tasks of timesheetArray; let i = index">
+                            <td>
+                                <select class="form-control" [(ngModel)]="tasks.taskName">
+                                    <option value="" selected disabled>Select the Task</option>
+                                    <option *ngFor="let task of tasksData" [ngValue]="task.taskName">{{task.taskName}}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Description" (blur)="checkTaskValidation(tasks.taskDescription,'taskDescription',i)"
+                                    type="text" id="" [(ngModel)]="tasks.taskDescription" name="" />
+                            </td>
+                            <td>
+                                <input class="form-control firstDate" id="firstDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" (blur)="checkHours($event,tasks.dayOneHours,'dayOneHours',i)"
+                                    type="text" [(ngModel)]="tasks.dayOneHours" name="" />
+                            </td>
+                            <td>
+                                <input class="form-control secondDate" id="secondDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours"
+                                    (blur)="checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)" type="text" [(ngModel)]="tasks.dayTwoHours"
+                                    name="" />
+                            </td>
+                            <td>
+                                <input class="form-control thirdDate" id="thirdDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" placeholder="hours"
+                                    (blur)="checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)" type="text" [(ngModel)]="tasks.dayThreeHours"
+                                    name="" />
+                            </td>
+                            <td>
+                                <input class="form-control fourthDate" id="fourthDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours"
+                                    placeholder="hours" placeholder="hours" (blur)="checkHours($event,tasks.dayFourHours,'dayFourHours',i)"
+                                    type="text" id="" [(ngModel)]="tasks.dayFourHours" name="" />
+                            </td>
+                            <td>
+                                <input class="form-control fifthDate" id="fifthDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" (blur)="checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)"
+                                    type="text" id="" [(ngModel)]="tasks.dayFiveHours" name="" />
+                            </td>
+                            <td>
+                                <input class="form-control sixthDate" id="sixthDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" (keyup)="checkHours($event,tasks.daySixHours,'daySixHours',i)"
+                                    type="text" id="" [(ngModel)]="tasks.daySixHours" name="" />
+                            </td>
+                            <td>
+                                <input class="form-control seventhDate" id="seventhDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours"
+                                    (blur)="checkHours($event,tasks.daySevenHours,'daySevenHours',i)" type="text" id="" [(ngModel)]="tasks.daySevenHours"
+                                    name="" />
+                            </td>
+                            <td>
+                                <button *ngIf="i==0" class="btn btn-default btn-success" type="button" (click)="addRow()">Add</button>
+                                <button *ngIf="i>0" class="btn btn-default btn-danger" type="button" (click)="deleteFieldValue(i)">Delete</button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="2">
+                                Total Timesheet Hours
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Total" id="firstdatetotal" type="text" [(ngModel)]="firstDateTotal" name="" readonly
+                                />
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Total" id="seconddatetotal" type="text" [(ngModel)]="secondDateTotal" name="" readonly
+                                />
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Total" id="thirdDatthirddatetotaleHour" type="text" [(ngModel)]="thirdDateTotal"
+                                    name="" readonly/>
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Total" id="fouthdatetotal" type="text" id="" [(ngModel)]="fourthDateTotal" name=""
+                                    readonly/>
+
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Total" id="fifthdatetotal" type="text" id="" [(ngModel)]="fifthDateTotal" name=""
+                                    readonly/>
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Total" id="sixthdatetotal" type="text" id="" [(ngModel)]="sixthDateTotal" name=""
+                                    readonly/>
+
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="Total" id="seventhdatetotal" type="text" id="" [(ngModel)]="seventhDateTotal" name=""
+                                    readonly/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+            <div class="row" style="padding:50px 0px 0px 0px">
+                <div class="col-md-6">
+                    <p>Total Weekly Hours
+                        <input id="totalweeklyhours" [value]="totalWeeklyHours" class="form-control" type="text" readonly>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <label style="color:red;" *ngIf="mandatoryValidation">Task Name is Mandatory</label>
+                <label style="color:red;" *ngIf="hourValidation">Hours Cannot be greater than 24</label>
+                <label style="color:red;" *ngIf="message">{{message}}</label>
+            </div>
+
+        </div>
+
+
+        <!-- third column of row -->
+        <div class="col-md-3">
+
+            <div style="margin:10px 0px;">
+                <label style="display:inline">Project Manager Name</label>
+                <div class="input-group">
+                    <div class="input-group">
+                        <input id="managername" type="text" class="form-control" [(ngModel)]="selectedResourceValue.managerEmail" [readonly]="isManagerReadOnly"
+                        />
+                        <span class="input-group-btn">
+                            <button *ngIf="managerEditButtonShowHide" id="clientmanagereditbutton" (click)="hideManagerEditButton()" class="btn btn-default btn-warning edit-button"
+                                type="button">Edit</button>
+                            <button *ngIf="managerUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideManagerUpdateButton()" class="btn btn-default btn-primary update-button"
+                                type="button">Update</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin:10px 0px;">
+                <label style="display:inline">Client Manager Name</label>
+                <div class="input-group">
+                    <input id="clientmanagername" type="text" class="form-control" [(ngModel)]="selectedResourceValue.clientEmail" [readonly]="isClientReadOnly"
+                    />
+                    <span class="input-group-btn">
+                        <button *ngIf="clientEditButtonShowHide" id="clientmanagereditbutton" (click)="hideClientEditButton()" class="btn btn-default btn-warning edit-button"
+                            type="button">Edit</button>
+                        <button *ngIf="clientUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideClientUpdateButton()" class="btn btn-default btn-primary update-button"
+                            type="button">Update</button>
+                    </span>
+                </div>
+            </div>
+
+            <table class="table">
+                <tr>
+                    <th>StakeHolders Email</th>
+                </tr>
+                <tbody>
+                    <tr *ngFor="let stakeholderEmail of selectedResourceValue.stakeholdersEmail">
+                        <td>{{stakeholderEmail}}</td>
+                        <button class="btn btn-default btn-danger" type="button" (click)="deleteStakeHolderEmail(stakeholderEmail)">Delete</button>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form (ngSubmit)="submit(userform)" #userform="ngForm">
+                <label>Add StakeHolder Email</label>
+                <div class="input-group">
+                    <input required class="form-control" id="stakeholderEmail" name="emailaddress" #emailaddress="ngModel" pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
+                        ngModel [(ngModel)]="stakeholderEmail" type="text">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-success add-stakeholder" (click)="addEmail()" [disabled]="!userform.valid" type="submit">Add</button>
+                    </span>
+                </div>
+                <div *ngIf="!emailaddress.valid && emailaddress.touched">
+                    <p *ngIf="emailaddress?.errors?.pattern" style="color:red">Invalid Email Address</p>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div class="wrapper" style="padding:15px 0px 0px 0px;">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <button style="background-color: #00303c;color:white" id="btnSave" class="btn  btn-md center-block" (click)="saveTimesheet()">Save</button>
+            <button id="exportToExcel" class="btn btn-warning btn-md center-block" (click)="exportToExcel()">Export In Excel</button>
+            <button id="sendInMail" class="btn btn-danger btn-md center-block">Send In Mail</button>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+
+</div>

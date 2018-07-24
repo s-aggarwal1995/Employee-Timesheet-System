@@ -23,6 +23,13 @@ repositories {
 	mavenCentral()
 }
 
+sourceSets {
+	main {
+		resources {
+			srcDirs = ["static-resources/dist", "Employee-Timesheet-System/src/main/resources"]
+		}
+	}
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -31,4 +38,36 @@ dependencies {
 	compile ('org.apache.poi:poi:3.9')
 	compile("org.apache.poi:poi:3.12")
 	compile("org.apache.poi:poi-ooxml:3.12")
+}
+
+processResources {
+	dependsOn "buildAngular"
+	from ('static-resources/dist/') {
+		into 'public'
+	}
+}
+
+task buildAngular(type:Exec) {
+	dependsOn "installAngular"
+	workingDir "static-resources"
+	inputs.dir "static-resources"
+	group = BasePlugin.BUILD_GROUP
+//	outputs.dir "$webappDir/dist"
+	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+		commandLine "ng.cmd", "build"
+	} else {
+		commandLine "ng", "build"
+	}
+}
+
+task installAngular(type:Exec) {
+	workingDir "static-resources"
+	inputs.dir "static-resources"
+	group = BasePlugin.BUILD_GROUP
+//	outputs.dir "$webappDir/dist"
+	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+		commandLine "npm.cmd", "install"
+	} else {
+		commandLine "npm", "install"
+	}
 }

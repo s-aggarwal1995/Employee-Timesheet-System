@@ -23,13 +23,13 @@ repositories {
 	mavenCentral()
 }
 
-sourceSets {
+/*sourceSets {
 	main {
 		resources {
-			srcDirs = ["static-resources/dist", "Employee-Timesheet-System/src/main/resources"]
+			srcDirs = ["static-resources/dist", "src/main/resources"]
 		}
 	}
-}
+}*/
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')

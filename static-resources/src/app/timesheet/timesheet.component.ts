@@ -15,6 +15,7 @@ import { Subscription, Observable, timer } from 'rxjs';
 })
 export class TimesheetComponent implements OnInit {
 
+ 
   message: any;
 
   hourValidation: boolean = false;
@@ -373,6 +374,7 @@ export class TimesheetComponent implements OnInit {
 
   saveTimesheet() {
     let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
+
     if (valueIsEmptyOrNot) {
       this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
       this.timesheetService.postTimesheet(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
@@ -380,26 +382,39 @@ export class TimesheetComponent implements OnInit {
           this.message = message.response;
           this.setTimesheetArrayToDefault();
           var self = this;
-          setTimeout(function () { self.message=""; }, 2000);
-        });
-       
+          setTimeout(function () { self.message = ""; }, 2000);
+        },
+          error => console.log(error));
+
     }
 
   }
 
   exportToExcel() {
-    this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
-    //this.checkForEmptyData();
-    this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
-      .subscribe(message => {
-        this.message = message.response;
-        this.setTimesheetArrayToDefault();
-        var self = this;
-        setTimeout(function () { self.message=undefined; }, 2000);
-      });
+    console.log(this.timesheetArray);
+    console.log("called");
+    let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
+
+    if (valueIsEmptyOrNot) {
+      this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+      //this.checkForEmptyData();
+      this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
+        .subscribe(message => {
+          this.message = message.response;
+          var self = this;
+          setTimeout(function () { self.message = ""; }, 2000);
+         
+          window.open("http://localhost:8030/downloadexcelsheet"); 
+          
+          this.setTimesheetArrayToDefault();
+        },
+          error => console.log(error));
+    }
   }
 
-  setTimesheetArrayToDefault(){
+    
+
+  setTimesheetArrayToDefault() {
     this.firstDateTotal = '';
     this.secondDateTotal = '';
     this.thirdDateTotal = '';
@@ -434,9 +449,10 @@ export class TimesheetComponent implements OnInit {
         }
       }
     }
-
     return true;
   }
+
+  
 
 
 }

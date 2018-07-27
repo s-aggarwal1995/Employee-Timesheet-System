@@ -1,20 +1,31 @@
 package io.javabrains.springbootstarter.controller;
 
-import io.javabrains.springbootstarter.bao.TimesheetService;
 import io.javabrains.springbootstarter.bao.TimesheetServiceIfc;
-import io.javabrains.springbootstarter.model.Task;
 import io.javabrains.springbootstarter.model.TaskData;
 import io.javabrains.springbootstarter.model.Timesheet;
 import io.javabrains.springbootstarter.model.User;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+
+
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @Controller
 public class UserDataController implements UserDataControllerIfc{
+
+    private static final String FILE_PATH = "D:\\Employee-Timesheet-System\\WeeklyTimesheet.xlsx";
+
 
     /**
      * programming to interfaces, using ifc as a reference variable
@@ -96,6 +107,22 @@ public class UserDataController implements UserDataControllerIfc{
         return timesheetService.getTasksData();
     }
 
+    @RequestMapping("/downloadexcelsheet")
+    public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        FileInputStream inputStream = new FileInputStream(new File("D:\\Employee-Timesheet-System\\WeeklyTimesheet.xlsx"));
+
+        response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet.xlsx\"");
+//      response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        IOUtils.copy(inputStream, outputStream);
+
+        outputStream.close();
+        inputStream.close();
+    }
+
+//  D:\Employee-Timesheet-System\WeeklyTimesheet.xlsx
 
 }

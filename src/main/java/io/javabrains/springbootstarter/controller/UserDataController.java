@@ -82,8 +82,8 @@ public class UserDataController implements UserDataControllerIfc{
     @RequestMapping(value="/posttimesheetdata",method=RequestMethod.POST)
     public String setTimesheet(@RequestBody Timesheet timesheet)
     {
-        timesheetService.addTimesheet(timesheet);
-        return "{\"response\":\"Timesheet is Successfully Submitted\"}";
+       return timesheetService.addTimesheet(timesheet);
+
     }
 
 
@@ -97,7 +97,8 @@ public class UserDataController implements UserDataControllerIfc{
 
     // get all timesheets
     @RequestMapping(value="/gettimesheets")
-    public List<Timesheet> getTimesheet(){
+    public List<Timesheet> getTimesheet()
+    {
 
         return timesheetService.getTimesheets();
     }

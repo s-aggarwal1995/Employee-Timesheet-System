@@ -28,8 +28,9 @@ public class TimesheetService  implements  TimesheetServiceIfc{
     }
 
 
-    public void addTimesheet(Timesheet timesheet){
-        timesheetRepository.addNewTimesheet(timesheet);
+    public String addTimesheet(Timesheet timesheet){
+       return timesheetRepository.addNewTimesheet(timesheet);
+
     }
 
     public void exportToExcel(Timesheet timesheet){

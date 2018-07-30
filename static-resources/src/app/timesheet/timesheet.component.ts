@@ -83,7 +83,7 @@ export class TimesheetComponent implements OnInit {
     var d = new Date();
     var day = d.getDay(),
       diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-    return new Date(d.setDate(diff));
+    return new Date(d.setDate(diff-7));
   }
 
 

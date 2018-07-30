@@ -11,7 +11,7 @@ public interface TimesheetServiceIfc {
 
     public List<User> getUsersData();
     public void setUserData(User user);
-    public void addTimesheet(Timesheet timesheet);
+    public String addTimesheet(Timesheet timesheet);
     public List<Timesheet> getTimesheets();
     public List<TaskData> getTasksData();
     public void exportToExcel(Timesheet timesheet);

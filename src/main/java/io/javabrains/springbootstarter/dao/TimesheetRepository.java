@@ -22,35 +22,49 @@ public class TimesheetRepository {
     private MongoTemplate mongoTemplate;
 
 
-    public void addNewTimesheet(Timesheet timesheet)
+    public String addNewTimesheet(Timesheet timesheet)
     {
 
         //find whether the record id present
-          mongoTemplate.save(timesheet);
+          //mongoTemplate.save(timesheet);
 
-//        Query query = new Query();
-//
-//        Update update = new Update();
-//
-//
-//        query.addCriteria(Criteria.where("startDate").is(timesheet.getStartDate()).andOperator(Criteria.where("userId").is(timesheet.getUser().getUserId())) );
-//
-//        long count = mongoTemplate.count(query, Timesheet.class);
-//
-//
-//        if (count <= 0)
-//        {
-//
-//            mongoTemplate.save(timesheet);
-//
-//        } else
-//        {
-//
-//            mongoTemplate.updateFirst(query, update, Timesheet.class);
-//
-//        }
+        Query query = new Query();
+//        //query.addCriteria(Criteria.where("startDate").is(timesheet.getStartDate()).andOperator(Criteria.where("userId").is(timesheet.getUser().getUserId())) );
+        query.addCriteria(Criteria.where("startDate").is(timesheet.getStartDate()));
 
-    }
+        List<Timesheet> userTimesheets = mongoTemplate.find( query, Timesheet.class);
+
+
+        int count=0;
+        for (Timesheet userTimesheet : userTimesheets) {
+           if(userTimesheet.getUser().getUserId().equals(timesheet.getUser().getUserId())){
+               count++;
+           }
+        }
+
+        Update update = new Update();
+        update.set("startDate", timesheet.getStartDate());
+        update.set("endDate", timesheet.getEndDate());
+        update.set("dates", timesheet.getDates());
+        update.set("totalHoursForEachDate", timesheet.getTotalHoursForEachDate());
+        update.set("user", timesheet.getUser());
+        update.set("tasks", timesheet.getTasks());
+        update.set("totalWeeklyHours", timesheet.getTotalWeeklyHours());
+
+
+
+
+        if (count <= 0)
+        {
+            mongoTemplate.save(timesheet);
+            return "{\"response\":\"Timesheet is Successfully Submitted\"}";
+
+        } else
+        {
+            mongoTemplate.updateFirst(query, update, Timesheet.class);
+            return "{\"response\":\"Timesheet is Successfully Updated\"}";
+        }
+        }
 
     public List<Timesheet> getAllTimesheets()
     {

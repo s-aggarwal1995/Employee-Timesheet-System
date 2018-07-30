@@ -107,9 +107,9 @@ public class ExcelService {
                 // individual date hour sum.
             Row getHoursRow = generatedSheet.getRow(17);
             int th=4;
-            for(Number eachDate : timesheet.getTotalHoursForEachDate()) {
+            for(String eachDate : timesheet.getTotalHoursForEachDate()) {
                     Cell hoursCell = getHoursRow.getCell(th);
-                    hoursCell.setCellValue((int) eachDate);
+                    hoursCell.setCellValue(eachDate);
                     th++;
             }
 
@@ -117,7 +117,7 @@ public class ExcelService {
             // get total weekly hours sum
             Row getTotalWeeklyHours = generatedSheet.getRow(18);
             Cell totalWeeklyHoursCell = getTotalWeeklyHours.getCell(3);
-            totalWeeklyHoursCell.setCellValue((int)timesheet.getTotalWeeklyHours());
+            totalWeeklyHoursCell.setCellValue(timesheet.getTotalWeeklyHours());
 
 
 

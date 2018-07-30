@@ -25,10 +25,10 @@ public class Timesheet {
     private String startDate;
     private String endDate;
     private List<String> dates;
-    private List<Number> totalHoursForEachDate;
+    private List<String> totalHoursForEachDate;
     private User user;
     private List<Task> tasks;
-    private Number totalWeeklyHours;
+    private String totalWeeklyHours;
 
     public String getEndDate() {
         return endDate;
@@ -54,11 +54,11 @@ public class Timesheet {
         this.dates = dates;
     }
 
-    public List<Number> getTotalHoursForEachDate() {
+    public List<String> getTotalHoursForEachDate() {
         return totalHoursForEachDate;
     }
 
-    public void setTotalHoursForEachDate(List<Number> totalHoursForEachDate) {
+    public void setTotalHoursForEachDate(List<String> totalHoursForEachDate) {
         this.totalHoursForEachDate = totalHoursForEachDate;
     }
 
@@ -78,11 +78,11 @@ public class Timesheet {
         this.tasks = tasks;
     }
 
-    public Number getTotalWeeklyHours() {
+    public String getTotalWeeklyHours() {
         return totalWeeklyHours;
     }
 
-    public void setTotalWeeklyHours(Number totalWeeklyHours) {
+    public void setTotalWeeklyHours(String totalWeeklyHours) {
         this.totalWeeklyHours = totalWeeklyHours;
     }
 

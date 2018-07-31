@@ -7,6 +7,9 @@ import { WeeklyTask } from '../models/weeklyTask'
 import { Resource } from '../models/resource';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Subscription, Observable, timer } from 'rxjs';
+import { ConstantService } from '../services/constants/constants.service';
+import {environment} from '../../environments/environment';
+
 
 @Component({
   selector: 'app-timesheet',
@@ -15,8 +18,15 @@ import { Subscription, Observable, timer } from 'rxjs';
 })
 export class TimesheetComponent implements OnInit {
 
- 
+  addAndEditButtonDisable: boolean = false;
+
+  completeTimesheet: any;
+
   message: any;
+
+  editButtonVisibility: boolean = false;
+  saveButtonVisibility: boolean = true;
+  isReadOnlyForTimesheetRow: boolean = false;
 
   hourValidation: boolean = false;
   mandatoryValidation: boolean = false;
@@ -65,17 +75,30 @@ export class TimesheetComponent implements OnInit {
 
   stakeholderEmail;
 
-  constructor(public timesheetService: TimesheetService, public tasksService: TasksService) { }
+  constructor(public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService) { }
 
   ngOnInit() {
-    this.getResources();
-    this.getTasks();
-    this.startDate = this.getMonday();
-    this.getWeekFromDate(this.startDate);
-    this.timesheetArray.push(this.tasks);
 
-    $("#validationlabel").hide();
-    $("#hourvalidationlabel").hide();
+    // to get the resources name from the service
+    this.getResources();
+
+    // to get task in dropdown from the service
+    this.getTasks();
+
+    // get the current monday of the week
+    this.startDate = this.getMonday();
+
+
+    // get week from date 
+    this.getWeekFromDate(this.startDate);
+
+  }
+
+  getSelectedResourceValue() {
+
+    console.log(this.selectedResourceValue);
+    console.log(this.startDate);
+    this.getExistingTimesheet();
 
   }
 
@@ -83,11 +106,49 @@ export class TimesheetComponent implements OnInit {
     var d = new Date();
     var day = d.getDay(),
       diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-    return new Date(d.setDate(diff-7));
+    return new Date(d.setDate(diff - 7));
   }
 
 
+  getExistingTimesheet() {
+    this.constantService.showLoader();
+    this.timesheetService.getTimesheetAccordingToWeekAndUser(this.startDate, this.selectedResourceValue).subscribe(timesheet => {
+      console.log(timesheet);
+      this.constantService.hideLoader();
 
+      //this.completeTimesheet = timesheet;
+      if (timesheet != null) {
+        this.timesheetArray = [];
+        for (var i = 0; i < timesheet.tasks.length; i++) {
+          this.timesheetArray.push(timesheet.tasks[i]);
+        }
+        this.firstDateTotal = timesheet.totalHoursForEachDate[0];
+        this.secondDateTotal = timesheet.totalHoursForEachDate[1];
+        this.thirdDateTotal = timesheet.totalHoursForEachDate[2];
+        this.fourthDateTotal = timesheet.totalHoursForEachDate[3];
+        this.fifthDateTotal = timesheet.totalHoursForEachDate[4];
+        this.sixthDateTotal = timesheet.totalHoursForEachDate[5];
+        this.seventhDateTotal = timesheet.totalHoursForEachDate[6];
+        this.totalWeeklyHours = timesheet.totalWeeklyHours;
+        this.isReadOnlyForTimesheetRow = true;
+
+        this.editButtonVisibility = true;
+        this.saveButtonVisibility = false;
+
+        // if user get timesheet
+        this.addAndEditButtonDisable = true;
+
+        // if existing timesheet is present then show previous manager and client manager if present
+        //this.selectedResourceValue=timesheet.user;
+
+      }
+      else {
+        this.timesheetArray.push(this.tasks);
+        this.addAndEditButtonDisable = false;
+      }
+    },
+      error => console.log(error));
+  }
 
 
   getResources() {
@@ -187,6 +248,9 @@ export class TimesheetComponent implements OnInit {
       startingDate++;
     }
 
+    if (this.selectedResourceValue != undefined && this.startDate != undefined)
+      this.getExistingTimesheet();
+
   }
 
 
@@ -231,18 +295,18 @@ export class TimesheetComponent implements OnInit {
   }
 
 
-  checkTaskValidation(taskDesp, id, i) {
-    console.log(i);
-    console.log(this.timesheetArray[i]);
-    console.log(this.timesheetArray[i].taskDescription);
+  // checkTaskValidation(taskDesp, id, i) {
+  //   console.log(i);
+  //   console.log(this.timesheetArray[i]);
+  //   console.log(this.timesheetArray[i].taskDescription);
 
 
-    if (taskDesp.length > 20) {
-      alert("task length should not be greater than 20");
-      this.timesheetArray[i][id] = "";
-      return;
-    }
-  }
+  //   if (taskDesp.length > 20) {
+  //     alert("task length should not be greater than 20");
+  //     this.timesheetArray[i][id] = "";
+  //     return;
+  //   }
+  // }
 
   checkHours(event, hours, key, index) {
 
@@ -380,9 +444,16 @@ export class TimesheetComponent implements OnInit {
       this.timesheetService.postTimesheet(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
         .subscribe(message => {
           this.message = message.response;
-          this.setTimesheetArrayToDefault();
           var self = this;
           setTimeout(function () { self.message = ""; }, 2000);
+
+          this.isReadOnlyForTimesheetRow = true;
+          this.editButtonVisibility = true;
+          this.saveButtonVisibility = false;
+
+          this.addAndEditButtonDisable = true;
+
+          //this.setTimesheetArrayToDefault();
         },
           error => console.log(error));
 
@@ -391,28 +462,40 @@ export class TimesheetComponent implements OnInit {
   }
 
   exportToExcel() {
-    console.log(this.timesheetArray);
-    console.log("called");
+
     let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
 
     if (valueIsEmptyOrNot) {
       this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
       //this.checkForEmptyData();
+      this.constantService.showLoader();
+
       this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
         .subscribe(message => {
           this.message = message.response;
           var self = this;
-          setTimeout(function () { self.message = ""; }, 2000);
-         
-          window.open("http://localhost:8030/downloadexcelsheet"); 
-          
-          this.setTimesheetArrayToDefault();
+          setTimeout(function () {
+          self.message = "";
+            self.constantService.hideLoader();
+          }, 2000);
+
+          try {
+            window.open(`${environment.baseUrl}` + "downloadexcelsheet");
+          }
+          catch (e) {
+            this.message = e;
+            var self = this;
+            setTimeout(function () { self.message = ""; }, 2000);
+          }
+
+          this.isReadOnlyForTimesheetRow = true;
+          this.addAndEditButtonDisable = true;
         },
           error => console.log(error));
     }
   }
 
-    
+
 
   setTimesheetArrayToDefault() {
     this.firstDateTotal = '';
@@ -452,7 +535,17 @@ export class TimesheetComponent implements OnInit {
     return true;
   }
 
-  
+  toggleButton() {
+
+    this.isReadOnlyForTimesheetRow = false;
+
+    this.editButtonVisibility = false;
+    this.saveButtonVisibility = true;
+
+    // if user get timesheet
+    this.addAndEditButtonDisable = false;
+  }
+
 
 
 }

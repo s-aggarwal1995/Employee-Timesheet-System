@@ -1,6 +1,6 @@
 package io.javabrains.springbootstarter.controller;
 
-import io.javabrains.springbootstarter.model.Task;
+import io.javabrains.springbootstarter.model.ConditionalTimesheet;
 import io.javabrains.springbootstarter.model.TaskData;
 import io.javabrains.springbootstarter.model.Timesheet;
 import io.javabrains.springbootstarter.model.User;
@@ -19,6 +19,7 @@ public interface UserDataControllerIfc {
     public String setTimesheet(@RequestBody Timesheet timesheet);
     public List<Timesheet> getTimesheet();
     public List<TaskData> getTasksData();
+    public Timesheet getTimesheetsAccordingToWeek(@RequestBody ConditionalTimesheet conditionalTimesheet);
 
 
 

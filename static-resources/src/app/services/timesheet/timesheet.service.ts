@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Resource } from '../../models/resource';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { ConditionalTimesheet } from '../../models/conditionalTimesheet';
+import {environment} from '../../../environments/environment';
 
 
 
@@ -17,13 +19,15 @@ const httpOptions = {
 })
 export class TimesheetService {
 
-  private resourcesUrl = 'http://localhost:8030/getusers';
-  private timesheetPostURL = 'http://localhost:8030/posttimesheetdata';
-  private exportToExcelURL = 'http://localhost:8030/exporttoexcel';
-  private updateManagerURL = 'http://localhost:8030/updateprojectmanagername';
-  private clientManagerURL = 'http://localhost:8030/updateclientmanagername';
-  private addStakeholderEmailURL = 'http://localhost:8030/addstakeholderemail';
-  private deleteStakeholderEmailURL = 'http://localhost:8030/deletestakeholderemail';
+  private baseUrl = `${environment.baseUrl}`;
+  private resourcesUrl = this.baseUrl + 'getusers';
+  private timesheetPostURL =  this.baseUrl + 'posttimesheetdata';
+  private exportToExcelURL =  this.baseUrl + 'exporttoexcel';
+  private updateManagerURL =   this.baseUrl + 'updateprojectmanagername';
+  private clientManagerURL =  this.baseUrl + 'updateclientmanagername';
+  private addStakeholderEmailURL =  this.baseUrl + 'addstakeholderemail';
+  private deleteStakeholderEmailURL =  this.baseUrl + 'deletestakeholderemail';
+  private conditionalTimesheetURL =  this.baseUrl + 'gettimesheetifpresent';
   private log;
 
   constructor(private http:HttpClient) { }
@@ -70,6 +74,18 @@ export class TimesheetService {
   deleteStakeholderEmail(Resource: Resource): Observable<any> {
     return this.http.post(this.deleteStakeholderEmailURL, Resource, httpOptions).pipe(
       catchError(this.handleError('deleteStakeholderEmail', []))
+    );
+  }
+
+
+
+
+  getTimesheetAccordingToWeekAndUser(startDate,user): Observable<any> {
+
+    const postedData:ConditionalTimesheet = { startDate: startDate.toLocaleDateString(), user: user };
+
+    return this.http.post(this.conditionalTimesheetURL, postedData, httpOptions).pipe(
+      catchError(this.handleError('conditional', []))
     );
   }
 

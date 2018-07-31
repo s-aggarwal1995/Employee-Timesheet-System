@@ -1,6 +1,5 @@
 package io.javabrains.springbootstarter.bao;
 
-import io.javabrains.springbootstarter.model.Task;
 import io.javabrains.springbootstarter.model.TaskData;
 import io.javabrains.springbootstarter.model.Timesheet;
 import io.javabrains.springbootstarter.model.User;
@@ -15,4 +14,5 @@ public interface TimesheetServiceIfc {
     public List<Timesheet> getTimesheets();
     public List<TaskData> getTasksData();
     public void exportToExcel(Timesheet timesheet);
+    public Timesheet getTimesheetsAccordingToWeek(String startDate, User user);
 }

@@ -26,8 +26,6 @@ public class User {
         this.stakeholdersEmail = stakeholdersEmail;
     }
 
-
-
     public String getUserId() {
         return userId;
     }

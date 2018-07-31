@@ -1,12 +1,12 @@
 package io.javabrains.springbootstarter.controller;
 
 import io.javabrains.springbootstarter.bao.TimesheetServiceIfc;
+import io.javabrains.springbootstarter.model.ConditionalTimesheet;
 import io.javabrains.springbootstarter.model.TaskData;
 import io.javabrains.springbootstarter.model.Timesheet;
 import io.javabrains.springbootstarter.model.User;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -86,13 +86,19 @@ public class UserDataController implements UserDataControllerIfc{
 
     }
 
+    // get Timesheets according to required conditions
+    @RequestMapping(value="/gettimesheetifpresent",method=RequestMethod.POST)
+    public Timesheet getTimesheetsAccordingToWeek(@RequestBody ConditionalTimesheet conditionalTimesheet){
+        return timesheetService.getTimesheetsAccordingToWeek(conditionalTimesheet.getStartDate(),conditionalTimesheet.getUser());
+    }
+
 
     //export to excel
     @RequestMapping(value="/exporttoexcel",method=RequestMethod.POST)
     public String exportToExcel(@RequestBody Timesheet timesheet)
     {
         timesheetService.exportToExcel(timesheet);
-        return "{\"response\":\"ExcelSheet is Successfully Created At The Backend\"}";
+        return "{\"response\":\"ExcelSheet is Successfully Created\"}";
     }
 
     // get all timesheets
@@ -127,6 +133,8 @@ public class UserDataController implements UserDataControllerIfc{
         outputStream.close();
         inputStream.close();
     }
+
+
 
 
 

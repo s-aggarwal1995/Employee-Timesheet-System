@@ -119,8 +119,6 @@ public class UserDataController implements UserDataControllerIfc{
     @RequestMapping("/downloadexcelsheet")
     public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-
-
         String filePath = new File("EmployeeTimesheet.xlsx").getAbsolutePath();
         FileInputStream inputStream = new FileInputStream(filePath);
         response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet.xlsx\"");

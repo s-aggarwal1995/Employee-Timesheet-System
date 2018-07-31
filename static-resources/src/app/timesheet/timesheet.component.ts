@@ -8,7 +8,7 @@ import { Resource } from '../models/resource';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Subscription, Observable, timer } from 'rxjs';
 import { ConstantService } from '../services/constants/constants.service';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -143,8 +143,26 @@ export class TimesheetComponent implements OnInit {
 
       }
       else {
+        this.timesheetArray = [];
+        this.tasks= new WeeklyTask('', '', '', '', '', '', '', '', '');
         this.timesheetArray.push(this.tasks);
         this.addAndEditButtonDisable = false;
+
+        this.firstDateTotal = "";
+        this.secondDateTotal = "";
+        this.thirdDateTotal = "";
+        this.fourthDateTotal = "";
+        this.fifthDateTotal = "";
+        this.sixthDateTotal = "";
+        this.seventhDateTotal = "";
+        this.totalWeeklyHours = "";
+        this.isReadOnlyForTimesheetRow = false;
+
+
+        this.editButtonVisibility = false;
+        this.saveButtonVisibility = true;
+
+
       }
     },
       error => console.log(error));
@@ -468,15 +486,15 @@ export class TimesheetComponent implements OnInit {
     if (valueIsEmptyOrNot) {
       this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
       //this.checkForEmptyData();
-      this.constantService.showLoader();
+      //this.constantService.showLoader();
 
       this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
         .subscribe(message => {
           this.message = message.response;
           var self = this;
           setTimeout(function () {
-          self.message = "";
-            self.constantService.hideLoader();
+            self.message = "";
+           // self.constantService.hideLoader();
           }, 2000);
 
           try {

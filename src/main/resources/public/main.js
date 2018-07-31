@@ -92,7 +92,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>"
+module.exports = "<div *ngIf=\"ConstantService.displayLoader\" style=\"width:100%;height:100%;opacity:0.7;z-index:9999;background-color:gray;position:fixed;\">\r\n    <img src=\"../assets/imgs/loader.gif\" style=\"margin:auto;display:block;border-radius:7px;position:relative;top:43%;width:86px\">\r\n</div>\r\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -107,15 +107,21 @@ module.exports = "<router-outlet></router-outlet>"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/constants/constants.service */ "./src/app/services/constants/constants.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(ConstantService) {
+        this.ConstantService = ConstantService;
         this.title = 'app';
     }
     AppComponent = __decorate([
@@ -123,7 +129,8 @@ var AppComponent = /** @class */ (function () {
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_services_constants_constants_service__WEBPACK_IMPORTED_MODULE_1__["ConstantService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -229,6 +236,53 @@ var WeeklyTask = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/constants/constants.service.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/services/constants/constants.service.ts ***!
+  \*********************************************************/
+/*! exports provided: ConstantService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConstantService", function() { return ConstantService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ConstantService = /** @class */ (function () {
+    function ConstantService(http) {
+        this.http = http;
+        this.displayLoader = false;
+    }
+    ConstantService.prototype.hideLoader = function () {
+        this.displayLoader = false;
+    };
+    ConstantService.prototype.showLoader = function () {
+        this.displayLoader = true;
+    };
+    ConstantService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], ConstantService);
+    return ConstantService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/tasks/tasks.service.ts":
 /*!*************************************************!*\
   !*** ./src/app/services/tasks/tasks.service.ts ***!
@@ -243,6 +297,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -256,10 +311,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var TasksService = /** @class */ (function () {
     function TasksService(http) {
         this.http = http;
-        this.tasksUrl = 'http://localhost:8030/gettasksdata';
+        this.baseUrl = "" + _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseUrl;
+        this.tasksUrl = this.baseUrl + "gettasksdata";
     }
     TasksService.prototype.getTasks = function () {
         return this.http.get(this.tasksUrl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getHeroes', [])));
@@ -302,6 +359,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -315,19 +373,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
 var TimesheetService = /** @class */ (function () {
     function TimesheetService(http) {
         this.http = http;
-        this.resourcesUrl = 'http://localhost:8030/getusers';
-        this.timesheetPostURL = 'http://localhost:8030/posttimesheetdata';
-        this.exportToExcelURL = 'http://localhost:8030/exporttoexcel';
-        this.updateManagerURL = 'http://localhost:8030/updateprojectmanagername';
-        this.clientManagerURL = 'http://localhost:8030/updateclientmanagername';
-        this.addStakeholderEmailURL = 'http://localhost:8030/addstakeholderemail';
-        this.deleteStakeholderEmailURL = 'http://localhost:8030/deletestakeholderemail';
+        this.baseUrl = "" + _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseUrl;
+        this.resourcesUrl = this.baseUrl + 'getusers';
+        this.timesheetPostURL = this.baseUrl + 'posttimesheetdata';
+        this.exportToExcelURL = this.baseUrl + 'exporttoexcel';
+        this.updateManagerURL = this.baseUrl + 'updateprojectmanagername';
+        this.clientManagerURL = this.baseUrl + 'updateclientmanagername';
+        this.addStakeholderEmailURL = this.baseUrl + 'addstakeholderemail';
+        this.deleteStakeholderEmailURL = this.baseUrl + 'deletestakeholderemail';
+        this.conditionalTimesheetURL = this.baseUrl + 'gettimesheetifpresent';
     }
     TimesheetService.prototype.getResources = function () {
         return this.http.get(this.resourcesUrl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('getHeroes', [])));
@@ -351,6 +412,10 @@ var TimesheetService = /** @class */ (function () {
     };
     TimesheetService.prototype.deleteStakeholderEmail = function (Resource) {
         return this.http.post(this.deleteStakeholderEmailURL, Resource, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('deleteStakeholderEmail', [])));
+    };
+    TimesheetService.prototype.getTimesheetAccordingToWeekAndUser = function (startDate, user) {
+        var postedData = { startDate: startDate.toLocaleDateString(), user: user };
+        return this.http.post(this.conditionalTimesheetURL, postedData, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('conditional', [])));
     };
     TimesheetService.prototype.handleError = function (operation, result) {
         if (operation === void 0) { operation = 'operation'; }
@@ -394,7 +459,7 @@ module.exports = ".wrapperpadding{\r\n    padding:15px 0px;\r\n}\r\n#weeklytimes
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper wrapperpadding\">\r\n    <div class=\"container\">\r\n        <div *ngIf=\"!selectedResourceValue\" class=\"col-md-6 centered text-center col-centered\">\r\n            <p>\r\n                <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\">\r\n                    <option value=\"undefined\" selected disabled>Select the resource name</option>\r\n                    <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                </select>\r\n            </p>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"selectedResourceValue\">\r\n    <div class=\"wrapper\">\r\n        <!-- first column of row -->\r\n        <!-- second column of row -->\r\n        <div class=\"col-md-8\" style=\"background-color:#00303c; color:#ffffff\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4\">\r\n                    <p>Resource Name\r\n                        <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\">\r\n                            <option value=\"\" selected disabled>Select the resource name</option>\r\n                            <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                        </select>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Name of the Project\r\n                        <input type=\"text\" class=\"form-control\" value=\"Teach For America\" readonly>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Select Date:\r\n                        <p-calendar class=\"form-control\" [disabledDays]=\"[0,2,3,4,5,6]\" [(ngModel)]=\"startDate\" (onSelect)=\"getWeekFromDate(startDate)\"></p-calendar>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div class=\"timesheettablediv\" style=\"width:100%\">\r\n                <table style=\"width:100%;\" class=\"taskstable\">\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"width:15%;text-align:center\">Task Name</th>\r\n                            <th style=\"width:15%;text-align:center\">Description</th>\r\n                            <th style=\"width:10%\" *ngFor=\"let date of dates\">{{date}}</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor=\"let tasks of timesheetArray; let i = index\">\r\n                            <td>\r\n                                <select class=\"form-control\" [(ngModel)]=\"tasks.taskName\">\r\n                                    <option value=\"\" selected disabled>Select the Task</option>\r\n                                    <option *ngFor=\"let task of tasksData\" [ngValue]=\"task.taskName\">{{task.taskName}}</option>\r\n                                </select>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Description\" (blur)=\"checkTaskValidation(tasks.taskDescription,'taskDescription',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.taskDescription\" name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control firstDate\" id=\"firstDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayOneHours,'dayOneHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayOneHours\" name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control secondDate\" id=\"secondDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayTwoHours\"\r\n                                    name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control thirdDate\" id=\"thirdDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayThreeHours\"\r\n                                    name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fourthDate\" id=\"fourthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    placeholder=\"hours\" placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFourHours,'dayFourHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.dayFourHours\" name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fifthDate\" id=\"fifthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.dayFiveHours\" name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control sixthDate\" id=\"sixthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.daySixHours,'daySixHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySixHours\" name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control seventhDate\" id=\"seventhDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.daySevenHours,'daySevenHours',i)\" type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySevenHours\"\r\n                                    name=\"\" />\r\n                            </td>\r\n                            <td>\r\n                                <button *ngIf=\"i==0\" class=\"btn btn-default btn-success\" type=\"button\" (click)=\"addRow()\">Add</button>\r\n                                <button *ngIf=\"i>0\" class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteFieldValue(i)\">Delete</button>\r\n                            </td>\r\n                        </tr>\r\n\r\n\r\n                        <tr>\r\n                            <td colspan=\"2\">\r\n                                Total Timesheet Hours\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"firstdatetotal\" type=\"text\" [(ngModel)]=\"firstDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seconddatetotal\" type=\"text\" [(ngModel)]=\"secondDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"thirdDatthirddatetotaleHour\" type=\"text\" [(ngModel)]=\"thirdDateTotal\"\r\n                                    name=\"\" readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fouthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fourthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fifthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fifthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"sixthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"sixthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seventhdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"seventhDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n            </div>\r\n\r\n\r\n\r\n            <div class=\"row\" style=\"padding:50px 0px 0px 0px\">\r\n                <div class=\"col-md-6\">\r\n                    <p>Total Weekly Hours\r\n                        <input id=\"totalweeklyhours\" [value]=\"totalWeeklyHours\" class=\"form-control\" type=\"text\" readonly>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div>\r\n                <label style=\"color:red;\" *ngIf=\"mandatoryValidation\">Task Name is Mandatory</label>\r\n                <label style=\"color:red;\" *ngIf=\"hourValidation\">Hours Cannot be greater than 24</label>\r\n                <label style=\"color:red;\" *ngIf=\"message\">{{message}}</label>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n        <!-- third column of row -->\r\n        <div class=\"col-md-3\">\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Project Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <div class=\"input-group\">\r\n                        <input id=\"managername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.managerEmail\" [readonly]=\"isManagerReadOnly\"\r\n                        />\r\n                        <span class=\"input-group-btn\">\r\n                            <button *ngIf=\"managerEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideManagerEditButton()\" class=\"btn btn-default btn-warning edit-button\"\r\n                                type=\"button\">Edit</button>\r\n                            <button *ngIf=\"managerUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideManagerUpdateButton()\" class=\"btn btn-default btn-primary update-button\"\r\n                                type=\"button\">Update</button>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmanagername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientEmail\" [readonly]=\"isClientReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\">\r\n                        <button *ngIf=\"clientEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideClientEditButton()\" class=\"btn btn-default btn-warning edit-button\"\r\n                            type=\"button\">Edit</button>\r\n                        <button *ngIf=\"clientUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideClientUpdateButton()\" class=\"btn btn-default btn-primary update-button\"\r\n                            type=\"button\">Update</button>\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <table class=\"table\">\r\n                <tr>\r\n                    <th>StakeHolders Email</th>\r\n                </tr>\r\n                <tbody>\r\n                    <tr *ngFor=\"let stakeholderEmail of selectedResourceValue.stakeholdersEmail\">\r\n                        <td>{{stakeholderEmail}}</td>\r\n                        <button class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">Delete</button>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n\r\n            <form (ngSubmit)=\"submit(userform)\" #userform=\"ngForm\">\r\n                <label>Add StakeHolder Email</label>\r\n                <div class=\"input-group\">\r\n                    <input required class=\"form-control\" id=\"stakeholderEmail\" name=\"emailaddress\" #emailaddress=\"ngModel\" pattern=\"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"\r\n                        ngModel [(ngModel)]=\"stakeholderEmail\" type=\"text\">\r\n                    <span class=\"input-group-btn\">\r\n                        <button class=\"btn btn-default btn-success add-stakeholder\" (click)=\"addEmail()\" [disabled]=\"!userform.valid\" type=\"submit\">Add</button>\r\n                    </span>\r\n                </div>\r\n                <div *ngIf=\"!emailaddress.valid && emailaddress.touched\">\r\n                    <p *ngIf=\"emailaddress?.errors?.pattern\" style=\"color:red\">Invalid Email Address</p>\r\n                </div>\r\n            </form>\r\n        </div>\r\n\r\n\r\n    </div>\r\n\r\n    <div class=\"wrapper\" style=\"padding:15px 0px 0px 0px;\">\r\n        <div class=\"col-md-4\">\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <button style=\"background-color: #00303c;color:white\" id=\"btnSave\" class=\"btn  btn-md center-block\" (click)=\"saveTimesheet()\">Save</button>\r\n            <button class=\"btn btn-primary btn-md center-block\" (click)=\"exportToExcel()\">Generate Excel Sheet</button>\r\n            <button id=\"sendInMail\" class=\"btn btn-danger btn-md center-block\">Send In Mail</button>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n        </div>\r\n    </div>\r\n   \r\n    \r\n</div>\r\n\r\n"
+module.exports = "<div class=\"wrapper wrapperpadding\">\r\n    <div class=\"container\">\r\n        <div *ngIf=\"!selectedResourceValue\" class=\"col-md-6 centered text-center col-centered\">\r\n            <p>\r\n                <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                    <option value=\"undefined\" selected disabled>Select the resource name</option>\r\n                    <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                </select>\r\n            </p>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"selectedResourceValue\">\r\n    <div class=\"wrapper\">\r\n        <!-- first column of row -->\r\n        <!-- second column of row -->\r\n        <div class=\"col-md-8\" style=\"background-color:#00303c; color:#ffffff\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4\">\r\n                    <p>Resource Name\r\n                        <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\" >\r\n                            <option value=\"\" selected disabled>Select the resource name</option>\r\n                            <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                        </select>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Name of the Project\r\n                        <input type=\"text\" class=\"form-control\" value=\"Teach For America\" readonly>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Select Date:\r\n                        <p-calendar class=\"form-control\" [disabledDays]=\"[0,2,3,4,5,6]\" [(ngModel)]=\"startDate\" (onSelect)=\"getWeekFromDate(startDate)\"></p-calendar>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div class=\"timesheettablediv\" style=\"width:100%\">\r\n                <table style=\"width:100%;\" class=\"taskstable\">\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"width:15%;text-align:center\">Task Name</th>\r\n                            <th style=\"width:15%;text-align:center\">Description</th>\r\n                            <th style=\"width:10%\" *ngFor=\"let date of dates\">{{date}}</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor=\"let tasks of timesheetArray; let i = index\">\r\n                            <td>\r\n                                <select class=\"form-control\" [(ngModel)]=\"tasks.taskName\" [disabled]=\"isReadOnlyForTimesheetRow\">\r\n                                    <option value=\"\" selected disabled>Select the Task</option>\r\n                                    <option *ngFor=\"let task of tasksData\" [ngValue]=\"task.taskName\">{{task.taskName}}</option>\r\n                                </select>\r\n                            </td>\r\n                            <td>\r\n                                    <!-- (blur)=\"checkTaskValidation(tasks.taskDescription,'taskDescription',i)\" -->\r\n                                <input class=\"form-control\" placeholder=\"Description\" \r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.taskDescription\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control firstDate\" id=\"firstDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayOneHours,'dayOneHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayOneHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control secondDate\" id=\"secondDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayTwoHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control thirdDate\" id=\"thirdDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayThreeHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fourthDate\" id=\"fourthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    placeholder=\"hours\" placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFourHours,'dayFourHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.dayFourHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fifthDate\" id=\"fifthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.dayFiveHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control sixthDate\" id=\"sixthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.daySixHours,'daySixHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySixHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control seventhDate\" id=\"seventhDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.daySevenHours,'daySevenHours',i)\" type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySevenHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"/>\r\n                            </td>\r\n                            <td>\r\n                                <button *ngIf=\"i==0\" class=\"btn btn-default btn-success\" type=\"button\" (click)=\"addRow()\"  [disabled]=\"addAndEditButtonDisable\">Add</button>\r\n                                <button *ngIf=\"i>0\" class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteFieldValue(i)\"  [disabled]=\"addAndEditButtonDisable\">Delete</button>\r\n                            </td>\r\n                        </tr>\r\n\r\n\r\n                        <tr>\r\n                            <td colspan=\"2\">\r\n                                Total Timesheet Hours\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"firstdatetotal\" type=\"text\" [(ngModel)]=\"firstDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seconddatetotal\" type=\"text\" [(ngModel)]=\"secondDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"thirdDatthirddatetotaleHour\" type=\"text\" [(ngModel)]=\"thirdDateTotal\"\r\n                                    name=\"\" readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fouthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fourthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fifthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fifthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"sixthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"sixthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seventhdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"seventhDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n            </div>\r\n\r\n\r\n\r\n            <div class=\"row\" style=\"padding:50px 0px 0px 0px\">\r\n                <div class=\"col-md-6\">\r\n                    <p>Total Weekly Hours\r\n                        <input id=\"totalweeklyhours\" [value]=\"totalWeeklyHours\" class=\"form-control\" type=\"text\" readonly>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div>\r\n                <label style=\"color:red;\" *ngIf=\"mandatoryValidation\">Task Name is Mandatory</label>\r\n                <label style=\"color:red;\" *ngIf=\"hourValidation\">Hours Cannot be greater than 24</label>\r\n                <label style=\"color:red;\" *ngIf=\"message\">{{message}}</label>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n        <!-- third column of row -->\r\n        <div class=\"col-md-3\">\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Project Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <div class=\"input-group\">\r\n                        <input id=\"managername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.managerEmail\" [readonly]=\"isManagerReadOnly\"\r\n                        />\r\n                        <span class=\"input-group-btn\">\r\n                            <button *ngIf=\"managerEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideManagerEditButton()\" class=\"btn btn-default btn-warning edit-button\"\r\n                                type=\"button\">Edit</button>\r\n                            <button *ngIf=\"managerUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideManagerUpdateButton()\" class=\"btn btn-default btn-primary update-button\"\r\n                                type=\"button\">Update</button>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmanagername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientEmail\" [readonly]=\"isClientReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\">\r\n                        <button *ngIf=\"clientEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideClientEditButton()\" class=\"btn btn-default btn-warning edit-button\"\r\n                            type=\"button\">Edit</button>\r\n                        <button *ngIf=\"clientUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideClientUpdateButton()\" class=\"btn btn-default btn-primary update-button\"\r\n                            type=\"button\">Update</button>\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <table class=\"table\">\r\n                <tr>\r\n                    <th>StakeHolders Email</th>\r\n                </tr>\r\n                <tbody>\r\n                    <tr *ngFor=\"let stakeholderEmail of selectedResourceValue.stakeholdersEmail\">\r\n                        <td>{{stakeholderEmail}}</td>\r\n                        <button class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">Delete</button>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n\r\n            <form (ngSubmit)=\"submit(userform)\" #userform=\"ngForm\">\r\n                <label>Add StakeHolder Email</label>\r\n                <div class=\"input-group\">\r\n                    <input required class=\"form-control\" id=\"stakeholderEmail\" name=\"emailaddress\" #emailaddress=\"ngModel\" pattern=\"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"\r\n                        ngModel [(ngModel)]=\"stakeholderEmail\" type=\"text\">\r\n                    <span class=\"input-group-btn\">\r\n                        <button class=\"btn btn-default btn-success add-stakeholder\" (click)=\"addEmail()\" [disabled]=\"!userform.valid\" type=\"submit\">Add</button>\r\n                    </span>\r\n                </div>\r\n                <div *ngIf=\"!emailaddress.valid && emailaddress.touched\">\r\n                    <p *ngIf=\"emailaddress?.errors?.pattern\" style=\"color:red\">Invalid Email Address</p>\r\n                </div>\r\n            </form>\r\n        </div>\r\n\r\n\r\n    </div>\r\n\r\n    <div class=\"wrapper\" style=\"padding:15px 0px 0px 0px;\">\r\n        <div class=\"col-md-4\">\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <button *ngIf=\"saveButtonVisibility\" style=\"background-color: #00303c;color:white\" id=\"btnSave\" class=\"btn  btn-md center-block\" (click)=\"saveTimesheet()\">Save Timesheet</button>\r\n            <button *ngIf=\"editButtonVisibility\" (click)=\"toggleButton()\"  id=\"btnSave\" class=\"btn btn-warning\">Edit Timesheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block\" (click)=\"exportToExcel()\">Generate Excel Sheet</button>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n        </div>\r\n    </div>\r\n   \r\n    \r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -409,11 +474,11 @@ module.exports = "<div class=\"wrapper wrapperpadding\">\r\n    <div class=\"con
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimesheetComponent", function() { return TimesheetComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/timesheet/timesheet.service */ "./src/app/services/timesheet/timesheet.service.ts");
-/* harmony import */ var _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/tasks/tasks.service */ "./src/app/services/tasks/tasks.service.ts");
-/* harmony import */ var _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/weeklyTask */ "./src/app/models/weeklyTask.ts");
+/* harmony import */ var _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/timesheet/timesheet.service */ "./src/app/services/timesheet/timesheet.service.ts");
+/* harmony import */ var _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/tasks/tasks.service */ "./src/app/services/tasks/tasks.service.ts");
+/* harmony import */ var _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/weeklyTask */ "./src/app/models/weeklyTask.ts");
+/* harmony import */ var _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/constants/constants.service */ "./src/app/services/constants/constants.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -428,10 +493,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var TimesheetComponent = /** @class */ (function () {
-    function TimesheetComponent(timesheetService, tasksService) {
+    function TimesheetComponent(timesheetService, tasksService, constantService) {
         this.timesheetService = timesheetService;
         this.tasksService = tasksService;
+        this.constantService = constantService;
+        this.addAndEditButtonDisable = false;
+        this.editButtonVisibility = false;
+        this.saveButtonVisibility = true;
+        this.isReadOnlyForTimesheetRow = false;
         this.hourValidation = false;
         this.mandatoryValidation = false;
         this.totalWeeklyHours = '';
@@ -445,7 +516,7 @@ var TimesheetComponent = /** @class */ (function () {
         this.resources = [];
         this.tasksData = [];
         this.timesheetArray = [];
-        this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
+        this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
         this.exportToExcelTimesheet = [];
         this.dates = [];
         //defaultDate:Date;
@@ -457,18 +528,71 @@ var TimesheetComponent = /** @class */ (function () {
         this.isClientReadOnly = true;
     }
     TimesheetComponent.prototype.ngOnInit = function () {
+        // to get the resources name from the service
         this.getResources();
+        // to get task in dropdown from the service
         this.getTasks();
+        // get the current monday of the week
         this.startDate = this.getMonday();
+        // get week from date 
         this.getWeekFromDate(this.startDate);
-        this.timesheetArray.push(this.tasks);
-        jquery__WEBPACK_IMPORTED_MODULE_1__("#validationlabel").hide();
-        jquery__WEBPACK_IMPORTED_MODULE_1__("#hourvalidationlabel").hide();
+    };
+    TimesheetComponent.prototype.getSelectedResourceValue = function () {
+        console.log(this.selectedResourceValue);
+        console.log(this.startDate);
+        this.getExistingTimesheet();
     };
     TimesheetComponent.prototype.getMonday = function () {
         var d = new Date();
         var day = d.getDay(), diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-        return new Date(d.setDate(diff));
+        return new Date(d.setDate(diff - 7));
+    };
+    TimesheetComponent.prototype.getExistingTimesheet = function () {
+        var _this = this;
+        this.constantService.showLoader();
+        this.timesheetService.getTimesheetAccordingToWeekAndUser(this.startDate, this.selectedResourceValue).subscribe(function (timesheet) {
+            console.log(timesheet);
+            _this.constantService.hideLoader();
+            //this.completeTimesheet = timesheet;
+            if (timesheet != null) {
+                _this.timesheetArray = [];
+                for (var i = 0; i < timesheet.tasks.length; i++) {
+                    _this.timesheetArray.push(timesheet.tasks[i]);
+                }
+                _this.firstDateTotal = timesheet.totalHoursForEachDate[0];
+                _this.secondDateTotal = timesheet.totalHoursForEachDate[1];
+                _this.thirdDateTotal = timesheet.totalHoursForEachDate[2];
+                _this.fourthDateTotal = timesheet.totalHoursForEachDate[3];
+                _this.fifthDateTotal = timesheet.totalHoursForEachDate[4];
+                _this.sixthDateTotal = timesheet.totalHoursForEachDate[5];
+                _this.seventhDateTotal = timesheet.totalHoursForEachDate[6];
+                _this.totalWeeklyHours = timesheet.totalWeeklyHours;
+                _this.isReadOnlyForTimesheetRow = true;
+                _this.editButtonVisibility = true;
+                _this.saveButtonVisibility = false;
+                // if user get timesheet
+                _this.addAndEditButtonDisable = true;
+                // if existing timesheet is present then show previous manager and client manager if present
+                //this.selectedResourceValue=timesheet.user;
+            }
+            else {
+                _this.timesheetArray = [];
+                _this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
+                _this.timesheetArray.push(_this.tasks);
+                _this.addAndEditButtonDisable = false;
+                _this.firstDateTotal = "";
+                _this.secondDateTotal = "";
+                _this.thirdDateTotal = "";
+                _this.fourthDateTotal = "";
+                _this.fifthDateTotal = "";
+                _this.sixthDateTotal = "";
+                _this.seventhDateTotal = "";
+                _this.totalWeeklyHours = "";
+                _this.isReadOnlyForTimesheetRow = false;
+                _this.editButtonVisibility = false;
+                _this.saveButtonVisibility = true;
+            }
+        }, function (error) { return console.log(error); });
     };
     TimesheetComponent.prototype.getResources = function () {
         var _this = this;
@@ -557,9 +681,11 @@ var TimesheetComponent = /** @class */ (function () {
             }
             startingDate++;
         }
+        if (this.selectedResourceValue != undefined && this.startDate != undefined)
+            this.getExistingTimesheet();
     };
     TimesheetComponent.prototype.addRow = function () {
-        this.timesheetArray.push(new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__["WeeklyTask"]('', '', '', '', '', '', '', '', ''));
+        this.timesheetArray.push(new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', ''));
         console.log(this.timesheetArray);
     };
     TimesheetComponent.prototype.deleteFieldValue = function (index) {
@@ -590,16 +716,16 @@ var TimesheetComponent = /** @class */ (function () {
             this.seventhDateTotal = sumOfSeventhDate;
         }
     };
-    TimesheetComponent.prototype.checkTaskValidation = function (taskDesp, id, i) {
-        console.log(i);
-        console.log(this.timesheetArray[i]);
-        console.log(this.timesheetArray[i].taskDescription);
-        if (taskDesp.length > 20) {
-            alert("task length should not be greater than 20");
-            this.timesheetArray[i][id] = "";
-            return;
-        }
-    };
+    // checkTaskValidation(taskDesp, id, i) {
+    //   console.log(i);
+    //   console.log(this.timesheetArray[i]);
+    //   console.log(this.timesheetArray[i].taskDescription);
+    //   if (taskDesp.length > 20) {
+    //     alert("task length should not be greater than 20");
+    //     this.timesheetArray[i][id] = "";
+    //     return;
+    //   }
+    // }
     TimesheetComponent.prototype.checkHours = function (event, hours, key, index) {
         //Total Weekly Hours
         this.sumOfWeeklyHours();
@@ -726,27 +852,41 @@ var TimesheetComponent = /** @class */ (function () {
             this.timesheetService.postTimesheet(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
                 .subscribe(function (message) {
                 _this.message = message.response;
-                _this.setTimesheetArrayToDefault();
                 var self = _this;
                 setTimeout(function () { self.message = ""; }, 2000);
+                _this.isReadOnlyForTimesheetRow = true;
+                _this.editButtonVisibility = true;
+                _this.saveButtonVisibility = false;
+                _this.addAndEditButtonDisable = true;
+                //this.setTimesheetArrayToDefault();
             }, function (error) { return console.log(error); });
         }
     };
     TimesheetComponent.prototype.exportToExcel = function () {
         var _this = this;
-        console.log(this.timesheetArray);
-        console.log("called");
         var valueIsEmptyOrNot = this.checkForEmptyData();
         if (valueIsEmptyOrNot) {
             this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
             //this.checkForEmptyData();
+            //this.constantService.showLoader();
             this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
                 .subscribe(function (message) {
                 _this.message = message.response;
                 var self = _this;
-                setTimeout(function () { self.message = ""; }, 2000);
-                window.open("http://localhost:8030/downloadexcelsheet");
-                _this.setTimesheetArrayToDefault();
+                setTimeout(function () {
+                    self.message = "";
+                    // self.constantService.hideLoader();
+                }, 2000);
+                try {
+                    window.open("" + _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl + "downloadexcelsheet");
+                }
+                catch (e) {
+                    _this.message = e;
+                    var self = _this;
+                    setTimeout(function () { self.message = ""; }, 2000);
+                }
+                _this.isReadOnlyForTimesheetRow = true;
+                _this.addAndEditButtonDisable = true;
             }, function (error) { return console.log(error); });
         }
     };
@@ -759,7 +899,7 @@ var TimesheetComponent = /** @class */ (function () {
         this.sixthDateTotal = '';
         this.seventhDateTotal = '';
         this.timesheetArray = [];
-        this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
+        this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
         this.timesheetArray.push(this.tasks);
         this.totalWeeklyHours = '';
     };
@@ -785,13 +925,20 @@ var TimesheetComponent = /** @class */ (function () {
         }
         return true;
     };
+    TimesheetComponent.prototype.toggleButton = function () {
+        this.isReadOnlyForTimesheetRow = false;
+        this.editButtonVisibility = false;
+        this.saveButtonVisibility = true;
+        // if user get timesheet
+        this.addAndEditButtonDisable = false;
+    };
     TimesheetComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-timesheet',
             template: __webpack_require__(/*! ./timesheet.component.html */ "./src/app/timesheet/timesheet.component.html"),
             styles: [__webpack_require__(/*! ./timesheet.component.css */ "./src/app/timesheet/timesheet.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_2__["TimesheetService"], _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_3__["TasksService"]])
+        __metadata("design:paramtypes", [_services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_1__["TimesheetService"], _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_2__["TasksService"], _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_4__["ConstantService"]])
     ], TimesheetComponent);
     return TimesheetComponent;
 }());
@@ -814,7 +961,8 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var environment = {
-    production: false
+    production: false,
+    baseUrl: 'http://localhost:8030/'
 };
 /*
  * In development mode, to ignore zone related error stack frames such as

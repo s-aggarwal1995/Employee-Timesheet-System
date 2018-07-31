@@ -3,14 +3,16 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Tasks} from '../../models/tasks';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
 
-
-  private tasksUrl = 'http://localhost:8030/gettasksdata';
+  private baseUrl = `${environment.baseUrl}`;
+  private tasksUrl = this.baseUrl + "gettasksdata";
+  
   constructor(private http: HttpClient) { }
 
 

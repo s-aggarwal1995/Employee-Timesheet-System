@@ -94,6 +94,8 @@ export class TimesheetComponent implements OnInit {
 
   }
 
+  
+
   getSelectedResourceValue() {
 
     console.log(this.selectedResourceValue);
@@ -144,7 +146,7 @@ export class TimesheetComponent implements OnInit {
       }
       else {
         this.timesheetArray = [];
-        this.tasks= new WeeklyTask('', '', '', '', '', '', '', '', '');
+        this.tasks = new WeeklyTask('', '', '', '', '', '', '', '', '');
         this.timesheetArray.push(this.tasks);
         this.addAndEditButtonDisable = false;
 
@@ -165,16 +167,28 @@ export class TimesheetComponent implements OnInit {
 
       }
     },
-      error => console.log(error));
+      error => {
+      this.message = error;
+        var self = this;
+        setTimeout(function () { self.message = ""; }, 2000);
+      });
   }
 
 
   getResources() {
-    this.timesheetService.getResources().subscribe(resources => this.resources = resources, error => console.log(error));
+    this.timesheetService.getResources().subscribe(resources => this.resources = resources, error => {
+    this.message = error;
+      var self = this;
+      setTimeout(function () { self.message = ""; }, 2000);
+    });
   }
 
   getTasks() {
-    this.tasksService.getTasks().subscribe(tasks => this.tasksData = tasks, error => console.log(error));
+    this.tasksService.getTasks().subscribe(tasks => this.tasksData = tasks, error => {
+    this.message = error;
+      var self = this;
+      setTimeout(function () { self.message = ""; }, 2000);
+    });
   }
 
   hideManagerEditButton() {
@@ -191,7 +205,11 @@ export class TimesheetComponent implements OnInit {
       this.managerEditButtonShowHide = true;
       this.isManagerReadOnly = true;
     },
-      error => console.log(error));
+      error => {
+      this.message = error;
+        var self = this;
+        setTimeout(function () { self.message = ""; }, 2000);
+      });
 
   }
 
@@ -209,7 +227,11 @@ export class TimesheetComponent implements OnInit {
       this.clientEditButtonShowHide = true;
       this.isClientReadOnly = true;
     },
-      error => console.log(error));
+      error => {
+      this.message = error;
+        var self = this;
+        setTimeout(function () { self.message = ""; }, 2000);
+      });
 
   }
 
@@ -221,7 +243,13 @@ export class TimesheetComponent implements OnInit {
       this.responseForAddedStakeholder = Message;
       console.log(this.responseForAddedStakeholder.response);
     },
-      error => console.log(error));
+      error => {
+      this.message = error;
+        var self = this;
+        setTimeout(function () { self.message = ""; }, 2000);
+      });
+
+
     this.stakeholderEmail = "";
 
   }
@@ -234,7 +262,11 @@ export class TimesheetComponent implements OnInit {
         this.responseForDeletedStakeholder = Message;
         console.log(this.responseForDeletedStakeholder.response);
       },
-        error => console.log(error));
+        error => {
+        this.message = error;
+          var self = this;
+          setTimeout(function () { self.message = ""; }, 2000);
+        });
     }
   }
 
@@ -473,7 +505,11 @@ export class TimesheetComponent implements OnInit {
 
           //this.setTimesheetArrayToDefault();
         },
-          error => console.log(error));
+          error => {
+          this.message = error;
+            var self = this;
+            setTimeout(function () { self.message = ""; }, 2000);
+          });
 
     }
 
@@ -494,7 +530,7 @@ export class TimesheetComponent implements OnInit {
           var self = this;
           setTimeout(function () {
             self.message = "";
-           // self.constantService.hideLoader();
+            // self.constantService.hideLoader();
           }, 2000);
 
           try {
@@ -509,7 +545,11 @@ export class TimesheetComponent implements OnInit {
           this.isReadOnlyForTimesheetRow = true;
           this.addAndEditButtonDisable = true;
         },
-          error => console.log(error));
+          error => {
+          this.message = error;
+            var self = this;
+            setTimeout(function () { self.message = ""; }, 2000);
+          });
     }
   }
 

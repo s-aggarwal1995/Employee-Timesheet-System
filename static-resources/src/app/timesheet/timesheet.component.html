@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-4">
                     <p>Select Date:
-                        <p-calendar class="form-control" [disabledDays]="[0,2,3,4,5,6]" [(ngModel)]="startDate" (onSelect)="getWeekFromDate(startDate)"></p-calendar>
+                        <p-calendar readonlyInput="true" class="form-control" [disabledDays]="[0,2,3,4,5,6]" [(ngModel)]="startDate"  (onSelect)="getWeekFromDate(startDate)"></p-calendar>
                     </p>
                 </div>
             </div>

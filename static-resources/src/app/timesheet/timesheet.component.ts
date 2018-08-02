@@ -94,7 +94,7 @@ export class TimesheetComponent implements OnInit {
 
   }
 
-  
+
 
   getSelectedResourceValue() {
 
@@ -168,7 +168,7 @@ export class TimesheetComponent implements OnInit {
       }
     },
       error => {
-      this.message = error;
+        this.message = error;
         var self = this;
         setTimeout(function () { self.message = ""; }, 2000);
       });
@@ -177,7 +177,7 @@ export class TimesheetComponent implements OnInit {
 
   getResources() {
     this.timesheetService.getResources().subscribe(resources => this.resources = resources, error => {
-    this.message = error;
+      this.message = error;
       var self = this;
       setTimeout(function () { self.message = ""; }, 2000);
     });
@@ -185,7 +185,7 @@ export class TimesheetComponent implements OnInit {
 
   getTasks() {
     this.tasksService.getTasks().subscribe(tasks => this.tasksData = tasks, error => {
-    this.message = error;
+      this.message = error;
       var self = this;
       setTimeout(function () { self.message = ""; }, 2000);
     });
@@ -206,7 +206,7 @@ export class TimesheetComponent implements OnInit {
       this.isManagerReadOnly = true;
     },
       error => {
-      this.message = error;
+        this.message = error;
         var self = this;
         setTimeout(function () { self.message = ""; }, 2000);
       });
@@ -228,7 +228,7 @@ export class TimesheetComponent implements OnInit {
       this.isClientReadOnly = true;
     },
       error => {
-      this.message = error;
+        this.message = error;
         var self = this;
         setTimeout(function () { self.message = ""; }, 2000);
       });
@@ -244,7 +244,7 @@ export class TimesheetComponent implements OnInit {
       console.log(this.responseForAddedStakeholder.response);
     },
       error => {
-      this.message = error;
+        this.message = error;
         var self = this;
         setTimeout(function () { self.message = ""; }, 2000);
       });
@@ -263,7 +263,7 @@ export class TimesheetComponent implements OnInit {
         console.log(this.responseForDeletedStakeholder.response);
       },
         error => {
-        this.message = error;
+          this.message = error;
           var self = this;
           setTimeout(function () { self.message = ""; }, 2000);
         });
@@ -506,7 +506,7 @@ export class TimesheetComponent implements OnInit {
           //this.setTimesheetArrayToDefault();
         },
           error => {
-          this.message = error;
+            this.message = error;
             var self = this;
             setTimeout(function () { self.message = ""; }, 2000);
           });
@@ -535,6 +535,7 @@ export class TimesheetComponent implements OnInit {
 
           try {
             window.open(`${environment.baseUrl}` + "downloadexcelsheet");
+            window.close();
           }
           catch (e) {
             this.message = e;
@@ -544,9 +545,13 @@ export class TimesheetComponent implements OnInit {
 
           this.isReadOnlyForTimesheetRow = true;
           this.addAndEditButtonDisable = true;
+
+          this.editButtonVisibility = true;
+          this.saveButtonVisibility = false;
+
         },
           error => {
-          this.message = error;
+            this.message = error;
             var self = this;
             setTimeout(function () { self.message = ""; }, 2000);
           });

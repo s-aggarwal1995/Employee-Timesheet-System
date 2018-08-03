@@ -41,34 +41,34 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-mail')
 }
 
-processResources {
-	dependsOn "buildAngular"
-	from ('static-resources/dist/') {
-		into 'public'
-	}
-}
+//processResources {
+//	dependsOn "buildAngular"
+//	from ('static-resources/dist/') {
+//		into 'public'
+//	}
+//}
 
-task buildAngular(type:Exec) {
-	dependsOn "installAngular"
-	workingDir "static-resources"
-	inputs.dir "static-resources"
-	group = BasePlugin.BUILD_GROUP
-//	outputs.dir "$webappDir/dist"
-	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
-		commandLine "ng.cmd", "build"
-	} else {
-		commandLine "ng", "build"
-	}
-}
-
-task installAngular(type:Exec) {
-	workingDir "static-resources"
-	inputs.dir "static-resources"
-	group = BasePlugin.BUILD_GROUP
-//	outputs.dir "$webappDir/dist"
-	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
-		commandLine "npm.cmd", "install"
-	} else {
-		commandLine "npm", "install"
-	}
-}
+//task buildAngular(type:Exec) {
+//	dependsOn "installAngular"
+//	workingDir "static-resources"
+//	inputs.dir "static-resources"
+//	group = BasePlugin.BUILD_GROUP
+////	outputs.dir "$webappDir/dist"
+//	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+//		commandLine "ng.cmd", "build"
+//	} else {
+//		commandLine "ng", "build"
+//	}
+//}
+//
+//task installAngular(type:Exec) {
+//	workingDir "static-resources"
+//	inputs.dir "static-resources"
+//	group = BasePlugin.BUILD_GROUP
+////	outputs.dir "$webappDir/dist"
+//	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+//		commandLine "npm.cmd", "install"
+//	} else {
+//		commandLine "npm", "install"
+//	}
+//}

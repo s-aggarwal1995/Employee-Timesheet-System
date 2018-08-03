@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class EmailController {
 
     @Autowired
@@ -21,8 +22,13 @@ public class EmailController {
         String to=emailMessage.getReceiver();
         String subject=emailMessage.getSubject();
         String text=emailMessage.getMailBody();
-        emailService.sendSimpleMessage(to,subject,text);
-        return "email sent successfully";
+        try{
+            emailService.sendSimpleMessage(to,subject,text);
+            return "Email Sent!";
+        }
+        catch(Exception ex) {
+            return "Error in sending email: "+ex;
+        }
     }
 
 }

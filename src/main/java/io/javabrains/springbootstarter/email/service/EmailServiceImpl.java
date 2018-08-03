@@ -33,6 +33,9 @@ public class EmailServiceImpl implements  EmailService {
         helper.setText(text);
         helper.setSubject(subject);
         helper.setCc(emailsArray);
+        //ClassPathResource file = new ClassPathResource("EmployeeTimesheet.xlsx");
+        //helper.addAttachment("EmployeeTimesheet.xlsx", file);
+
         sender.send(message);
 
     }

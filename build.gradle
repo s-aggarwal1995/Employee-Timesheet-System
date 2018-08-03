@@ -61,14 +61,14 @@ task buildAngular(type:Exec) {
 	}
 }
 
-//task installAngular(type:Exec) {
-//	workingDir "static-resources"
-//	inputs.dir "static-resources"
-//	group = BasePlugin.BUILD_GROUP
-////	outputs.dir "$webappDir/dist"
-//	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
-//		commandLine "npm.cmd", "install"
-//	} else {
-//		commandLine "npm", "install"
-//	}
-//}
+task installAngular(type:Exec) {
+	workingDir "static-resources"
+	inputs.dir "static-resources"
+	group = BasePlugin.BUILD_GROUP
+//	outputs.dir "$webappDir/dist"
+	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
+		commandLine "npm.cmd", "install"
+	} else {
+		commandLine "npm", "install"
+	}
+}

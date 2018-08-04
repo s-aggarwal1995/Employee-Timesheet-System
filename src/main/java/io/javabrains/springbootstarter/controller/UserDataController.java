@@ -23,7 +23,6 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@Controller
 public class UserDataController implements UserDataControllerIfc{
 
    

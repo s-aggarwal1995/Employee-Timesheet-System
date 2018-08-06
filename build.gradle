@@ -47,7 +47,7 @@ dependencies {
 //		into 'public'
 //	}
 //}
-
+//
 //task buildAngular(type:Exec) {
 //	dependsOn "installAngular"
 //	workingDir "static-resources"

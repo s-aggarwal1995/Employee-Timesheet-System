@@ -1,5 +1,6 @@
 package io.javabrains.springbootstarter.util;
 
+import io.javabrains.springbootstarter.controller.UserDataController;
 import io.javabrains.springbootstarter.model.Task;
 import io.javabrains.springbootstarter.model.Timesheet;
 import org.apache.poi.ss.usermodel.Cell;
@@ -7,6 +8,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 
@@ -23,7 +26,7 @@ public class ExcelService {
 
     private static final String excelSheetName = "WeeklyTimesheet.xlsx";
     private static ArrayList<String> weekArray = new ArrayList<String>();
-
+    private static final Logger logger = LoggerFactory.getLogger(UserDataController.class);
 //    @Value("${path}")
 //    private static String path;ls -ltr
 
@@ -31,11 +34,12 @@ public class ExcelService {
 
     public static void createExcelSheet(Timesheet timesheet) {
         try {
+            logger.info("createExcelSheet method");
 
             // read a specific excel file from project
             FileInputStream excelFile = new FileInputStream(new ClassPathResource(excelSheetName).getFile());
 
-
+            logger.info(excelFile.toString());
 
 
             // get workbook from that particular excel file
@@ -144,6 +148,8 @@ public class ExcelService {
 
             /// /tmp
             FileOutputStream fileOut = new FileOutputStream("poi-generated-file.xlsx");
+            logger.info("fileoutstream"+fileOut.toString());
+
             workbook.write(fileOut);
             workbook.close();
 

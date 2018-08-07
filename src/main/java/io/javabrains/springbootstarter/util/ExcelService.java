@@ -9,15 +9,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ExcelService {
@@ -137,10 +135,23 @@ public class ExcelService {
             getClientManagerNameCell.setCellValue(timesheet.getUser().getClientEmail());
 
 
+            String filePath = new File("EmployeeTimesheet.xlsx").getAbsolutePath();
+            File file = new File(filePath);
+            if(file.exists()){
+                file.delete();
+                FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");
+                workbook.write(outputStream);
+                workbook.close();
+            }
+            else{
+                FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");
+                workbook.write(outputStream);
+                workbook.close();
+            }
 
-            FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");
-            workbook.write(outputStream);
-            workbook.close();
+
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

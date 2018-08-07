@@ -143,28 +143,10 @@ public class ExcelService {
             getClientManagerNameCell.setCellValue(timesheet.getUser().getClientEmail());
 
             /// /tmp
-            File file = new File("EmployeeTimesheet.xlsx");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileOutputStream outputStream = new FileOutputStream(file);
-            workbook.write(outputStream);
+            FileOutputStream fileOut = new FileOutputStream("poi-generated-file.xlsx");
+            workbook.write(fileOut);
             workbook.close();
 
-            /*File file = new File("EmployeeTimesheet.xlsx");
-            if(file.exists()){
-                if(file.delete()){
-                    FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");
-                    workbook.write(outputStream);
-                    workbook.close();
-                }
-            }
-            else {
-                FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");
-                workbook.write(outputStream);
-                workbook.close();
-            }
-*/
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

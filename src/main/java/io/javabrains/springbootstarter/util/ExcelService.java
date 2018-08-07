@@ -37,7 +37,7 @@ public class ExcelService {
             logger.info("createExcelSheet method");
 
             // read a specific excel file from project
-            FileInputStream excelFile = new FileInputStream(new ClassPathResource(excelSheetName).getFile());
+            FileInputStream excelFile = new FileInputStream(excelSheetName);
 
             logger.info(excelFile.toString());
 

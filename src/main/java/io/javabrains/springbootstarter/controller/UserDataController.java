@@ -26,8 +26,6 @@ import java.util.List;
 @RestController
 public class UserDataController implements UserDataControllerIfc{
 
-   
-
 
     /**
      * programming to interfaces, using ifc as a reference variable
@@ -35,8 +33,8 @@ public class UserDataController implements UserDataControllerIfc{
     @Autowired
     TimesheetServiceIfc timesheetService;
 
-    @Value("${path}")
-    private String path;
+//    @Value("${path}")
+//    private String path;
 
     //post user data
     @RequestMapping(value="/postuser",method=RequestMethod.POST)
@@ -121,7 +119,7 @@ public class UserDataController implements UserDataControllerIfc{
     @RequestMapping("/downloadexcelsheet")
     public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        FileInputStream inputStream = new FileInputStream(path +" EmployeeTimesheet.xlsx");
+        FileInputStream inputStream = new FileInputStream(" EmployeeTimesheet.xlsx");
         response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet.xlsx\"");
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 

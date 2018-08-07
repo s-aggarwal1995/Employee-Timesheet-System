@@ -24,8 +24,9 @@ public class ExcelService {
     private static final String excelSheetName = "WeeklyTimesheet.xlsx";
     private static ArrayList<String> weekArray = new ArrayList<String>();
 
-    @Value("${path}")
-    private static String path;
+//    @Value("${path}")
+//    private static String path;
+
 
     public static void createExcelSheet(Timesheet timesheet) {
         try {
@@ -141,7 +142,7 @@ public class ExcelService {
             getClientManagerNameCell.setCellValue(timesheet.getUser().getClientEmail());
 
             /// /tmp
-            File file = new File(path +" EmployeeTimesheet.xlsx");
+            File file = new File(" EmployeeTimesheet.xlsx");
             if(file.exists()){
                 if(file.delete()){
                     FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");

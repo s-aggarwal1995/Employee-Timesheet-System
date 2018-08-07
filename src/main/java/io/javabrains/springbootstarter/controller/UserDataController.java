@@ -7,6 +7,7 @@ import io.javabrains.springbootstarter.model.Timesheet;
 import io.javabrains.springbootstarter.model.User;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,8 @@ public class UserDataController implements UserDataControllerIfc{
     @Autowired
     TimesheetServiceIfc timesheetService;
 
+    @Value("${path}")
+    private String path;
 
     //post user data
     @RequestMapping(value="/postuser",method=RequestMethod.POST)
@@ -118,7 +121,7 @@ public class UserDataController implements UserDataControllerIfc{
     @RequestMapping("/downloadexcelsheet")
     public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        FileInputStream inputStream = new FileInputStream("EmployeeTimesheet.xlsx");
+        FileInputStream inputStream = new FileInputStream(path +" EmployeeTimesheet.xlsx");
         response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet.xlsx\"");
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 

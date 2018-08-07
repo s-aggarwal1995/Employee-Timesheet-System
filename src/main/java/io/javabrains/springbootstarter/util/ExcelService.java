@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
@@ -23,6 +24,8 @@ public class ExcelService {
     private static final String excelSheetName = "WeeklyTimesheet.xlsx";
     private static ArrayList<String> weekArray = new ArrayList<String>();
 
+    @Value("${path}")
+    private static String path;
 
     public static void createExcelSheet(Timesheet timesheet) {
         try {
@@ -137,8 +140,8 @@ public class ExcelService {
             Cell getClientManagerNameCell = getClientManagerNameRow.getCell(1);
             getClientManagerNameCell.setCellValue(timesheet.getUser().getClientEmail());
 
-
-            File file = new File("EmployeeTimesheet.xlsx");
+            /// /tmp
+            File file = new File(path +" EmployeeTimesheet.xlsx");
             if(file.exists()){
                 if(file.delete()){
                     FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");

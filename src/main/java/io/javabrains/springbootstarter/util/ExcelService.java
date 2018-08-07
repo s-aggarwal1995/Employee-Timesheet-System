@@ -140,10 +140,11 @@ public class ExcelService {
 
             File file = new File("EmployeeTimesheet.xlsx");
             if(file.exists()){
-                file.delete();
-                FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");
-                workbook.write(outputStream);
-                workbook.close();
+                if(file.delete()){
+                    FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");
+                    workbook.write(outputStream);
+                    workbook.close();
+                }
             }
             else {
                 FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");

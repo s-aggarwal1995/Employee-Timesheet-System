@@ -138,8 +138,7 @@ public class ExcelService {
             getClientManagerNameCell.setCellValue(timesheet.getUser().getClientEmail());
 
 
-            String filePath = new File("EmployeeTimesheet.xlsx").getAbsolutePath();
-            File file = new File(filePath);
+            File file = new File("EmployeeTimesheet.xlsx");
             if(file.exists()){
                 file.delete();
                 FileOutputStream outputStream = new FileOutputStream("EmployeeTimesheet.xlsx");

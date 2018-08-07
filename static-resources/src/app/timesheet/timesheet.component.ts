@@ -534,7 +534,7 @@ export class TimesheetComponent implements OnInit {
           }, 2000);
 
           try {
-            window.open(`${environment.baseUrl}` + "downloadexcelsheet");
+            window.open(`${environment.baseUrl}` + "downloadexcelsheet", "_blank");
             window.close();
           }
           catch (e) {

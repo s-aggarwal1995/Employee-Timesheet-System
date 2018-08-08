@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -131,8 +133,13 @@ public class UserDataController implements UserDataControllerIfc{
 
     }
 
+    @RequestMapping(value = "/**/{[path:[^\\.]*}")
+    public RedirectView redirectWithUsingRedirectView( RedirectAttributes attributes) {
 
-
+            attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
+            attributes.addAttribute("attribute", "redirectWithRedirectView");
+            return new RedirectView("forward:/");
+    }
 
 
 }

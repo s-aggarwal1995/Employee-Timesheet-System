@@ -260,7 +260,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>Wrong Url</p>\n  \n"
+module.exports = "<p>Wrong Url</p>\r\n  \r\n"
 
 /***/ }),
 
@@ -969,17 +969,17 @@ var TimesheetComponent = /** @class */ (function () {
         if (valueIsEmptyOrNot) {
             this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
             //this.checkForEmptyData();
-            //this.constantService.showLoader();
+            this.constantService.showLoader();
             this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
                 .subscribe(function (message) {
                 _this.message = message.response;
                 var self = _this;
                 setTimeout(function () {
                     self.message = "";
-                    // self.constantService.hideLoader();
+                    self.constantService.hideLoader();
                 }, 2000);
                 try {
-                    window.open("" + _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl + "downloadexcelsheet");
+                    window.open("" + _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl + "downloadexcelsheet", "_parent");
                     window.close();
                 }
                 catch (e) {

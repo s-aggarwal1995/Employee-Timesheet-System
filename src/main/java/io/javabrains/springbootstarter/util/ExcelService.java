@@ -26,7 +26,8 @@ public class ExcelService {
 
     private static final String excelSheetName = "WeeklyTimesheet.xlsx";
     private static ArrayList<String> weekArray = new ArrayList<String>();
-    private static final Logger logger = LoggerFactory.getLogger(UserDataController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExcelService.class);
+
 //    @Value("${path}")
 //    private static String path;ls -ltr
 

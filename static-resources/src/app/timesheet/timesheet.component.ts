@@ -522,7 +522,7 @@ export class TimesheetComponent implements OnInit {
     if (valueIsEmptyOrNot) {
       this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
       //this.checkForEmptyData();
-      //this.constantService.showLoader();
+      this.constantService.showLoader();
 
       this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
         .subscribe(message => {
@@ -530,11 +530,11 @@ export class TimesheetComponent implements OnInit {
           var self = this;
           setTimeout(function () {
             self.message = "";
-            // self.constantService.hideLoader();
+             self.constantService.hideLoader();
           }, 2000);
 
           try {
-            window.open(`${environment.baseUrl}` + "downloadexcelsheet", "_blank");
+            window.open(`${environment.baseUrl}` + "downloadexcelsheet", "_parent");
             window.close();
           }
           catch (e) {

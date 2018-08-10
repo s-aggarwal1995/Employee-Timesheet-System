@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import static io.javabrains.springbootstarter.bao.TimesheetService.excelGeneratedUser;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -119,10 +120,10 @@ public class UserDataController implements UserDataControllerIfc{
     }
 
     @RequestMapping("/downloadexcelsheet")
-    public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void index(HttpServletRequest request, HttpServletResponse response,Timesheet timesheet) throws IOException {
         File file = new File("poi-generated-file.xlsx");
         FileInputStream inputStream = new FileInputStream(file);
-        response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet.xlsx\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet\"" + "_"+ excelGeneratedUser.getUser().getUserName() + "_" + excelGeneratedUser.getStartDate() + ".xlsx");
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 
         ServletOutputStream outputStream = response.getOutputStream();
@@ -138,7 +139,7 @@ public class UserDataController implements UserDataControllerIfc{
 
             attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
             attributes.addAttribute("attribute", "redirectWithRedirectView");
-            return new RedirectView("forward:/");
+            return new RedirectView("redirect:/index.html");
     }
 
 

@@ -16,6 +16,9 @@ public class TimesheetService  implements  TimesheetServiceIfc{
     @Autowired
     private TimesheetRepository timesheetRepository;
 
+    public static Timesheet excelGeneratedUser;
+
+
 
     public List<User> getUsersData(){
         return timesheetRepository.getUsers();
@@ -34,6 +37,7 @@ public class TimesheetService  implements  TimesheetServiceIfc{
     public void exportToExcel(Timesheet timesheet){
         ExcelService.createExcelSheet(timesheet);
         timesheetRepository.addNewTimesheet(timesheet);
+        excelGeneratedUser = timesheet;
     }
 
     public List<Timesheet> getTimesheets(){

@@ -23,13 +23,6 @@ repositories {
 	mavenCentral()
 }
 
-/*sourceSets {
-	main {
-		resources {
-			srcDirs = ["static-resources/dist", "src/main/resources"]
-		}
-	}
-}*/
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -41,19 +34,20 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-mail')
 }
 
-//processResources {
-//	dependsOn "buildAngular"
-//	from ('static-resources/dist/') {
-//		into 'public'
-//	}
+
+
+//task  processResources1(type: Copy) {
+//		from ('static-resources/dist/')
+//		into 'src/main/resources/'
 //}
+//
+//
 //
 //task buildAngular(type:Exec) {
 //	dependsOn "installAngular"
 //	workingDir "static-resources"
 //	inputs.dir "static-resources"
 //	group = BasePlugin.BUILD_GROUP
-////	outputs.dir "$webappDir/dist"
 //	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
 //		commandLine "ng.cmd", "build"
 //	} else {
@@ -65,7 +59,6 @@ dependencies {
 //	workingDir "static-resources"
 //	inputs.dir "static-resources"
 //	group = BasePlugin.BUILD_GROUP
-////	outputs.dir "$webappDir/dist"
 //	if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")){
 //		commandLine "npm.cmd", "install"
 //	} else {

@@ -11,7 +11,8 @@ import { CalendarModule } from 'primeng/primeng';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule } from "@angular/common/http";
 import {TimesheetService} from './services/timesheet/timesheet.service';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component'
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+
 
 @NgModule({
   declarations: [

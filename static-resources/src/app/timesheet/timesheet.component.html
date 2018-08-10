@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <p>Resource Name
-                        <select name="resource" class="form-control" [(ngModel)]="selectedResourceValue" (change)="getSelectedResourceValue()" >
+                        <select name="resource" class="form-control" [(ngModel)]="selectedResourceValue" (change)="getSelectedResourceValue()">
                             <option value="" selected disabled>Select the resource name</option>
                             <option *ngFor="let resource of resources" [ngValue]="resource">{{resource.userName}}</option>
                         </select>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-4">
                     <p>Select Date:
-                        <p-calendar readonlyInput="true" class="form-control" [disabledDays]="[0,2,3,4,5,6]" [(ngModel)]="startDate"  (onSelect)="getWeekFromDate(startDate)"></p-calendar>
+                        <p-calendar readonlyInput="true" class="form-control" [disabledDays]="[0,2,3,4,5,6]" [(ngModel)]="startDate" (onSelect)="getWeekFromDate(startDate)"></p-calendar>
                     </p>
                 </div>
             </div>
@@ -53,45 +53,49 @@
                                 </select>
                             </td>
                             <td>
-                                    <!-- (blur)="checkTaskValidation(tasks.taskDescription,'taskDescription',i)" -->
-                                <input class="form-control" placeholder="Description" 
-                                    type="text" id="" [(ngModel)]="tasks.taskDescription" name="" [readonly]="isReadOnlyForTimesheetRow" />
+                                <!-- (blur)="checkTaskValidation(tasks.taskDescription,'taskDescription',i)" -->
+                                <input class="form-control inputworkasmodelbutton"   placeholder="Description" type="text" [(ngModel)]="tasks.taskDescription" name="" [readonly]="isReadOnlyForTimesheetRow"
+                                />
                             </td>
                             <td>
                                 <input class="form-control firstDate" id="firstDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" (blur)="checkHours($event,tasks.dayOneHours,'dayOneHours',i)"
-                                    type="text" [(ngModel)]="tasks.dayOneHours" name="" [readonly]="isReadOnlyForTimesheetRow" />
+                                    type="text" [(ngModel)]="tasks.dayOneHours" name="" [readonly]="isReadOnlyForTimesheetRow"
+                                />
                             </td>
                             <td>
                                 <input class="form-control secondDate" id="secondDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours"
                                     (blur)="checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)" type="text" [(ngModel)]="tasks.dayTwoHours"
-                                    name="" [readonly]="isReadOnlyForTimesheetRow"/>
+                                    name="" [readonly]="isReadOnlyForTimesheetRow" />
                             </td>
                             <td>
                                 <input class="form-control thirdDate" id="thirdDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" placeholder="hours"
                                     (blur)="checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)" type="text" [(ngModel)]="tasks.dayThreeHours"
-                                    name="" [readonly]="isReadOnlyForTimesheetRow"/>
+                                    name="" [readonly]="isReadOnlyForTimesheetRow" />
                             </td>
                             <td>
                                 <input class="form-control fourthDate" id="fourthDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours"
                                     placeholder="hours" placeholder="hours" (blur)="checkHours($event,tasks.dayFourHours,'dayFourHours',i)"
-                                    type="text" id="" [(ngModel)]="tasks.dayFourHours" name="" [readonly]="isReadOnlyForTimesheetRow"/>
+                                    type="text" id="" [(ngModel)]="tasks.dayFourHours" name="" [readonly]="isReadOnlyForTimesheetRow"
+                                />
                             </td>
                             <td>
                                 <input class="form-control fifthDate" id="fifthDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" (blur)="checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)"
-                                    type="text" id="" [(ngModel)]="tasks.dayFiveHours" name="" [readonly]="isReadOnlyForTimesheetRow" />
+                                    type="text" id="" [(ngModel)]="tasks.dayFiveHours" name="" [readonly]="isReadOnlyForTimesheetRow"
+                                />
                             </td>
                             <td>
                                 <input class="form-control sixthDate" id="sixthDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" (keyup)="checkHours($event,tasks.daySixHours,'daySixHours',i)"
-                                    type="text" id="" [(ngModel)]="tasks.daySixHours" name="" [readonly]="isReadOnlyForTimesheetRow"/>
+                                    type="text" id="" [(ngModel)]="tasks.daySixHours" name="" [readonly]="isReadOnlyForTimesheetRow"
+                                />
                             </td>
                             <td>
                                 <input class="form-control seventhDate" id="seventhDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours"
                                     (blur)="checkHours($event,tasks.daySevenHours,'daySevenHours',i)" type="text" id="" [(ngModel)]="tasks.daySevenHours"
-                                    name="" [readonly]="isReadOnlyForTimesheetRow"/>
+                                    name="" [readonly]="isReadOnlyForTimesheetRow" />
                             </td>
                             <td>
-                                <button *ngIf="i==0" class="btn btn-default btn-success" type="button" (click)="addRow()"  [disabled]="addAndEditButtonDisable">Add</button>
-                                <button *ngIf="i>0" class="btn btn-default btn-danger" type="button" (click)="deleteFieldValue(i)"  [disabled]="addAndEditButtonDisable">Delete</button>
+                                <button *ngIf="i==0" class="btn btn-default btn-success" type="button" (click)="addRow()" [disabled]="addAndEditButtonDisable">Add</button>
+                                <button *ngIf="i>0" class="btn btn-default btn-danger" type="button" (click)="deleteFieldValue(i)" [disabled]="addAndEditButtonDisable">Delete</button>
                             </td>
                         </tr>
 
@@ -109,8 +113,8 @@
                                 />
                             </td>
                             <td>
-                                <input class="form-control" placeholder="Total" id="thirdDatthirddatetotaleHour" type="text" [(ngModel)]="thirdDateTotal"
-                                    name="" readonly/>
+                                <input class="form-control" placeholder="Total" id="thirddatetotaleHour" type="text" [(ngModel)]="thirdDateTotal" name=""
+                                    readonly/>
                             </td>
                             <td>
                                 <input class="form-control" placeholder="Total" id="fouthdatetotal" type="text" id="" [(ngModel)]="fourthDateTotal" name=""
@@ -221,14 +225,15 @@
         <div class="col-md-4">
         </div>
         <div class="col-md-4">
-            <button *ngIf="saveButtonVisibility" style="background-color: #00303c;color:white" id="btnSave" class="btn  btn-md center-block" (click)="saveTimesheet()">Save Timesheet</button>
-            <button *ngIf="editButtonVisibility" (click)="toggleButton()"  id="btnSave" class="btn btn-warning">Edit Timesheet</button>
+            <button *ngIf="saveButtonVisibility" style="background-color: #00303c;color:white" id="btnSave" class="btn  btn-md center-block"
+                (click)="saveTimesheet()">Save Timesheet</button>
+            <button *ngIf="editButtonVisibility" (click)="toggleButton()" id="btnSave" class="btn btn-warning">Edit Timesheet</button>
             <button class="btn btn-primary btn-md center-block" (click)="exportToExcel()">Generate Excel Sheet</button>
         </div>
         <div class="col-md-4">
         </div>
     </div>
-   
-    
+
+
 </div>
 

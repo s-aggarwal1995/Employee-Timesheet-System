@@ -11,6 +11,7 @@ import { ConstantService } from '../services/constants/constants.service';
 import { environment } from '../../environments/environment';
 
 
+
 @Component({
   selector: 'app-timesheet',
   templateUrl: './timesheet.component.html',
@@ -176,7 +177,13 @@ export class TimesheetComponent implements OnInit {
 
 
   getResources() {
-    this.timesheetService.getResources().subscribe(resources => this.resources = resources, error => {
+    this.constantService.showLoader();
+    this.timesheetService.getResources().subscribe(resources => {
+      this.constantService.hideLoader();
+      this.resources = resources;
+
+    }, error => {
+      this.constantService.hideLoader();
       this.message = error;
       var self = this;
       setTimeout(function () { self.message = ""; }, 2000);
@@ -530,7 +537,7 @@ export class TimesheetComponent implements OnInit {
           var self = this;
           setTimeout(function () {
             self.message = "";
-             self.constantService.hideLoader();
+            self.constantService.hideLoader();
           }, 2000);
 
           try {
@@ -608,6 +615,10 @@ export class TimesheetComponent implements OnInit {
     // if user get timesheet
     this.addAndEditButtonDisable = false;
   }
+
+  
+
+
 
 
 

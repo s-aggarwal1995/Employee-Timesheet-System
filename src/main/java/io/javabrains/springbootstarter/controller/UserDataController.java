@@ -22,8 +22,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static io.javabrains.springbootstarter.bao.TimesheetService.excelGeneratedUser;
-
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -123,7 +121,12 @@ public class UserDataController implements UserDataControllerIfc{
     public void index(HttpServletRequest request, HttpServletResponse response,Timesheet timesheet) throws IOException {
         File file = new File("poi-generated-file.xlsx");
         FileInputStream inputStream = new FileInputStream(file);
-        response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet\"" + "_"+ excelGeneratedUser.getUser().getUserName() + "_" + excelGeneratedUser.getStartDate() + ".xlsx");
+
+        int n = timesheetService.getExcelGeneratedUser().getStartDate().lastIndexOf("/");
+        String year = timesheetService.getExcelGeneratedUser().getStartDate().substring(n + 1);
+
+
+        response.setHeader("Content-Disposition", "attachment; filename=\"WeeklyTimesheet\"" + "_"+ timesheetService.getExcelGeneratedUser().getUser().getUserName() + "_" + timesheetService.getExcelGeneratedUser().getDates().get(0) + "-" + year + ".xlsx");
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 
         ServletOutputStream outputStream = response.getOutputStream();

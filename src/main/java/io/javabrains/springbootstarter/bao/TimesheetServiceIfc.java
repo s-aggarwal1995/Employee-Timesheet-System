@@ -15,4 +15,7 @@ public interface TimesheetServiceIfc {
     public List<TaskData> getTasksData();
     public void exportToExcel(Timesheet timesheet);
     public Timesheet getTimesheetsAccordingToWeek(String startDate, User user);
+    public Timesheet getExcelGeneratedUser();
+    public void setExcelGeneratedUser(Timesheet excelGeneratedUser);
+
 }

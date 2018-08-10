@@ -139,7 +139,7 @@ public class UserDataController implements UserDataControllerIfc{
 
             attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
             attributes.addAttribute("attribute", "redirectWithRedirectView");
-            return new RedirectView("redirect:/index.html");
+            return new RedirectView("redirect:/forward");
     }
 
 

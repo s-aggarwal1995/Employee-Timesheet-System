@@ -1,7 +1,6 @@
 
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {$} from 'jquery';
 
 
 @Injectable({
@@ -10,7 +9,8 @@ import {$} from 'jquery';
 export  class ConstantService {
 
   
-    displayLoader:boolean =false;
+  displayLoader:boolean;
+  
   constructor(private http: HttpClient) { }
 
     hideLoader():any{

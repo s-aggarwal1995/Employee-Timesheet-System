@@ -10,10 +10,8 @@ import {Router}  from "@angular/router";
 })
 export class AppComponent {
 
-  title = 'app';
-
-  constructor(public ConstantService:ConstantService, public router:Router){
-    this.router.navigateByUrl("/timesheet");
+  constructor(public ConstantService:ConstantService){
+   
   }
   
 }

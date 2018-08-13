@@ -222,15 +222,16 @@
     </div>
 
     <div class="wrapper" style="padding:15px 0px 0px 0px;">
-        <div class="col-md-4">
+        <div class="col-md-3">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <button *ngIf="saveButtonVisibility" style="background-color: #00303c;color:white" id="btnSave" class="btn btn-md center-block"
                 (click)="saveTimesheet()">Save Timesheet</button>
             <button *ngIf="editButtonVisibility" (click)="toggleButton()" id="btnSave" class="btn btn-warning">Edit Timesheet</button>
             <button class="btn btn-primary btn-md center-block" (click)="exportToExcel()">Generate Excel Sheet</button>
+            <button  class="btn btn-danger btn-warning">Send In Mail</button>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
         </div>
     </div>
 

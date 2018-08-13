@@ -2,12 +2,14 @@ package io.javabrains.springbootstarter.email.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +30,18 @@ public class EmailServiceImpl implements  EmailService {
 
 
         MimeMessage message = sender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
+        MimeMessageHelper helper = new MimeMessageHelper(message,true);
         helper.setTo(to);
         helper.setText(text);
         helper.setSubject(subject);
         helper.setCc(emailsArray);
-        //ClassPathResource file = new ClassPathResource("EmployeeTimesheet.xlsx");
-        //helper.addAttachment("EmployeeTimesheet.xlsx", file);
+
+        FileSystemResource file
+                = new FileSystemResource(new File("poi-generated-file.xlsx"));
+        helper.addAttachment("WeeklyTimesheet.xlsx", file);
+
+//        ClassPathResource file = new ClassPathResource("poi-generated-file.xlsx");
+//        helper.addAttachment("WeeklyTimesheet", file);
 
         sender.send(message);
 

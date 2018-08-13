@@ -22,7 +22,8 @@ public class EmailController {
         String to=emailMessage.getReceiver();
         String subject=emailMessage.getSubject();
         String text=emailMessage.getMailBody();
-        try{
+
+        try {
             emailService.sendSimpleMessage(to,subject,text);
             return "Email Sent!";
         }

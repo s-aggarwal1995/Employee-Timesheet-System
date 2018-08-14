@@ -1,6 +1,5 @@
 package io.javabrains.springbootstarter.util;
 
-import io.javabrains.springbootstarter.controller.UserDataController;
 import io.javabrains.springbootstarter.model.Task;
 import io.javabrains.springbootstarter.model.Timesheet;
 import org.apache.poi.ss.usermodel.Cell;
@@ -8,24 +7,22 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 
-import java.io.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class ExcelService {
 
     private static final String excelSheetName = "WeeklyTimesheet.xlsx";
     private static ArrayList<String> weekArray = new ArrayList<String>();
+
     private static final Logger logger = LoggerFactory.getLogger(ExcelService.class);
 
 //    @Value("${path}")
@@ -154,14 +151,20 @@ public class ExcelService {
             workbook.write(fileOut);
             workbook.close();
 
+            logger.info("excel sheet is successfully created.");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            logger.info("Exception Into The Create Excel Sheet Function In Excel Util Of Type FileNotFoundException");
+
         } catch (IOException e) {
             e.printStackTrace();
+            logger.info("Exception Into The Create Excel Sheet Function In Excel Util Of Type IOException");
+
         }
         catch (Exception e) {
             e.printStackTrace();
+            logger.info("Exception Into The Create Excel Sheet Function In Excel Util Of Type Exception");
         }
 
     }

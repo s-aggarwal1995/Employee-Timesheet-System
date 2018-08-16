@@ -5546,3 +5546,91 @@ Caused by: java.net.UnknownHostException: timesheet-shard-00-02-hzvsy.mongodb.ne
 16-08-2018 20:31:25.360 [http-nio-8030-exec-8] INFO  i.j.s.bao.TimesheetService.getTimesheetsAccordingToWeek - Enter Into The Get Timesheet According To Week In Service Layer
 16-08-2018 20:31:25.360 [http-nio-8030-exec-8] INFO  i.j.s.dao.TimesheetRepository.getTimesheetsAccordingToWeekAndUser - Enter Into The Get Timesheets According To Week And User Function At Repositorty
 16-08-2018 20:31:25.394 [http-nio-8030-exec-8] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:14.312 [http-nio-8030-exec-1] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:14.314 [http-nio-8030-exec-1] INFO  i.j.s.controller.UserDataController.addStakeholderEmail - Enter The Add Stakeholder Function
+16-08-2018 20:35:14.315 [http-nio-8030-exec-1] INFO  i.j.s.bao.TimesheetService.setUserData - Enter Into The Set User Data In Service Layer
+16-08-2018 20:35:14.315 [http-nio-8030-exec-1] INFO  i.j.s.dao.TimesheetRepository.setUser - Enter Into Set Users Function At Repositorty
+16-08-2018 20:35:14.347 [http-nio-8030-exec-1] INFO  i.j.s.dao.TimesheetRepository.setUser - User Is Saved Into The User Repository
+16-08-2018 20:35:14.348 [http-nio-8030-exec-1] INFO  i.j.s.controller.UserDataController.addStakeholderEmail - Exit The Add Stakeholder Function
+16-08-2018 20:35:14.349 [http-nio-8030-exec-1] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:21.578 [http-nio-8030-exec-9] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:21.579 [http-nio-8030-exec-9] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:21.582 [http-nio-8030-exec-7] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:21.583 [http-nio-8030-exec-7] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:21.586 [http-nio-8030-exec-6] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:21.588 [http-nio-8030-exec-6] INFO  i.j.s.controller.UserDataController.deleteStakeholderEmail - Enter The Delete StakeHolder Function
+16-08-2018 20:35:21.589 [http-nio-8030-exec-6] INFO  i.j.s.bao.TimesheetService.setUserData - Enter Into The Set User Data In Service Layer
+16-08-2018 20:35:21.590 [http-nio-8030-exec-6] INFO  i.j.s.dao.TimesheetRepository.setUser - Enter Into Set Users Function At Repositorty
+16-08-2018 20:35:21.591 [http-nio-8030-exec-10] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@781f0464
+16-08-2018 20:35:21.593 [http-nio-8030-exec-10] INFO  i.j.s.controller.UserDataController.deleteStakeholderEmail - Enter The Delete StakeHolder Function
+16-08-2018 20:35:21.593 [http-nio-8030-exec-10] INFO  i.j.s.bao.TimesheetService.setUserData - Enter Into The Set User Data In Service Layer
+16-08-2018 20:35:21.594 [http-nio-8030-exec-10] INFO  i.j.s.dao.TimesheetRepository.setUser - Enter Into Set Users Function At Repositorty
+16-08-2018 20:35:21.622 [http-nio-8030-exec-6] INFO  i.j.s.dao.TimesheetRepository.setUser - User Is Saved Into The User Repository
+16-08-2018 20:35:21.622 [http-nio-8030-exec-6] INFO  i.j.s.controller.UserDataController.deleteStakeholderEmail - Exit The Delete StakeHolder Function
+16-08-2018 20:35:21.623 [http-nio-8030-exec-6] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:35:21.626 [http-nio-8030-exec-10] INFO  i.j.s.dao.TimesheetRepository.setUser - User Is Saved Into The User Repository
+16-08-2018 20:35:21.626 [http-nio-8030-exec-10] INFO  i.j.s.controller.UserDataController.deleteStakeholderEmail - Exit The Delete StakeHolder Function
+16-08-2018 20:35:21.627 [http-nio-8030-exec-10] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@781f0464
+16-08-2018 20:36:02.895 [http-nio-8030-exec-4] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@781f0464
+16-08-2018 20:36:02.896 [http-nio-8030-exec-4] INFO  i.j.s.controller.UserDataController.getUsersData - Enter The GetUsers Function
+16-08-2018 20:36:02.896 [http-nio-8030-exec-4] INFO  i.j.s.bao.TimesheetService.getUsersData - Enter Into The Get User Data In Service Layer
+16-08-2018 20:36:02.896 [http-nio-8030-exec-4] INFO  i.j.s.dao.TimesheetRepository.getUsers - Enter Into The Get Users Function At Repositorty
+16-08-2018 20:36:02.906 [http-nio-8030-exec-3] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:02.907 [http-nio-8030-exec-3] INFO  i.j.s.controller.UserDataController.getTasksData - Enter The Get Task Data
+16-08-2018 20:36:02.908 [http-nio-8030-exec-3] INFO  i.j.s.bao.TimesheetService.getTasksData - Enter Into The Get Task In Service Layer
+16-08-2018 20:36:02.908 [http-nio-8030-exec-3] INFO  i.j.s.dao.TimesheetRepository.getTasksData - Enter Into Get Task Data Function At Repositorty
+16-08-2018 20:36:02.930 [http-nio-8030-exec-4] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@781f0464
+16-08-2018 20:36:02.942 [http-nio-8030-exec-3] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:13.842 [http-nio-8030-exec-8] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:13.843 [http-nio-8030-exec-8] INFO  i.j.s.controller.UserDataController.getTimesheetsAccordingToWeek - Enter The Specified User Timesheet Function
+16-08-2018 20:36:13.843 [http-nio-8030-exec-8] INFO  i.j.s.bao.TimesheetService.getTimesheetsAccordingToWeek - Enter Into The Get Timesheet According To Week In Service Layer
+16-08-2018 20:36:13.844 [http-nio-8030-exec-8] INFO  i.j.s.dao.TimesheetRepository.getTimesheetsAccordingToWeekAndUser - Enter Into The Get Timesheets According To Week And User Function At Repositorty
+16-08-2018 20:36:13.876 [http-nio-8030-exec-8] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:41.114 [http-nio-8030-exec-5] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:41.116 [http-nio-8030-exec-5] INFO  i.j.s.controller.UserDataController.getTimesheetsAccordingToWeek - Enter The Specified User Timesheet Function
+16-08-2018 20:36:41.116 [http-nio-8030-exec-5] INFO  i.j.s.bao.TimesheetService.getTimesheetsAccordingToWeek - Enter Into The Get Timesheet According To Week In Service Layer
+16-08-2018 20:36:41.117 [http-nio-8030-exec-5] INFO  i.j.s.dao.TimesheetRepository.getTimesheetsAccordingToWeekAndUser - Enter Into The Get Timesheets According To Week And User Function At Repositorty
+16-08-2018 20:36:41.149 [http-nio-8030-exec-5] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:50.949 [http-nio-8030-exec-2] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:50.950 [http-nio-8030-exec-2] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:50.955 [http-nio-8030-exec-1] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:36:50.957 [http-nio-8030-exec-1] INFO  i.j.s.controller.UserDataController.setTimesheet - Enter The post Timesheet Function
+16-08-2018 20:36:50.958 [http-nio-8030-exec-1] INFO  i.j.s.bao.TimesheetService.addTimesheet - Enter Into The Add Timesheet In Service Layer
+16-08-2018 20:36:50.959 [http-nio-8030-exec-1] INFO  i.j.s.dao.TimesheetRepository.addNewTimesheet - Enter Into The Add New Timesheet Function At Repositorty
+16-08-2018 20:36:51.121 [http-nio-8030-exec-1] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:12.612 [http-nio-8030-exec-7] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:12.614 [http-nio-8030-exec-7] INFO  i.j.s.controller.UserDataController.getTimesheetsAccordingToWeek - Enter The Specified User Timesheet Function
+16-08-2018 20:37:12.615 [http-nio-8030-exec-7] INFO  i.j.s.bao.TimesheetService.getTimesheetsAccordingToWeek - Enter Into The Get Timesheet According To Week In Service Layer
+16-08-2018 20:37:12.615 [http-nio-8030-exec-7] INFO  i.j.s.dao.TimesheetRepository.getTimesheetsAccordingToWeekAndUser - Enter Into The Get Timesheets According To Week And User Function At Repositorty
+16-08-2018 20:37:12.648 [http-nio-8030-exec-7] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:27.317 [http-nio-8030-exec-6] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:27.354 [http-nio-8030-exec-6] INFO  i.j.s.controller.UserDataController.updateProjectManagerName - Enter The Update Project Manager Name Function
+16-08-2018 20:37:27.354 [http-nio-8030-exec-6] INFO  i.j.s.bao.TimesheetService.setUserData - Enter Into The Set User Data In Service Layer
+16-08-2018 20:37:27.354 [http-nio-8030-exec-6] INFO  i.j.s.dao.TimesheetRepository.setUser - Enter Into Set Users Function At Repositorty
+16-08-2018 20:37:27.386 [http-nio-8030-exec-6] INFO  i.j.s.dao.TimesheetRepository.setUser - User Is Saved Into The User Repository
+16-08-2018 20:37:27.386 [http-nio-8030-exec-6] INFO  i.j.s.controller.UserDataController.updateProjectManagerName - Exit The Update Project Manager Name Function
+16-08-2018 20:37:27.387 [http-nio-8030-exec-6] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:29.145 [http-nio-8030-exec-10] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:29.146 [http-nio-8030-exec-10] INFO  i.j.s.controller.UserDataController.updateProjectManagerName - Enter The Update Project Manager Name Function
+16-08-2018 20:37:29.147 [http-nio-8030-exec-10] INFO  i.j.s.bao.TimesheetService.setUserData - Enter Into The Set User Data In Service Layer
+16-08-2018 20:37:29.147 [http-nio-8030-exec-10] INFO  i.j.s.dao.TimesheetRepository.setUser - Enter Into Set Users Function At Repositorty
+16-08-2018 20:37:29.179 [http-nio-8030-exec-10] INFO  i.j.s.dao.TimesheetRepository.setUser - User Is Saved Into The User Repository
+16-08-2018 20:37:29.179 [http-nio-8030-exec-10] INFO  i.j.s.controller.UserDataController.updateProjectManagerName - Exit The Update Project Manager Name Function
+16-08-2018 20:37:29.180 [http-nio-8030-exec-10] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:38.965 [http-nio-8030-exec-4] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:38.966 [http-nio-8030-exec-4] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:38.973 [http-nio-8030-exec-3] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:38.976 [http-nio-8030-exec-3] INFO  i.j.s.controller.UserDataController.exportToExcel - Enter The Generate ExcelSheet Function
+16-08-2018 20:37:38.977 [http-nio-8030-exec-3] INFO  i.j.s.bao.TimesheetService.exportToExcel - Enter Into The Export To excel In Service Layer
+16-08-2018 20:37:39.236 [http-nio-8030-exec-3] INFO  i.j.s.util.ExcelService.createExcelSheet - createExcelSheet method
+16-08-2018 20:37:39.253 [http-nio-8030-exec-3] INFO  i.j.s.util.ExcelService.createExcelSheet - java.io.FileInputStream@1b954255
+16-08-2018 20:37:41.693 [http-nio-8030-exec-3] INFO  i.j.s.util.ExcelService.createExcelSheet - fileoutstreamjava.io.FileOutputStream@41a417de
+16-08-2018 20:37:42.133 [http-nio-8030-exec-3] INFO  i.j.s.util.ExcelService.createExcelSheet - excel sheet is successfully created.
+16-08-2018 20:37:42.133 [http-nio-8030-exec-3] INFO  i.j.s.dao.TimesheetRepository.addNewTimesheet - Enter Into The Add New Timesheet Function At Repositorty
+16-08-2018 20:37:42.197 [http-nio-8030-exec-3] INFO  i.j.s.controller.UserDataController.exportToExcel - Exit From The Generate ExcelSheet Function
+16-08-2018 20:37:42.198 [http-nio-8030-exec-3] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:42.259 [http-nio-8030-exec-8] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.initContextHolders - Bound request context to thread: org.apache.catalina.connector.RequestFacade@3d533b2
+16-08-2018 20:37:42.322 [http-nio-8030-exec-8] INFO  i.j.s.controller.UserDataController.downloadExcelSheet - Enter in the Download ExcelSheet Function
+16-08-2018 20:37:42.323 [http-nio-8030-exec-8] INFO  i.j.s.controller.UserDataController.downloadExcelSheet - ExcelSheet Read ie Poi-Generated-Excel
+16-08-2018 20:37:42.346 [http-nio-8030-exec-8] INFO  i.j.s.controller.UserDataController.downloadExcelSheet - Exit From The Download ExcelSheet Function
+16-08-2018 20:37:42.346 [http-nio-8030-exec-8] DEBUG o.s.b.w.s.f.OrderedRequestContextFilter.doFilterInternal - Cleared thread-bound request context: org.apache.catalina.connector.RequestFacade@3d533b2

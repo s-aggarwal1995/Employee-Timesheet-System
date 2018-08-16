@@ -26,6 +26,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     FormsModule,
     CalendarModule,
     BrowserAnimationsModule,
+    NgbModule,
     HttpClientModule
   ],
   providers: [TimesheetService],

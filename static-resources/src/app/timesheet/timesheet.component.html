@@ -1,3 +1,12 @@
+<!-- svam image header-->
+<div class="header">
+    <img src="../assets/imgs/svam.png" alt="SVAM INTL" class="responsive" width="800" height="400">
+
+    <h6>WEEKLY TIMESHEET </h6>
+</div>
+
+
+
 <div class="wrapper wrapperpadding">
     <div class="container">
         <div *ngIf="!selectedResourceValue" class="col-md-6 centered text-center col-centered">
@@ -54,8 +63,8 @@
                             </td>
                             <td>
                                 <!-- (blur)="checkTaskValidation(tasks.taskDescription,'taskDescription',i)" -->
-                                <input class="form-control inputworkasmodelbutton"   placeholder="Description" type="text" [(ngModel)]="tasks.taskDescription" name="" [readonly]="isReadOnlyForTimesheetRow"
-                                />
+                                <input class="form-control inputworkasmodelbutton" placeholder="Description" type="text" [(ngModel)]="tasks.taskDescription"
+                                    name="" [readonly]="isReadOnlyForTimesheetRow" />
                             </td>
                             <td>
                                 <input class="form-control firstDate" id="firstDateHour" (keypress)=checkNoOfDigitsInHours($event) placeholder="hours" (blur)="checkHours($event,tasks.dayOneHours,'dayOneHours',i)"
@@ -94,8 +103,18 @@
                                     name="" [readonly]="isReadOnlyForTimesheetRow" />
                             </td>
                             <td>
-                                <button *ngIf="i==0" class="btn btn-default btn-success" type="button" (click)="addRow()" [disabled]="addAndEditButtonDisable">Add</button>
-                                <button *ngIf="i>0" class="btn btn-default btn-danger" type="button" (click)="deleteFieldValue(i)" [disabled]="addAndEditButtonDisable">Delete</button>
+                                <button id="addrowbuttonid" style="box-shadow: none;background-color:#00303c;border-color:#00303c;" *ngIf="i==0" class="btn btn-default btn-success"
+                                    type="button" (click)="addRow()" [disabled]="addAndEditButtonDisable">
+                                    <i style="color:green;" class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+
+
+                                <button style="background-color:#00303c;;border-color:#00303c;" *ngIf="i>0" class="btn btn-default btn-danger" type="button"
+                                    (click)="deleteFieldValue(i)" [disabled]="addAndEditButtonDisable">
+                                    <i style="color:red;" class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+
+
                             </td>
                         </tr>
 
@@ -167,11 +186,17 @@
                     <div class="input-group">
                         <input id="managername" type="text" class="form-control" [(ngModel)]="selectedResourceValue.managerEmail" [readonly]="isManagerReadOnly"
                         />
-                        <span class="input-group-btn">
-                            <button *ngIf="managerEditButtonShowHide" id="clientmanagereditbutton" (click)="hideManagerEditButton()" class="btn btn-default btn-warning edit-button"
-                                type="button">Edit</button>
-                            <button *ngIf="managerUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideManagerUpdateButton()" class="btn btn-default btn-primary update-button"
-                                type="button">Update</button>
+                        <span class="input-group-btn" style="padding:10px;">
+                            <!-- <button *ngIf="managerEditButtonShowHide" id="clientmanagereditbutton" (click)="hideManagerEditButton()" class="btn btn-default btn-warning edit-button"
+                                type="button">Edit</button> -->
+                            <span style="cursor:pointer;" *ngIf="managerEditButtonShowHide" id="clientmanagereditbutton" (click)="hideManagerEditButton()"
+                                class="edit-button">{{editIcon}}</span>
+
+                            <!-- <button *ngIf="managerUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideManagerUpdateButton()" class="btn btn-default btn-primary update-button"
+                                type="button">Update</button> -->
+                            <span style="cursor:pointer;" *ngIf="managerUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideManagerUpdateButton()"
+                                class="update-button">{{check}}</span>
+
                         </span>
                     </div>
                 </div>
@@ -182,11 +207,17 @@
                 <div class="input-group">
                     <input id="clientmanagername" type="text" class="form-control" [(ngModel)]="selectedResourceValue.clientEmail" [readonly]="isClientReadOnly"
                     />
-                    <span class="input-group-btn">
-                        <button *ngIf="clientEditButtonShowHide" id="clientmanagereditbutton" (click)="hideClientEditButton()" class="btn btn-default btn-warning edit-button"
-                            type="button">Edit</button>
-                        <button *ngIf="clientUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideClientUpdateButton()" class="btn btn-default btn-primary update-button"
-                            type="button">Update</button>
+                    <span class="input-group-btn" style="padding:10px;">
+                        <!-- <button *ngIf="clientEditButtonShowHide" id="clientmanagereditbutton" (click)="hideClientEditButton()" class="btn btn-default btn-warning edit-button"
+                            type="button">Edit</button> -->
+                        <span style="cursor:pointer;" *ngIf="clientEditButtonShowHide" id="clientmanagereditbutton" (click)="hideClientEditButton()"
+                            class="edit-button">{{editIcon}}</span>
+
+                        <!-- <button  *ngIf="clientUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideClientUpdateButton()" class="btn btn-default btn-primary update-button"
+                            type="button">Update</button> -->
+                        <span style="cursor:pointer;" *ngIf="clientUpdateButtonShowHide" id="clientmanagerupdatebutton" (click)="hideClientUpdateButton()"
+                            class="update-button">{{check}}</span>
+
                     </span>
                 </div>
             </div>
@@ -198,7 +229,12 @@
                 <tbody>
                     <tr *ngFor="let stakeholderEmail of selectedResourceValue.stakeholdersEmail">
                         <td>{{stakeholderEmail}}</td>
-                        <button class="btn btn-default btn-danger" type="button" (click)="deleteStakeHolderEmail(stakeholderEmail)">Delete</button>
+                        <!-- <button class="btn btn-default btn-danger" type="button" (click)="deleteStakeHolderEmail(stakeholderEmail)">Delete</button> -->
+                        <td>
+                            <span style="cursor:pointer;color:red;" (click)="deleteStakeHolderEmail(stakeholderEmail)">
+                                <i style="color:red;" class="fa fa-times" aria-hidden="true"></i>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -209,7 +245,10 @@
                     <input required class="form-control" id="stakeholderEmail" name="emailaddress" #emailaddress="ngModel" pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
                         ngModel [(ngModel)]="stakeholderEmail" type="text">
                     <span class="input-group-btn">
-                        <button class="btn btn-default btn-success add-stakeholder" (click)="addEmail()" [disabled]="!userform.valid" type="submit">Add</button>
+                        <button style="background-color: white;border:none;" class="btn btn-default btn-success add-stakeholder" (click)="addEmail()"
+                            [disabled]="!userform.valid" type="submit">
+                            <i style="color:green;" class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
                     </span>
                 </div>
                 <div *ngIf="!emailaddress.valid && emailaddress.touched">
@@ -226,14 +265,20 @@
         </div>
         <div class="col-md-6">
             <button *ngIf="saveButtonVisibility" style="background-color: #00303c;color:white" id="btnSave" class="btn btn-md center-block"
-                (click)="saveTimesheet()">Save Timesheet</button>
-            <button *ngIf="editButtonVisibility" (click)="toggleButton()" id="btnSave" class="btn btn-warning">Edit Timesheet</button>
-            <button class="btn btn-primary btn-md center-block" (click)="exportToExcel()">Generate Excel Sheet</button>
+                (click)="saveTimesheet()">
+                <i class="fa fa-cloud" aria-hidden="true"></i> Save Timesheet</button>
+            <button *ngIf="editButtonVisibility" (click)="toggleButton()" id="btnSave" class="btn btn-warning">
+                <span class="glyphicon glyphicon-pencil"></span>{{editIcon}} Edit Timesheet</button>
+            <button class="btn btn-primary btn-md center-block" (click)="exportToExcel()">
+                <i class="fa fa-download" aria-hidden="true"></i> Generate Excel Sheet</button>
+            <!-- <button class="btn btn-primary btn-md center-block btn-danger" (click)="sendMail()"><span class="glyphicon glyphicon-envelope"></span>{{mailIcon}} Send In Mail</button> -->
         </div>
         <div class="col-md-3">
         </div>
     </div>
 
-
+   
 </div>
-
+<div class="footer">
+        <p style="margin:0px;">Developed by Sanchit Aggarwal & Tanuj Kathuria</p>
+    </div>

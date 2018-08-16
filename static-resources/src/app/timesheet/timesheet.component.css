@@ -1,5 +1,6 @@
 .wrapperpadding{
-    padding:15px 0px;
+		margin-top: 60px;
+    /* padding:15px 0px; */
 }
 #weeklytimesheetheading{
     color:red;
@@ -50,3 +51,45 @@
   margin-top: 30%;
 }
 
+ /* for stakeholder table */
+ .table th, .table td{
+	 padding: 0.75rem 0 0.75rem 0.75rem;
+ }
+
+
+  /* header css */
+ .header img {
+	float: left;
+	background: #555;
+  }
+  
+  .header h6 {
+	position: relative;
+	top: 18px;
+	left: 10px;
+	font-size: 40px;
+	text-align: right;
+	margin-right: 30px;
+}
+
+.responsive{
+	width: 100%;
+	max-width:400px;
+	margin-top: 10px;
+	height:auto;
+}
+
+.footer{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #00303c;
+	color: white;
+	text-align: center;
+}
+
+.col-centered
+{
+	margin-top: 20% !important
+}

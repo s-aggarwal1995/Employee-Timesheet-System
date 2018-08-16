@@ -10,6 +10,8 @@ import { Subscription, Observable, timer } from 'rxjs';
 import { ConstantService } from '../services/constants/constants.service';
 import { environment } from '../../environments/environment';
 
+import icons from 'glyphicons';
+
 
 
 @Component({
@@ -18,6 +20,14 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./timesheet.component.css']
 })
 export class TimesheetComponent implements OnInit {
+
+
+  // icons
+  editIcon = icons.pencil;
+  crossIcon = icons.crossHeavy;
+  mailIcon = icons.email;
+  plus = icons.plus;
+  check= icons.checkHeavy;
 
   addAndEditButtonDisable: boolean = false;
 
@@ -79,6 +89,8 @@ export class TimesheetComponent implements OnInit {
   constructor(public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService) { }
 
   ngOnInit() {
+
+    
 
     // to get the resources name from the service
     this.getResources();
@@ -616,10 +628,7 @@ export class TimesheetComponent implements OnInit {
     this.addAndEditButtonDisable = false;
   }
 
-  
-
-
-
+ 
 
 
 }

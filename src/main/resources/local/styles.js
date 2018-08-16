@@ -698,16 +698,16 @@ if(false) {}
 
 /***/ 2:
 /*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./node_modules/bootstrap/dist/css/bootstrap.css ./node_modules/primeicons/primeicons.css ./node_modules/primeng/resources/themes/omega/theme.css ./node_modules/primeng/resources/primeng.min.css ./styles.css ***!
+  !*** multi ./styles.css ./node_modules/bootstrap/dist/css/bootstrap.css ./node_modules/primeicons/primeicons.css ./node_modules/primeng/resources/themes/omega/theme.css ./node_modules/primeng/resources/primeng.min.css ***!
   \****************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(/*! D:\Employee-Timesheet-System\static-resources\styles.css */"./styles.css");
 __webpack_require__(/*! D:\Employee-Timesheet-System\static-resources\node_modules\bootstrap\dist\css\bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
 __webpack_require__(/*! D:\Employee-Timesheet-System\static-resources\node_modules\primeicons\primeicons.css */"./node_modules/primeicons/primeicons.css");
 __webpack_require__(/*! D:\Employee-Timesheet-System\static-resources\node_modules\primeng\resources\themes\omega\theme.css */"./node_modules/primeng/resources/themes/omega/theme.css");
-__webpack_require__(/*! D:\Employee-Timesheet-System\static-resources\node_modules\primeng\resources\primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
-module.exports = __webpack_require__(/*! D:\Employee-Timesheet-System\static-resources\styles.css */"./styles.css");
+module.exports = __webpack_require__(/*! D:\Employee-Timesheet-System\static-resources\node_modules\primeng\resources\primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
 
 
 /***/ })

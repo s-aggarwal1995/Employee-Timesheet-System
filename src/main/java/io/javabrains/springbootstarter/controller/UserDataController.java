@@ -46,7 +46,6 @@ public class UserDataController implements UserDataControllerIfc{
             timesheetService.setUserData(user);
             logger.info("Exit The Post User Function");
             return "{\"response\":\"user successfully registered\"}";
-
         }
         catch (Exception e){
             e.printStackTrace();

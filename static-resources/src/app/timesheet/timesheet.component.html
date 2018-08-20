@@ -271,14 +271,85 @@
                 <span class="glyphicon glyphicon-pencil"></span>{{editIcon}} Edit Timesheet</button>
             <button class="btn btn-primary btn-md center-block" (click)="exportToExcel()">
                 <i class="fa fa-download" aria-hidden="true"></i> Generate Excel Sheet</button>
-            <!-- <button class="btn btn-primary btn-md center-block btn-danger" (click)="sendMail()"><span class="glyphicon glyphicon-envelope"></span>{{mailIcon}} Send In Mail</button> -->
+            <button class="btn btn-primary btn-md center-block btn-danger" (click)="sendMail(content)">
+                <span class="glyphicon glyphicon-envelope"></span>{{mailIcon}} Send In Mail</button>
         </div>
         <div class="col-md-3">
         </div>
     </div>
 
-   
+
 </div>
 <div class="footer">
-        <p style="margin:0px;">Developed by Sanchit Aggarwal / Inovation By Tanuj Kathuria</p>
+    <p style="margin:0px;">Developed by Sanchit Aggarwal / Innovation By Tanuj Kathuria</p>
 </div>
+
+
+
+
+<ng-template  id="hideDiv" #content let-c="close" let-d="dismiss">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Send Email</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="to">Client Email</label>
+                <div class="input-group">
+                    <!-- <input id="to" class="form-control" placeholder="To" name="clientmailid" #clientmailid="ngModel" [(ngModel)]="clientMailId"> -->
+                    <input id="to" #clientemail name="clientemail" class="form-control" placeholder="To" [(ngModel)]="clientMailId" (blur)="showEmailValidMessage(clientemail)" (keyup)="checkValidEmailAddress(clientemail)">
+                  
+                </div>
+                <div><span *ngIf="emailAddressMessage">Invalid Email Address</span></div>
+            </div>
+            <div class="form-group">
+                <label for="cc">Stakeholders Email (Cc)</label>
+                <div class="input-group">
+
+                    <input id="cc" class="form-control" placeholder="Cc" name="ccemailaddress" #ccemailaddress="ngModel" [(ngModel)]="ccEmailAddresses"
+                        readonly>
+                   
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <div class="input-group">
+
+                    <input id="subject" class="form-control" placeholder="subject" name="subject" #subject="ngModel" [(ngModel)]="mailSubject"
+                        readonly>
+                    <!-- <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button">
+                              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                            </button>
+                          </div> -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mailbody">Mail Body</label>
+                <div class="input-group">
+                    <div readonly [innerHTML]="emailTemplate"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="mailSent()" [disabled]="invalidMailAddress">Send</button>
+        <!-- <button type="button" class="btn btn-outline-dark" >Send</button> -->
+
+    </div>
+    
+</ng-template>
+
+
+
+
+
+
+

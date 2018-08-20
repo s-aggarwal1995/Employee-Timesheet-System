@@ -2,12 +2,34 @@ package io.javabrains.springbootstarter.email.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class EmailMessage
 {
     String receiver;
+    List<String> stakeholders = new ArrayList<String>();
     String subject;
     String mailBody;
+
+    public List<String> getStakeholders() {
+        return stakeholders;
+    }
+
+    public void setStakeholders(List<String> stakeholders) {
+        this.stakeholders = stakeholders;
+    }
+
+
+    public String getMailBody() {
+        return mailBody;
+    }
+
+    public void setMailBody(String mailBody) {
+        this.mailBody = mailBody;
+    }
+
 
     public String getReceiver() {
         return receiver;
@@ -25,11 +47,5 @@ public class EmailMessage
         this.subject = subject;
     }
 
-    public String getMailBody() {
-        return mailBody;
-    }
 
-    public void setMailBody(String mailBody) {
-        this.mailBody = mailBody;
-    }
 }

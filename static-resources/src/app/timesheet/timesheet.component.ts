@@ -12,6 +12,10 @@ import { environment } from '../../environments/environment';
 
 import icons from 'glyphicons';
 
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
+import { EmailService } from '../services/email/email.service'
+
 
 
 @Component({
@@ -27,7 +31,7 @@ export class TimesheetComponent implements OnInit {
   crossIcon = icons.crossHeavy;
   mailIcon = icons.email;
   plus = icons.plus;
-  check= icons.checkHeavy;
+  check = icons.checkHeavy;
 
   addAndEditButtonDisable: boolean = false;
 
@@ -86,11 +90,11 @@ export class TimesheetComponent implements OnInit {
 
   stakeholderEmail;
 
-  constructor(public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService) { }
+  constructor(public email: EmailService, public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService, private modalService: NgbModal) { }
 
   ngOnInit() {
 
-    
+
 
     // to get the resources name from the service
     this.getResources();
@@ -302,7 +306,8 @@ export class TimesheetComponent implements OnInit {
       let newdate = day + "-" + months[month];
       this.dates[i] = newdate;
       if (i == 0)
-        this.startDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), startingDate);
+        this.startDate = new Date(
+          selectedDate.getFullYear(), selectedDate.getMonth(), startingDate);
       if (i == 6) {
         let lastDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), startingDate);
         var dateObj = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), startingDate);
@@ -395,6 +400,8 @@ export class TimesheetComponent implements OnInit {
         }
         else
           this.firstDateTotal = sumOfFirstDate;
+
+
         this.sumOfWeeklyHours();
       }
     }
@@ -628,7 +635,150 @@ export class TimesheetComponent implements OnInit {
     this.addAndEditButtonDisable = false;
   }
 
- 
+
+
+  emailTemplate: string;
+  ccEmailAddresses: string;
+  clientMailId:string;
+  mailSubject:string;
+  invalidMailAddress:boolean = true;
+  emailAddressMessage:boolean;
+
+  setMailSubject(){
+    this.mailSubject = "Timesheet for approval from" + " " + this.startDate.toLocaleDateString() + "-" + this.endDate.toLocaleDateString();
+  }
+
+  sendMail(content) {
+
+    this.clientMailId="";
+   
+    let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
+
+    if (valueIsEmptyOrNot) {
+      this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+      //this.checkForEmptyData();
+      this.constantService.showLoader();
+
+      this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
+        .subscribe(message => {
+          this.message = message.response;
+          var self = this;
+          var con = content;
+          setTimeout(function () {
+            self.message = "";
+            self.constantService.hideLoader();
+          }, 2000);
+
+
+          //mail functionality
+          this.email.getEmailTemplate().subscribe(emailTemplate => {
+            this.ccEmailAddresses = "";
+            this.setMailSubject();
+            this.emailTemplate = emailTemplate;
+            
+  
+
+            var arrayLength = this.selectedResourceValue.stakeholdersEmail.length;
+
+            for (var i = 0; i < arrayLength; i++) {
+              this.ccEmailAddresses += this.selectedResourceValue.stakeholdersEmail[i] + ";";
+            }
+            this.ccEmailAddresses = this.ccEmailAddresses.slice(0, this.ccEmailAddresses.length - 1);
+
+
+
+            
+            this.open(con);
+          }
+            , error => {
+              this.message = error;
+              var self = this;
+              setTimeout(function () { self.message = ""; }, 2000);
+            })
+
+          this.isReadOnlyForTimesheetRow = true;
+          this.addAndEditButtonDisable = true;
+
+          this.editButtonVisibility = true;
+          this.saveButtonVisibility = false;
+
+        },
+          error => {
+            this.message = error;
+            var self = this;
+            setTimeout(function () { self.message = ""; }, 2000);
+          });
+    }
+
+
+  }
+
+  checkValidEmailAddress(clientMailId){
+   let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   let emailValidator:boolean = pattern.test(clientMailId.value);
+   if(emailValidator==true)
+   this.invalidMailAddress=false;
+   else{
+     this.invalidMailAddress=true;
+   }
+  }
+
+  
+
+  closeResult: string;
+
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  showEmailValidMessage(clientMailId){
+    let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailValidator:boolean = pattern.test(clientMailId.value);
+    if(emailValidator==true)
+    this.emailAddressMessage=false;
+    else{
+      this.emailAddressMessage=true;
+    }
+  }
+
+  
+
+  mailSent() {
+  
+    //$(".modal").remove();
+    $( ".modal-dialog" ).css( "display", "none" );
+    $(".modal-backdrop.show").css("opacity","0");
+    
+    this.constantService.showLoader();
+    this.email.postEmail(this.clientMailId,this.selectedResourceValue.stakeholdersEmail,this.mailSubject,this.emailTemplate).subscribe(message => {
+      this.constantService.hideLoader();
+      this.message = message.response;
+      var self = this;
+      setTimeout(function () { self.message = ""; }, 2000);
+    },
+      error => error => {
+        this.message = error;
+        var self = this;
+        setTimeout(function () { self.message = ""; }, 2000);
+      })
+
+  }
+
+
 
 
 }

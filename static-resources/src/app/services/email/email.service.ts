@@ -4,10 +4,11 @@ import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import { HttpHeaders } from '@angular/common/http';
+import { Password } from 'primeng/primeng';
 
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json','responseType': 'text' as 'text'})
 };
 
 
@@ -26,31 +27,28 @@ export class EmailService {
 
 
   getEmailTemplate():Observable<any>{
-    return this.http.get(this.emailUrl,options).pipe(
-      catchError(this.handleError('getemailtemplate', []))
-    );
+    return this.http.get(this.emailUrl,options);
   }
 
-  postEmail(receiver,stakeholders,subject,mailbody):Observable<any>{
-    const postedData = { receiver: receiver, stakeholders:stakeholders, subject: subject, mailbody: mailbody};
+  postEmail(username,password,receiver,stakeholders,subject,mailbody):Observable<any>{
+    const postedData = {username: username, password: password, receiver: receiver, stakeholders:stakeholders, subject: subject, mailbody: mailbody};
 
-    return this.http.post(this.emailSentUrl,postedData,httpOptions).pipe(
-      catchError(this.handleError('emailsent', []))
-    );
+    return this.http.post(this.emailSentUrl,postedData,httpOptions);
+  
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  // private handleError<T> (operation = 'operation', result?: T) {
+  //   return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+  //     // TODO: send the error to remote logging infrastructure
+  //     console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
+  //     // TODO: better job of transforming error for user consumption
+  //     // this.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
+  //     // Let the app keep running by returning an empty result.
+  //     return of(result as T);
+  //   };
+  // }
 
 }

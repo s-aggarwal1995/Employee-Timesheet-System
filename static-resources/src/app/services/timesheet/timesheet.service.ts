@@ -25,6 +25,8 @@ export class TimesheetService {
   private exportToExcelURL =  this.baseUrl + 'exporttoexcel';
   private updateManagerURL =   this.baseUrl + 'updateprojectmanagername';
   private clientManagerURL =  this.baseUrl + 'updateclientmanagername';
+  private clientManagerEmailURL = this.baseUrl + 'updateclientemail';
+  private userEmailURL = this.baseUrl + 'updateuseremail';
   private addStakeholderEmailURL =  this.baseUrl + 'addstakeholderemail';
   private deleteStakeholderEmailURL =  this.baseUrl + 'deletestakeholderemail';
   private conditionalTimesheetURL =  this.baseUrl + 'gettimesheetifpresent';
@@ -64,6 +66,21 @@ export class TimesheetService {
       catchError(this.handleError('updateClientManagerName', []))
     );
   }
+
+  updateClientManagerEmail(Resource: Resource): Observable<any> {
+    return this.http.post(this.clientManagerEmailURL, Resource, httpOptions).pipe(
+      catchError(this.handleError('updateClientManagerEmail', []))
+    );
+  }
+
+  updateUserEmail(Resource: Resource): Observable<any> {
+    return this.http.post(this.userEmailURL, Resource, httpOptions).pipe(
+      catchError(this.handleError('updateUserEmail', []))
+    );
+  }
+
+
+  
 
   addStakeholderEmail(Resource: Resource): Observable<any> {
     return this.http.post(this.addStakeholderEmailURL, Resource, httpOptions).pipe(

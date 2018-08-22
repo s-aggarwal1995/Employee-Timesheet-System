@@ -7,9 +7,13 @@ import io.javabrains.springbootstarter.bao.TimesheetServiceIfc;
 import io.javabrains.springbootstarter.email.model.EmailMessage;
 import io.javabrains.springbootstarter.email.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -25,21 +29,26 @@ public class EmailController {
     @Autowired
     private Configuration freemarkerConfig;
 
+    @Autowired
+    MailSender sender;
+
     @RequestMapping(value="/email",method=RequestMethod.POST)
     public String sendEmail(@RequestBody EmailMessage emailMessage)
     {
-
+        try {
+        String username=emailMessage.getUsername();
+        String password=emailMessage.getPassword();
         String to=emailMessage.getReceiver();
         String subject=emailMessage.getSubject();
         String text=getMailTemplate();
         List<String> cc = emailMessage.getStakeholders();
 
-        try {
-            emailService.sendSimpleMessage(to,subject,text,cc);
-            return "{\"response\":\"Email Sent!\"}";
+
+        emailService.sendSimpleMessage(username,password,to,subject,text,cc);
+            return "{\"response\":\"Mail Sent\"}";
         }
         catch(Exception ex) {
-            return "Error in sending email: "+ex;
+            return "{\"response\":\"Error in sending email: Either Username or Password is Incorrect\"}";
         }
     }
 
@@ -48,9 +57,7 @@ public class EmailController {
     public String getMailTemplate()
     {
         try {
-
            return  emailService.getMailTemplate();
-
         }
         catch(Exception ex) {
             return "Error In Getting Template:" + ex;

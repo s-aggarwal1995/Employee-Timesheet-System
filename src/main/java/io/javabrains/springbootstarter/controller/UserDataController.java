@@ -93,6 +93,42 @@ public class UserDataController implements UserDataControllerIfc{
         }
     }
 
+    // update Client Manager Email
+    @RequestMapping(value="/updateclientemail",method=RequestMethod.POST)
+    public String updateClientEmail(@RequestBody User user) {
+
+        try {
+            logger.info("Enter The Update Client Email Function");
+            timesheetService.setUserData(user);
+            logger.info("Exit From The Update Client Email Function");
+            return "{\"response\":\"Client Manager Email Successfully Updated\"}";
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            logger.info("Exception Occurs At Update Client Manager email Function");
+            return null;
+        }
+    }
+
+    // Update User Email
+    @RequestMapping(value="/updateuseremail",method=RequestMethod.POST)
+    public String updateUserEmail(@RequestBody User user) {
+
+        try {
+            logger.info("Enter The Update User Email Function");
+            timesheetService.setUserData(user);
+            logger.info("Exit From The Update User Email Function");
+            return "{\"response\":\"User Email Successfully Updated\"}";
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            logger.info("Exception Occurs At Update User Email Function");
+            return null;
+        }
+    }
+
 
     // add stakeholder email
     @RequestMapping(value="/addstakeholderemail",method=RequestMethod.POST)

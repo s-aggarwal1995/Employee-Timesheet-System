@@ -5,4 +5,6 @@ export class User {
      managerEmailString:string;
      clientEmailString:string;
      stakeholdersEmail:string[]; 
+     clientMailAdd:String;
+     userMailAdd:String;
 } 

@@ -8,10 +8,34 @@ import java.util.List;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class EmailMessage
 {
+
+    String username;
+    String Password;
     String receiver;
     List<String> stakeholders = new ArrayList<String>();
     String subject;
     String mailBody;
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
 
     public List<String> getStakeholders() {
         return stakeholders;

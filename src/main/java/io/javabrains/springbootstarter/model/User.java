@@ -17,6 +17,24 @@ public class User {
     String managerEmail;
     String clientEmail;
     ArrayList<String> stakeholdersEmail;
+    String clientMailAdd;
+    String userMailAdd;
+
+    public String getClientMailAdd() {
+        return clientMailAdd;
+    }
+
+    public void setClientMailAdd(String clientMailAdd) {
+        this.clientMailAdd = clientMailAdd;
+    }
+
+    public String getUserMailAdd() {
+        return userMailAdd;
+    }
+
+    public void setUserMailAdd(String userMailAdd) {
+        this.userMailAdd = userMailAdd;
+    }
 
     public ArrayList<String> getStakeholdersEmail() {
         return stakeholdersEmail;

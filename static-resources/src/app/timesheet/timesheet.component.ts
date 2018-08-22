@@ -26,33 +26,43 @@ import { EmailService } from '../services/email/email.service'
 export class TimesheetComponent implements OnInit {
 
 
-  // icons
+  // icons of glyphions used in the application using glyphicons package
   editIcon = icons.pencil;
   crossIcon = icons.crossHeavy;
   mailIcon = icons.email;
   plus = icons.plus;
   check = icons.checkHeavy;
 
+  // to disable the add and edit button in the timesheet table according to whether timesheet exist or not
   addAndEditButtonDisable: boolean = false;
 
-  completeTimesheet: any;
-
+  // show all validation message through this variable
   message: any;
+  EmailIdExistMessage: boolean;
 
+  // toggle edita nd save timesheet button visibility according to whether timesheet exist or not
   editButtonVisibility: boolean = false;
   saveButtonVisibility: boolean = true;
   isReadOnlyForTimesheetRow: boolean = false;
 
-  hourValidation: boolean = false;
-  mandatoryValidation: boolean = false;
 
+  // validation message show variable for hour validation and Validation message for hour Task.
+  hourValidationMessage: boolean = false;
+  validationMessageForMandatoryTaskName: boolean = false;
+
+  // sum of total weekly hour
   totalWeeklyHours: any = '';
 
+  // response from uodatation 
   responseForUpdatedManager: any;
   responseForUpdatedClient: any;
   responseForAddedStakeholder: any;
   responseForDeletedStakeholder: any;
+  responseForUpdatedClientEmail: any;
+  responseForUpdatedUserEmail: any;
 
+
+  // each date sum of hours
   firstDateTotal: any = '';
   secondDateTotal: any = '';
   thirdDateTotal: any = '';
@@ -61,40 +71,75 @@ export class TimesheetComponent implements OnInit {
   sixthDateTotal: any = '';
   seventhDateTotal: any = '';
 
-  totalHoursOfEachDate: any;
+  // array which is passed at the backend to for each row total hours
+  totalHoursArrayOfEachDate: any;
 
+  // get resources and tasks coming from the apis
   resources = [];
   tasksData = [];
 
-  // TODO its an object
+  // select resource object when selected from the dropdown
   selectedResourceValue: any;
 
+  // timesheet array contains all teh timesheet of a single users
   public timesheetArray: Array<any> = [];
   public tasks: WeeklyTask = new WeeklyTask('', '', '', '', '', '', '', '', '');
   public exportToExcelTimesheet: Array<any> = [];
 
-
+  // startDate and EndDate of a week and dates array contains all the dates of a week
   startDate: Date;
-  dates = [];
   endDate: Date;
-  //defaultDate:Date;
+  dates = [];
 
+  // properties for client name button show hide
   clientEditButtonShowHide: boolean = true;
   clientUpdateButtonShowHide: boolean = false;
 
+  //properties for manger name button show hide
   managerEditButtonShowHide: boolean = true;
   managerUpdateButtonShowHide: boolean = false;
 
+  //properties for client email button show hide
+  clientEmailEditButtonShowHide: boolean = true;
+  clientEmailUpdateButtonShowHide: boolean = false;
+
+  //properties for user email button show hide
+  userEmailEditButtonShowHide: boolean = true;
+  userEmailUpdateButtonShowHide: boolean = false;
+
+  // make all the inout boxes of client and user credentials readonly
   isManagerReadOnly: boolean = true;
   isClientReadOnly: boolean = true;
+  isClientEmailReadOnly: boolean = true;
+  isUserEmailReadOnly: boolean = true;
 
+  // stakeholderemail to add in the stakeholderemail List
   stakeholderEmail;
+
+  // email address properties
+  emailTemplate: string;
+  ccEmailAddresses: string;
+  clientMailId: string;
+  userMailId: string;
+  mailSubject: string;
+
+  // to enable send button if password is having at least one character
+  invalidMailAddress: boolean = true;
+
+  // user password binding which post too api
+  userPasswordForEmail: string;
+
+  // message to show "password should contain at least one character"
+  emptyPasswordMessage: boolean;
+
+  // message for invalid email address if user not tyed correct email address while updation
+  emailAddressNotValidated: string;
+
+
 
   constructor(public email: EmailService, public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService, private modalService: NgbModal) { }
 
   ngOnInit() {
-
-
 
     // to get the resources name from the service
     this.getResources();
@@ -105,22 +150,17 @@ export class TimesheetComponent implements OnInit {
     // get the current monday of the week
     this.startDate = this.getMonday();
 
-
     // get week from date 
     this.getWeekFromDate(this.startDate);
 
   }
 
-
-
+  // call when new resource/user is selected from the drop down box
   getSelectedResourceValue() {
-
-    console.log(this.selectedResourceValue);
-    console.log(this.startDate);
     this.getExistingTimesheet();
-
   }
 
+  // get Monday From Present Date
   getMonday() {
     var d = new Date();
     var day = d.getDay(),
@@ -129,13 +169,14 @@ export class TimesheetComponent implements OnInit {
   }
 
 
+  // for getting existing timesheet accoring to user and week
   getExistingTimesheet() {
     this.constantService.showLoader();
     this.timesheetService.getTimesheetAccordingToWeekAndUser(this.startDate, this.selectedResourceValue).subscribe(timesheet => {
-      console.log(timesheet);
+
       this.constantService.hideLoader();
 
-      //this.completeTimesheet = timesheet;
+
       if (timesheet != null) {
         this.timesheetArray = [];
         for (var i = 0; i < timesheet.tasks.length; i++) {
@@ -157,8 +198,7 @@ export class TimesheetComponent implements OnInit {
         // if user get timesheet
         this.addAndEditButtonDisable = true;
 
-        // if existing timesheet is present then show previous manager and client manager if present
-        //this.selectedResourceValue=timesheet.user;
+
 
       }
       else {
@@ -192,6 +232,7 @@ export class TimesheetComponent implements OnInit {
   }
 
 
+  // get resources from the apis
   getResources() {
     this.constantService.showLoader();
     this.timesheetService.getResources().subscribe(resources => {
@@ -206,6 +247,8 @@ export class TimesheetComponent implements OnInit {
     });
   }
 
+
+  // get tasks from the apis
   getTasks() {
     this.tasksService.getTasks().subscribe(tasks => this.tasksData = tasks, error => {
       this.message = error;
@@ -213,6 +256,7 @@ export class TimesheetComponent implements OnInit {
       setTimeout(function () { self.message = ""; }, 2000);
     });
   }
+
 
   hideManagerEditButton() {
     this.managerUpdateButtonShowHide = true;
@@ -245,7 +289,6 @@ export class TimesheetComponent implements OnInit {
   hideClientUpdateButton() {
     this.timesheetService.updateProjectManagerName(this.selectedResourceValue).subscribe(Message => {
       this.responseForUpdatedClient = Message;
-      console.log(this.responseForUpdatedClient.response);
       this.clientUpdateButtonShowHide = false;
       this.clientEditButtonShowHide = true;
       this.isClientReadOnly = true;
@@ -258,25 +301,110 @@ export class TimesheetComponent implements OnInit {
 
   }
 
-  addEmail() {
-    //var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    //this.stakeholderEmails.push(this.stakeholderEmail);
-    this.selectedResourceValue.stakeholdersEmail.push(this.stakeholderEmail);
-    this.timesheetService.addStakeholderEmail(this.selectedResourceValue).subscribe(Message => {
-      this.responseForAddedStakeholder = Message;
-      console.log(this.responseForAddedStakeholder.response);
-    },
-      error => {
-        this.message = error;
-        var self = this;
-        setTimeout(function () { self.message = ""; }, 2000);
-      });
 
 
-    this.stakeholderEmail = "";
+
+  hideClientEmailEditButton() {
+    this.clientEmailUpdateButtonShowHide = true;
+    this.clientEmailEditButtonShowHide = false;
+    this.isClientEmailReadOnly = false;
+  }
+
+  hideClientEmailUpdateButton(event) {
+
+    var pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (pattern.test(event.path[2].childNodes[0].value)) {
+
+      this.timesheetService.updateClientManagerEmail(this.selectedResourceValue).subscribe(Message => {
+        this.responseForUpdatedClientEmail = Message;
+
+        this.clientEmailUpdateButtonShowHide = false;
+        this.clientEmailEditButtonShowHide = true;
+        this.isClientEmailReadOnly = true;
+      },
+        error => {
+          this.message = error;
+          var self = this;
+          setTimeout(function () { self.message = ""; }, 2000);
+        });
+    }
+
+    else {
+
+      this.emailAddressNotValidated = "Please enter the Correct EmailAddress";
+      var self = this;
+      setTimeout(function () { self.emailAddressNotValidated = ""; }, 2000);
+
+    }
 
   }
 
+
+
+
+  hideUserEmailEditButton() {
+    this.userEmailUpdateButtonShowHide = true;
+    this.userEmailEditButtonShowHide = false;
+    this.isUserEmailReadOnly = false;
+  }
+
+  hideUserEmailUpdateButton(event) {
+
+    let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log(pattern.test(event.path[2].childNodes[0].value));
+    if (pattern.test(event.path[2].childNodes[0].value)) {
+      this.timesheetService.updateUserEmail(this.selectedResourceValue).subscribe(Message => {
+        this.responseForUpdatedUserEmail = Message;
+
+        this.userEmailUpdateButtonShowHide = false;
+        this.userEmailEditButtonShowHide = true;
+        this.isUserEmailReadOnly = true;
+      },
+        error => {
+          this.message = error;
+          var self = this;
+          setTimeout(function () { self.message = ""; }, 2000);
+        });
+    }
+    else {
+
+      this.emailAddressNotValidated = "Please enter the Correct EmailAddress";
+      var self = this;
+      setTimeout(function () { self.emailAddressNotValidated = ""; }, 2000);
+
+    }
+
+  }
+
+  // add stakeholder email in the stakeholders email list
+  addEmail() {
+
+    let index = this.selectedResourceValue.stakeholdersEmail.indexOf(this.stakeholderEmail)
+    if (index > -1) {
+      this.EmailIdExistMessage = true;
+      var self = this;
+      setTimeout(function () { self.EmailIdExistMessage = false; }, 2000);
+    }
+    else {
+      this.selectedResourceValue.stakeholdersEmail.push(this.stakeholderEmail);
+      this.timesheetService.addStakeholderEmail(this.selectedResourceValue).subscribe(Message => {
+        this.responseForAddedStakeholder = Message;
+        console.log(this.responseForAddedStakeholder.response);
+      },
+        error => {
+          this.message = error;
+          var self = this;
+          setTimeout(function () { self.message = ""; }, 2000);
+        });
+
+
+      this.stakeholderEmail = "";
+    }
+
+  }
+
+  // delete stakholder emails from list
   deleteStakeHolderEmail(stakeholderEmail) {
     for (var i = this.selectedResourceValue.stakeholdersEmail.length - 1; i >= 0; i--) {
       if (this.selectedResourceValue.stakeholdersEmail[i] === stakeholderEmail)
@@ -293,8 +421,10 @@ export class TimesheetComponent implements OnInit {
     }
   }
 
+
+  // get week from date
   getWeekFromDate(selectedDate) {
-    console.log(selectedDate);
+
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var startingDate = selectedDate.getDate();
     for (var i = 0; i < 7; i++) {
@@ -330,7 +460,6 @@ export class TimesheetComponent implements OnInit {
 
   addRow() {
     this.timesheetArray.push(new WeeklyTask('', '', '', '', '', '', '', '', ''));
-    console.log(this.timesheetArray);
   }
 
   deleteFieldValue(index) {
@@ -368,20 +497,7 @@ export class TimesheetComponent implements OnInit {
 
   }
 
-
-  // checkTaskValidation(taskDesp, id, i) {
-  //   console.log(i);
-  //   console.log(this.timesheetArray[i]);
-  //   console.log(this.timesheetArray[i].taskDescription);
-
-
-  //   if (taskDesp.length > 20) {
-  //     alert("task length should not be greater than 20");
-  //     this.timesheetArray[i][id] = "";
-  //     return;
-  //   }
-  // }
-
+  //chcek hours for validation
   checkHours(event, hours, key, index) {
 
     //Total Weekly Hours
@@ -394,9 +510,9 @@ export class TimesheetComponent implements OnInit {
         sumOfFirstDate += parseInt(this.timesheetArray[i].dayOneHours || 0);
         if (sumOfFirstDate > 24) {
           this.timesheetArray[index][key] = '';
-          this.hourValidation = true;
+          this.hourValidationMessage = true;
           var self = this;
-          setTimeout(function () { self.hourValidation = false; }, 2000);
+          setTimeout(function () { self.hourValidationMessage = false; }, 2000);
         }
         else
           this.firstDateTotal = sumOfFirstDate;
@@ -411,9 +527,9 @@ export class TimesheetComponent implements OnInit {
         sumOfSecondDate += parseInt(this.timesheetArray[i].dayTwoHours || 0);
         if (sumOfSecondDate > 24) {
           this.timesheetArray[index][key] = '';
-          this.hourValidation = true;
+          this.hourValidationMessage = true;
           var self = this;
-          setTimeout(function () { self.hourValidation = false; }, 2000);
+          setTimeout(function () { self.hourValidationMessage = false; }, 2000);
         }
         else
           this.secondDateTotal = sumOfSecondDate;
@@ -427,9 +543,9 @@ export class TimesheetComponent implements OnInit {
         sumOfThirdDate += parseInt(this.timesheetArray[i].dayThreeHours || 0);
         if (sumOfThirdDate > 24) {
           this.timesheetArray[index][key] = '';
-          this.hourValidation = true;
+          this.hourValidationMessage = true;
           var self = this;
-          setTimeout(function () { self.hourValidation = false; }, 2000);
+          setTimeout(function () { self.hourValidationMessage = false; }, 2000);
         }
         else
           this.thirdDateTotal = sumOfThirdDate;
@@ -443,9 +559,9 @@ export class TimesheetComponent implements OnInit {
         sumOfFourthDate += parseInt(this.timesheetArray[i].dayFourHours || 0);
         if (sumOfFourthDate > 24) {
           this.timesheetArray[index][key] = '';
-          this.hourValidation = true;
+          this.hourValidationMessage = true;
           var self = this;
-          setTimeout(function () { self.hourValidation = false; }, 2000);
+          setTimeout(function () { self.hourValidationMessage = false; }, 2000);
         }
         else
           this.fourthDateTotal = sumOfFourthDate;
@@ -457,9 +573,9 @@ export class TimesheetComponent implements OnInit {
         sumOfFifthDate += parseInt(this.timesheetArray[i].dayFiveHours || 0);
         if (sumOfFifthDate > 24) {
           this.timesheetArray[index][key] = '';
-          this.hourValidation = true;
+          this.hourValidationMessage = true;
           var self = this;
-          setTimeout(function () { self.hourValidation = false; }, 2000);
+          setTimeout(function () { self.hourValidationMessage = false; }, 2000);
         }
         else
           this.fifthDateTotal = sumOfFifthDate;
@@ -471,9 +587,9 @@ export class TimesheetComponent implements OnInit {
         sumOfSixthDate += parseInt(this.timesheetArray[i].daySixHours || 0);
         if (sumOfSixthDate > 24) {
           this.timesheetArray[index][key] = '';
-          this.hourValidation = true;
+          this.hourValidationMessage = true;
           var self = this;
-          setTimeout(function () { self.hourValidation = false; }, 2000);
+          setTimeout(function () { self.hourValidationMessage = false; }, 2000);
         }
         else
           this.sixthDateTotal = sumOfSixthDate;
@@ -485,9 +601,9 @@ export class TimesheetComponent implements OnInit {
         sumOfSeventhDate += parseInt(this.timesheetArray[i].daySevenHours || 0);
         if (sumOfSeventhDate > 24) {
           this.timesheetArray[index][key] = '';
-          this.hourValidation = true;
+          this.hourValidationMessage = true;
           var self = this;
-          setTimeout(function () { self.hourValidation = false; }, 2000);
+          setTimeout(function () { self.hourValidationMessage = false; }, 2000);
         }
         else
           this.seventhDateTotal = sumOfSeventhDate;
@@ -496,6 +612,7 @@ export class TimesheetComponent implements OnInit {
 
   }
 
+  // sum of weekly hours
   sumOfWeeklyHours() {
     let totalWeekSum = 0;
     for (var i = 0; i < this.timesheetArray.length; i++) {
@@ -512,12 +629,13 @@ export class TimesheetComponent implements OnInit {
     }
   }
 
+  // save timesheet
   saveTimesheet() {
     let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
 
     if (valueIsEmptyOrNot) {
-      this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
-      this.timesheetService.postTimesheet(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
+      this.totalHoursArrayOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+      this.timesheetService.postTimesheet(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursArrayOfEachDate)
         .subscribe(message => {
           this.message = message.response;
           var self = this;
@@ -529,7 +647,7 @@ export class TimesheetComponent implements OnInit {
 
           this.addAndEditButtonDisable = true;
 
-          //this.setTimesheetArrayToDefault();
+
         },
           error => {
             this.message = error;
@@ -541,16 +659,17 @@ export class TimesheetComponent implements OnInit {
 
   }
 
+  // export to excel timesheet
   exportToExcel() {
 
     let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
 
     if (valueIsEmptyOrNot) {
-      this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+      this.totalHoursArrayOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
       //this.checkForEmptyData();
       this.constantService.showLoader();
 
-      this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
+      this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursArrayOfEachDate)
         .subscribe(message => {
           this.message = message.response;
           var self = this;
@@ -586,35 +705,23 @@ export class TimesheetComponent implements OnInit {
 
 
 
-  setTimesheetArrayToDefault() {
-    this.firstDateTotal = '';
-    this.secondDateTotal = '';
-    this.thirdDateTotal = '';
-    this.fourthDateTotal = '';
-    this.fifthDateTotal = '';
-    this.sixthDateTotal = '';
-    this.seventhDateTotal = '';
-    this.timesheetArray = [];
-    this.tasks = new WeeklyTask('', '', '', '', '', '', '', '', '')
-    this.timesheetArray.push(this.tasks);
-    this.totalWeeklyHours = '';
-  }
-
+  // hours should not be greater than two
   checkNoOfDigitsInHours(event) {
     if (event.target.value > 2 || !(event.keyCode >= 48 && event.keyCode <= 57))
       event.preventDefault();
   }
 
+  // check whether the selected task should not be empty
   checkForEmptyData(): boolean {
     for (var i = 0; i < this.timesheetArray.length; i++) {
       for (var objectKey in this.timesheetArray[i]) {
         if (this.timesheetArray[i].hasOwnProperty(objectKey)) {
           if (this.timesheetArray[i]["taskName"] == '') {
             //$("#validationlabel").show();
-            this.mandatoryValidation = true;
+            this.validationMessageForMandatoryTaskName = true;
             var self = this;
             setTimeout(function () {
-              self.mandatoryValidation = false;
+              self.validationMessageForMandatoryTaskName = false;
             }, 2000);
             return false;
           }
@@ -624,6 +731,7 @@ export class TimesheetComponent implements OnInit {
     return true;
   }
 
+
   toggleButton() {
 
     this.isReadOnlyForTimesheetRow = false;
@@ -631,35 +739,82 @@ export class TimesheetComponent implements OnInit {
     this.editButtonVisibility = false;
     this.saveButtonVisibility = true;
 
-    // if user get timesheet
     this.addAndEditButtonDisable = false;
+
   }
 
 
-
-  emailTemplate: string;
-  ccEmailAddresses: string;
-  clientMailId:string;
-  mailSubject:string;
-  invalidMailAddress:boolean = true;
-  emailAddressMessage:boolean;
-
-  setMailSubject(){
+  // set mail subject in the model
+  setMailSubject() {
     this.mailSubject = "Timesheet for approval from" + " " + this.startDate.toLocaleDateString() + "-" + this.endDate.toLocaleDateString();
   }
 
+
+
+  // on key press check that both the email addresss is correct and password is not empty (called on keydown)
+  checkPasswordLength(event) {
+
+    if (this.userPasswordForEmail != "") {
+      this.invalidMailAddress = false;
+    }
+    else {
+      this.invalidMailAddress = true;
+    }
+  }
+
+  // show validation messages (called on blur)
+  showPasswordValidationMessageIfEmpty(event) {
+
+    //let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (event.target.value == "") {
+      this.emptyPasswordMessage = true;
+    }
+    else {
+      this.emptyPasswordMessage = false;
+    }
+
+  }
+
+
+
+  closeResult: string;
+
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+
   sendMail(content) {
 
-    this.clientMailId="";
-   
+    this.clientMailId = "";
+    this.ccEmailAddresses = "";
+    this.userMailId = "";
+    this.userPasswordForEmail = "";
+
+
     let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
 
     if (valueIsEmptyOrNot) {
-      this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+      this.totalHoursArrayOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
       //this.checkForEmptyData();
       this.constantService.showLoader();
 
-      this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
+      this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursArrayOfEachDate)
         .subscribe(message => {
           this.message = message.response;
           var self = this;
@@ -672,11 +827,14 @@ export class TimesheetComponent implements OnInit {
 
           //mail functionality
           this.email.getEmailTemplate().subscribe(emailTemplate => {
-            this.ccEmailAddresses = "";
+
+            this.userMailId = this.selectedResourceValue.userMailAdd;
+            this.clientMailId = this.selectedResourceValue.clientMailAdd;
+
             this.setMailSubject();
             this.emailTemplate = emailTemplate;
-            
-  
+
+
 
             var arrayLength = this.selectedResourceValue.stakeholdersEmail.length;
 
@@ -687,7 +845,7 @@ export class TimesheetComponent implements OnInit {
 
 
 
-            
+
             this.open(con);
           }
             , error => {
@@ -713,65 +871,25 @@ export class TimesheetComponent implements OnInit {
 
   }
 
-  checkValidEmailAddress(clientMailId){
-   let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-   let emailValidator:boolean = pattern.test(clientMailId.value);
-   if(emailValidator==true)
-   this.invalidMailAddress=false;
-   else{
-     this.invalidMailAddress=true;
-   }
-  }
 
-  
-
-  closeResult: string;
-
-  open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  showEmailValidMessage(clientMailId){
-    let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let emailValidator:boolean = pattern.test(clientMailId.value);
-    if(emailValidator==true)
-    this.emailAddressMessage=false;
-    else{
-      this.emailAddressMessage=true;
-    }
-  }
-
-  
-
+  // hide the modal
   mailSent() {
-  
-    //$(".modal").remove();
-    $( ".modal-dialog" ).css( "display", "none" );
-    $(".modal-backdrop.show").css("opacity","0");
-    
+
+    //$(".modal").remove(); 
+    $(".modal-dialog").css("display", "none");
+    $(".modal-backdrop.show").css("opacity", "0");
+
     this.constantService.showLoader();
-    this.email.postEmail(this.clientMailId,this.selectedResourceValue.stakeholdersEmail,this.mailSubject,this.emailTemplate).subscribe(message => {
+
+
+    this.email.postEmail(this.userMailId, this.userPasswordForEmail, this.clientMailId, this.selectedResourceValue.stakeholdersEmail, this.mailSubject, this.emailTemplate).subscribe(message => {
       this.constantService.hideLoader();
       this.message = message.response;
       var self = this;
       setTimeout(function () { self.message = ""; }, 2000);
     },
       error => error => {
-        this.message = error;
+        this.message = error.response;
         var self = this;
         setTimeout(function () { self.message = ""; }, 2000);
       })

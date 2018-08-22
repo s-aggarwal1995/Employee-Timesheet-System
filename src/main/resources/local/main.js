@@ -199,6 +199,7 @@ var AppModule = /** @class */ (function () {
                 primeng_primeng__WEBPACK_IMPORTED_MODULE_7__["CalendarModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__["BrowserAnimationsModule"],
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__["NgbModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__["NgbModule"].forRoot(),
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]
             ],
             providers: [_services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_10__["TimesheetService"]],
@@ -350,6 +351,63 @@ var ConstantService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/email/email.service.ts":
+/*!*************************************************!*\
+  !*** ./src/app/services/email/email.service.ts ***!
+  \*************************************************/
+/*! exports provided: EmailService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailService", function() { return EmailService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json', 'responseType': 'text' })
+};
+var options = { responseType: 'text' };
+var EmailService = /** @class */ (function () {
+    function EmailService(http) {
+        this.http = http;
+        this.baseUrl = "" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl;
+        this.emailUrl = this.baseUrl + "getemailtemplate";
+        this.emailSentUrl = this.baseUrl + "email";
+    }
+    EmailService.prototype.getEmailTemplate = function () {
+        return this.http.get(this.emailUrl, options);
+    };
+    EmailService.prototype.postEmail = function (username, password, receiver, stakeholders, subject, mailbody) {
+        var postedData = { username: username, password: password, receiver: receiver, stakeholders: stakeholders, subject: subject, mailbody: mailbody };
+        return this.http.post(this.emailSentUrl, postedData, httpOptions);
+    };
+    EmailService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], EmailService);
+    return EmailService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/tasks/tasks.service.ts":
 /*!*************************************************!*\
   !*** ./src/app/services/tasks/tasks.service.ts ***!
@@ -453,6 +511,8 @@ var TimesheetService = /** @class */ (function () {
         this.exportToExcelURL = this.baseUrl + 'exporttoexcel';
         this.updateManagerURL = this.baseUrl + 'updateprojectmanagername';
         this.clientManagerURL = this.baseUrl + 'updateclientmanagername';
+        this.clientManagerEmailURL = this.baseUrl + 'updateclientemail';
+        this.userEmailURL = this.baseUrl + 'updateuseremail';
         this.addStakeholderEmailURL = this.baseUrl + 'addstakeholderemail';
         this.deleteStakeholderEmailURL = this.baseUrl + 'deletestakeholderemail';
         this.conditionalTimesheetURL = this.baseUrl + 'gettimesheetifpresent';
@@ -473,6 +533,12 @@ var TimesheetService = /** @class */ (function () {
     };
     TimesheetService.prototype.updateClientManagerName = function (Resource) {
         return this.http.post(this.clientManagerURL, Resource, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('updateClientManagerName', [])));
+    };
+    TimesheetService.prototype.updateClientManagerEmail = function (Resource) {
+        return this.http.post(this.clientManagerEmailURL, Resource, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('updateClientManagerEmail', [])));
+    };
+    TimesheetService.prototype.updateUserEmail = function (Resource) {
+        return this.http.post(this.userEmailURL, Resource, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('updateUserEmail', [])));
     };
     TimesheetService.prototype.addStakeholderEmail = function (Resource) {
         return this.http.post(this.addStakeholderEmailURL, Resource, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('addStakeholderEmail', [])));
@@ -526,7 +592,7 @@ module.exports = ".wrapperpadding{\r\n\t\tmargin-top: 60px;\r\n    /* padding:15
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- svam image header-->\r\n<div class=\"header\">\r\n    <img src=\"../assets/imgs/svam.png\" alt=\"SVAM INTL\" class=\"responsive\" width=\"800\" height=\"400\">\r\n\r\n    <h6>WEEKLY TIMESHEET </h6>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"wrapper wrapperpadding\">\r\n    <div class=\"container\">\r\n        <div *ngIf=\"!selectedResourceValue\" class=\"col-md-6 centered text-center col-centered\">\r\n            <p>\r\n                <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                    <option value=\"undefined\" selected disabled>Select the resource name</option>\r\n                    <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                </select>\r\n            </p>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"selectedResourceValue\">\r\n    <div class=\"wrapper\">\r\n        <!-- first column of row -->\r\n        <!-- second column of row -->\r\n        <div class=\"col-md-9\" style=\"background-color:#00303c; color:#ffffff\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4\">\r\n                    <p>Resource Name\r\n                        <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                            <option value=\"\" selected disabled>Select the resource name</option>\r\n                            <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                        </select>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Name of the Project\r\n                        <input type=\"text\" class=\"form-control\" value=\"Teach For America\" readonly>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Select Date:\r\n                        <p-calendar readonlyInput=\"true\" class=\"form-control\" [disabledDays]=\"[0,2,3,4,5,6]\" [(ngModel)]=\"startDate\" (onSelect)=\"getWeekFromDate(startDate)\"></p-calendar>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div class=\"timesheettablediv\" style=\"width:100%\">\r\n                <table style=\"width:100%;\" class=\"taskstable\">\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"width:15%;text-align:center\">Task Name</th>\r\n                            <th style=\"width:15%;text-align:center\">Description</th>\r\n                            <th style=\"width:10%\" *ngFor=\"let date of dates\">{{date}}</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor=\"let tasks of timesheetArray; let i = index\">\r\n                            <td>\r\n                                <select class=\"form-control\" [(ngModel)]=\"tasks.taskName\" [disabled]=\"isReadOnlyForTimesheetRow\">\r\n                                    <option value=\"\" selected disabled>Select the Task</option>\r\n                                    <option *ngFor=\"let task of tasksData\" [ngValue]=\"task.taskName\">{{task.taskName}}</option>\r\n                                </select>\r\n                            </td>\r\n                            <td>\r\n                                <!-- (blur)=\"checkTaskValidation(tasks.taskDescription,'taskDescription',i)\" -->\r\n                                <input class=\"form-control inputworkasmodelbutton\" placeholder=\"Description\" type=\"text\" [(ngModel)]=\"tasks.taskDescription\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control firstDate\" id=\"firstDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayOneHours,'dayOneHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayOneHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control secondDate\" id=\"secondDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayTwoHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control thirdDate\" id=\"thirdDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayThreeHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fourthDate\" id=\"fourthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    placeholder=\"hours\" placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFourHours,'dayFourHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.dayFourHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fifthDate\" id=\"fifthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.dayFiveHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control sixthDate\" id=\"sixthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.daySixHours,'daySixHours',i)\"\r\n                                    type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySixHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control seventhDate\" id=\"seventhDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.daySevenHours,'daySevenHours',i)\" type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySevenHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <button id=\"addrowbuttonid\" style=\"box-shadow: none;background-color:#00303c;border-color:#00303c;\" *ngIf=\"i==0\" class=\"btn btn-default btn-success\"\r\n                                    type=\"button\" (click)=\"addRow()\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n\r\n\r\n                                <button style=\"background-color:#00303c;;border-color:#00303c;\" *ngIf=\"i>0\" class=\"btn btn-default btn-danger\" type=\"button\"\r\n                                    (click)=\"deleteFieldValue(i)\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n\r\n\r\n                            </td>\r\n                        </tr>\r\n\r\n\r\n                        <tr>\r\n                            <td colspan=\"2\">\r\n                                Total Timesheet Hours\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"firstdatetotal\" type=\"text\" [(ngModel)]=\"firstDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seconddatetotal\" type=\"text\" [(ngModel)]=\"secondDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"thirddatetotaleHour\" type=\"text\" [(ngModel)]=\"thirdDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fouthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fourthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fifthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fifthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"sixthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"sixthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seventhdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"seventhDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n            </div>\r\n\r\n\r\n\r\n            <div class=\"row\" style=\"padding:50px 0px 0px 0px\">\r\n                <div class=\"col-md-6\">\r\n                    <p>Total Weekly Hours\r\n                        <input id=\"totalweeklyhours\" [value]=\"totalWeeklyHours\" class=\"form-control\" type=\"text\" readonly>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div>\r\n                <label style=\"color:red;\" *ngIf=\"mandatoryValidation\">Task Name is Mandatory</label>\r\n                <label style=\"color:red;\" *ngIf=\"hourValidation\">Hours Cannot be greater than 24</label>\r\n                <label style=\"color:red;\" *ngIf=\"message\">{{message}}</label>\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n        <!-- third column of row -->\r\n        <div class=\"col-md-3\">\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Project Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <div class=\"input-group\">\r\n                        <input id=\"managername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.managerEmail\" [readonly]=\"isManagerReadOnly\"\r\n                        />\r\n                        <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n                            <!-- <button *ngIf=\"managerEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideManagerEditButton()\" class=\"btn btn-default btn-warning edit-button\"\r\n                                type=\"button\">Edit</button> -->\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideManagerEditButton()\"\r\n                                class=\"edit-button\">{{editIcon}}</span>\r\n\r\n                            <!-- <button *ngIf=\"managerUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideManagerUpdateButton()\" class=\"btn btn-default btn-primary update-button\"\r\n                                type=\"button\">Update</button> -->\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideManagerUpdateButton()\"\r\n                                class=\"update-button\">{{check}}</span>\r\n\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmanagername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientEmail\" [readonly]=\"isClientReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n                        <!-- <button *ngIf=\"clientEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideClientEditButton()\" class=\"btn btn-default btn-warning edit-button\"\r\n                            type=\"button\">Edit</button> -->\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideClientEditButton()\"\r\n                            class=\"edit-button\">{{editIcon}}</span>\r\n\r\n                        <!-- <button  *ngIf=\"clientUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideClientUpdateButton()\" class=\"btn btn-default btn-primary update-button\"\r\n                            type=\"button\">Update</button> -->\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideClientUpdateButton()\"\r\n                            class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <table class=\"table\">\r\n                <tr>\r\n                    <th>StakeHolders Email</th>\r\n                </tr>\r\n                <tbody>\r\n                    <tr *ngFor=\"let stakeholderEmail of selectedResourceValue.stakeholdersEmail\">\r\n                        <td>{{stakeholderEmail}}</td>\r\n                        <!-- <button class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">Delete</button> -->\r\n                        <td>\r\n                            <span style=\"cursor:pointer;color:red;\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">\r\n                                <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                            </span>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n\r\n            <form (ngSubmit)=\"submit(userform)\" #userform=\"ngForm\">\r\n                <label>Add StakeHolder Email</label>\r\n                <div class=\"input-group\">\r\n                    <input required class=\"form-control\" id=\"stakeholderEmail\" name=\"emailaddress\" #emailaddress=\"ngModel\" pattern=\"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"\r\n                        ngModel [(ngModel)]=\"stakeholderEmail\" type=\"text\">\r\n                    <span class=\"input-group-btn\">\r\n                        <button style=\"background-color: white;border:none;\" class=\"btn btn-default btn-success add-stakeholder\" (click)=\"addEmail()\"\r\n                            [disabled]=\"!userform.valid\" type=\"submit\">\r\n                            <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                        </button>\r\n                    </span>\r\n                </div>\r\n                <div *ngIf=\"!emailaddress.valid && emailaddress.touched\">\r\n                    <p *ngIf=\"emailaddress?.errors?.pattern\" style=\"color:red\">Invalid Email Address</p>\r\n                </div>\r\n            </form>\r\n        </div>\r\n\r\n\r\n    </div>\r\n\r\n    <div class=\"wrapper\" style=\"padding:15px 0px 0px 0px;\">\r\n        <div class=\"col-md-3\">\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <button *ngIf=\"saveButtonVisibility\" style=\"background-color: #00303c;color:white\" id=\"btnSave\" class=\"btn btn-md center-block\"\r\n                (click)=\"saveTimesheet()\">\r\n                <i class=\"fa fa-cloud\" aria-hidden=\"true\"></i> Save Timesheet</button>\r\n            <button *ngIf=\"editButtonVisibility\" (click)=\"toggleButton()\" id=\"btnSave\" class=\"btn btn-warning\">\r\n                <span class=\"glyphicon glyphicon-pencil\"></span>{{editIcon}} Edit Timesheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block\" (click)=\"exportToExcel()\">\r\n                <i class=\"fa fa-download\" aria-hidden=\"true\"></i> Generate Excel Sheet</button>\r\n            <!-- <button class=\"btn btn-primary btn-md center-block btn-danger\" (click)=\"sendMail()\"><span class=\"glyphicon glyphicon-envelope\"></span>{{mailIcon}} Send In Mail</button> -->\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n        </div>\r\n    </div>\r\n\r\n   \r\n</div>\r\n<div class=\"footer\">\r\n        <p style=\"margin:0px;\">Developed by Sanchit Aggarwal / Inovation By Tanuj Kathuria</p>\r\n</div>"
+module.exports = "<!-- svam image header-->\r\n<div class=\"header\">\r\n    <img src=\"../assets/imgs/svam.png\" alt=\"SVAM INC\" class=\"responsive\" width=\"800\" height=\"400\">\r\n\r\n    <h6>WEEKLY TIMESHEET </h6>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"wrapper wrapperpadding\">\r\n    <div class=\"container\">\r\n        <div *ngIf=\"!selectedResourceValue\" class=\"col-md-6 centered text-center col-centered\">\r\n            <p>\r\n                <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                    <option value=\"undefined\" selected disabled>Select the resource name</option>\r\n                    <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                </select>\r\n            </p>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"selectedResourceValue\">\r\n    <div class=\"wrapper\">\r\n        <!-- first column of row -->\r\n        <!-- second column of row -->\r\n        <div class=\"col-md-9\" style=\"background-color:#00303c; color:#ffffff\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4\">\r\n                    <p>Resource Name\r\n                        <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                            <option value=\"\" selected disabled>Select the resource name</option>\r\n                            <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                        </select>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Name of the Project\r\n                        <input type=\"text\" class=\"form-control\" value=\"Teach For America\" readonly>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Select Date:\r\n                        <p-calendar readonlyInput=\"true\" class=\"form-control\" [disabledDays]=\"[0,2,3,4,5,6]\" [(ngModel)]=\"startDate\" (onSelect)=\"getWeekFromDate(startDate)\"></p-calendar>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div class=\"timesheettablediv\" style=\"width:100%\">\r\n                <table style=\"width:100%;\" class=\"taskstable\">\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"width:15%;text-align:center\">Task Name</th>\r\n                            <th style=\"width:15%;text-align:center\">Description</th>\r\n                            <th style=\"width:10%\" *ngFor=\"let date of dates\">{{date}}</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor=\"let tasks of timesheetArray; let i = index\">\r\n                            <td>\r\n                                <select class=\"form-control\" [(ngModel)]=\"tasks.taskName\" [disabled]=\"isReadOnlyForTimesheetRow\">\r\n                                    <option value=\"\" selected disabled>Select the Task</option>\r\n                                    <option *ngFor=\"let task of tasksData\" [ngValue]=\"task.taskName\">{{task.taskName}}</option>\r\n                                </select>\r\n                            </td>\r\n                            <td>\r\n                                <!-- (blur)=\"checkTaskValidation(tasks.taskDescription,'taskDescription',i)\" -->\r\n                                <input class=\"form-control inputworkasmodelbutton\" placeholder=\"Description\" type=\"text\" [(ngModel)]=\"tasks.taskDescription\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control firstDate\" id=\"firstDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayOneHours,'dayOneHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayOneHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control secondDate\" id=\"secondDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayTwoHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control thirdDate\" id=\"thirdDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayThreeHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fourthDate\" id=\"fourthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    placeholder=\"hours\" placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFourHours,'dayFourHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayFourHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fifthDate\" id=\"fifthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (blur)=\"checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayFiveHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control sixthDate\" id=\"sixthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.daySixHours,'daySixHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.daySixHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control seventhDate\" id=\"seventhDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (blur)=\"checkHours($event,tasks.daySevenHours,'daySevenHours',i)\" type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySevenHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <button id=\"addrowbuttonid\" style=\"box-shadow: none;background-color:#00303c;border-color:#00303c;\" *ngIf=\"i==0\" class=\"btn btn-default btn-success\"\r\n                                    type=\"button\" (click)=\"addRow()\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n\r\n\r\n                                <button style=\"background-color:#00303c;;border-color:#00303c;\" *ngIf=\"i>0\" class=\"btn btn-default btn-danger\" type=\"button\"\r\n                                    (click)=\"deleteFieldValue(i)\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n\r\n\r\n                            </td>\r\n                        </tr>\r\n\r\n\r\n                        <tr>\r\n                            <td colspan=\"2\">\r\n                                Total Timesheet Hours\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"firstdatetotal\" type=\"text\" [(ngModel)]=\"firstDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seconddatetotal\" type=\"text\" [(ngModel)]=\"secondDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"thirddatetotaleHour\" type=\"text\" [(ngModel)]=\"thirdDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fouthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fourthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fifthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fifthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"sixthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"sixthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seventhdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"seventhDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n            </div>\r\n\r\n\r\n\r\n            <div class=\"row\" style=\"padding:50px 0px 0px 0px\">\r\n                <div class=\"col-md-6\">\r\n                    <p>Total Weekly Hours\r\n                        <input id=\"totalweeklyhours\" [value]=\"totalWeeklyHours\" class=\"form-control\" type=\"text\" readonly>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div>\r\n                <label style=\"color:red;\" *ngIf=\"validationMessageForMandatoryTaskName\">Task Name is Mandatory</label>\r\n                <label style=\"color:red;\" *ngIf=\"hourValidationMessage\">Hours Cannot be greater than 24</label>\r\n                <label style=\"color:red;\" *ngIf=\"EmailIdExistMessage\">Email Id Aready Exist</label>\r\n                <label style=\"color:red;\" *ngIf=\"emailAddressNotValidated\">{{emailAddressNotValidated}}</label>\r\n                <!-- <label style=\"color:green;\" *ngIf=\"message\">{{message}}</label> -->\r\n                <label style=\"padding:0px;\" *ngIf=\"message\" class=\"alert alert-success\">{{message}}</label>\r\n\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n        <!-- third column of row -->\r\n        <div class=\"col-md-3\">\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Project Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <div class=\"input-group\">\r\n                        <input id=\"managername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.managerEmail\" [readonly]=\"isManagerReadOnly\"\r\n                        />\r\n                        <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideManagerEditButton()\"\r\n                                class=\"edit-button\">{{editIcon}}</span>\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideManagerUpdateButton()\"\r\n                                class=\"update-button\">{{check}}</span>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmanagername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientEmail\" [readonly]=\"isClientReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideClientEditButton()\"\r\n                            class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideClientUpdateButton()\"\r\n                            class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Email</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmailid\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientMailAdd\" [readonly]=\"isClientEmailReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEmailEditButtonShowHide\" (click)=\"hideClientEmailEditButton()\" class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEmailUpdateButtonShowHide\" (click)=\"hideClientEmailUpdateButton($event)\" class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">User Email</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"usermailid\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.userMailAdd\" [readonly]=\"isUserEmailReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"userEmailEditButtonShowHide\" (click)=\"hideUserEmailEditButton()\" class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"userEmailUpdateButtonShowHide\" (click)=\"hideUserEmailUpdateButton($event)\" class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <table class=\"table\">\r\n                <tr>\r\n                    <th>StakeHolders Email</th>\r\n                </tr>\r\n                <tbody>\r\n                    <tr *ngFor=\"let stakeholderEmail of selectedResourceValue.stakeholdersEmail\">\r\n                        <td>{{stakeholderEmail}}</td>\r\n                        <!-- <button class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">Delete</button> -->\r\n                        <td>\r\n                            <span style=\"cursor:pointer;color:red;\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">\r\n                                <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                            </span>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n\r\n            <form (ngSubmit)=\"submit(userform)\" #userform=\"ngForm\">\r\n                <label>Add StakeHolder Email</label>\r\n                <div class=\"input-group\">\r\n                    <input required class=\"form-control\" id=\"stakeholderEmail\" name=\"emailaddress\" #emailaddress=\"ngModel\" pattern=\"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"\r\n                        ngModel [(ngModel)]=\"stakeholderEmail\" type=\"text\">\r\n                    <span class=\"input-group-btn\">\r\n                        <button style=\"background-color: white;border:none;\" class=\"btn btn-default btn-success add-stakeholder\" (click)=\"addEmail()\"\r\n                            [disabled]=\"!userform.valid\" type=\"submit\">\r\n                            <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                        </button>\r\n                    </span>\r\n                </div>\r\n                <div *ngIf=\"!emailaddress.valid && emailaddress.touched\">\r\n                    <p *ngIf=\"emailaddress?.errors?.pattern\" style=\"color:red\">Invalid Email Address</p>\r\n                </div>\r\n            </form>\r\n        </div>\r\n\r\n\r\n    </div>\r\n\r\n    <div class=\"wrapper\" style=\"padding:15px 0px 0px 0px;\">\r\n        <div class=\"col-md-3\">\r\n           \r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <button *ngIf=\"saveButtonVisibility\" style=\"background-color: #00303c;color:white;margin:10px;\" id=\"btnSave\" class=\"btn btn-md center-block\"\r\n                (click)=\"saveTimesheet()\">\r\n                <i class=\"fa fa-cloud\" aria-hidden=\"true\"></i> Save Timesheet</button>\r\n            <button *ngIf=\"editButtonVisibility\" style=\"margin:10px;\" (click)=\"toggleButton()\" id=\"btnSave\" class=\"btn btn-warning\">\r\n                <span class=\"glyphicon glyphicon-pencil\"></span>{{editIcon}} Edit Timesheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block\" style=\"margin:10px;\" (click)=\"exportToExcel()\">\r\n                <i class=\"fa fa-download\" aria-hidden=\"true\"></i> Generate Excel Sheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block btn-danger\" style=\"margin:10px;\" (click)=\"sendMail(content)\">\r\n                <span class=\"glyphicon glyphicon-envelope\"></span>{{mailIcon}} Send In Mail</button>\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n\r\n<div class=\"wrapper footer\">\r\n    <div class=\"col-md-12\">\r\n        <p style=\"margin:0px;\">Developed by Sanchit Aggarwal / Innovation By Tanuj Kathuria</p>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<ng-template id=\"hideDiv\" #content let-c=\"close\" let-d=\"dismiss\">\r\n\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\" id=\"modal-basic-title\">Send Email</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n\r\n\r\n    <div class=\"modal-body\">\r\n        <form>\r\n            <div class=\"form-group\">\r\n                <label for=\"useremail\">User Email</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"useremail\" #useremail name=\"useremail\" class=\"form-control\" placeholder=\"from\" [(ngModel)]=\"userMailId\" readonly>\r\n                </div>\r\n                <!-- <div>\r\n                    <span *ngIf=\"invalidEmailMessageForUser\">Invalid Email Address</span>\r\n                </div> -->\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"userpassword\">User Password</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"userpassword\" type=\"password\" #userpassword name=\"userpassword\" class=\"form-control\" placeholder=\"password\" (blur)=\"showPasswordValidationMessageIfEmpty($event)\"\r\n                        [(ngModel)]=\"userPasswordForEmail\" (keyup)=\"checkPasswordLength($event)\">\r\n                </div>\r\n                <div>\r\n                    <span *ngIf=\"emptyPasswordMessage\">Password Should not be Empty</span>\r\n                </div>\r\n\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"clientemail\">Client Email</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"clientemail\" #clientemail name=\"clientemail\" class=\"form-control\" placeholder=\"To\" [(ngModel)]=\"clientMailId\"\r\n                        readonly>\r\n                </div>\r\n                <!-- <div>\r\n                    <span *ngIf=\"emailValidationMessageForClient\">Invalid Email Address</span>\r\n                </div> -->\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"cc\">Stakeholders Email (Cc)</label>\r\n                <div class=\"input-group\">\r\n\r\n                    <input id=\"cc\" class=\"form-control\" placeholder=\"Cc\" name=\"ccemailaddress\" #ccemailaddress=\"ngModel\" [(ngModel)]=\"ccEmailAddresses\"\r\n                        readonly>\r\n\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"subject\">Subject</label>\r\n                <div class=\"input-group\">\r\n\r\n                    <input id=\"subject\" class=\"form-control\" placeholder=\"subject\" name=\"subject\" #subject=\"ngModel\" [(ngModel)]=\"mailSubject\"\r\n                        readonly>\r\n                    <!-- <div class=\"input-group-append\">\r\n                            <button class=\"btn btn-outline-secondary\" (click)=\"dp.toggle()\" type=\"button\">\r\n                              <img src=\"img/calendar-icon.svg\" style=\"width: 1.2rem; height: 1rem; cursor: pointer;\"/>\r\n                            </button>\r\n                          </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"mailbody\">Mail Body</label>\r\n                <div class=\"input-group\">\r\n                    <div readonly [innerHTML]=\"emailTemplate\"></div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n\r\n    <!-- <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"mailSent()\" [disabled]=\"invalidMailAddress\">Send</button>\r\n    </div> -->\r\n\r\n</ng-template>"
 
 /***/ }),
 
@@ -541,13 +607,17 @@ module.exports = "<!-- svam image header-->\r\n<div class=\"header\">\r\n    <im
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimesheetComponent", function() { return TimesheetComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/timesheet/timesheet.service */ "./src/app/services/timesheet/timesheet.service.ts");
-/* harmony import */ var _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/tasks/tasks.service */ "./src/app/services/tasks/tasks.service.ts");
-/* harmony import */ var _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/weeklyTask */ "./src/app/models/weeklyTask.ts");
-/* harmony import */ var _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/constants/constants.service */ "./src/app/services/constants/constants.service.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var glyphicons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! glyphicons */ "./node_modules/glyphicons/glyphicons.js");
-/* harmony import */ var glyphicons__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(glyphicons__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/timesheet/timesheet.service */ "./src/app/services/timesheet/timesheet.service.ts");
+/* harmony import */ var _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/tasks/tasks.service */ "./src/app/services/tasks/tasks.service.ts");
+/* harmony import */ var _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/weeklyTask */ "./src/app/models/weeklyTask.ts");
+/* harmony import */ var _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/constants/constants.service */ "./src/app/services/constants/constants.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var glyphicons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! glyphicons */ "./node_modules/glyphicons/glyphicons.js");
+/* harmony import */ var glyphicons__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(glyphicons__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _services_email_email_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/email/email.service */ "./src/app/services/email/email.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -564,24 +634,34 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var TimesheetComponent = /** @class */ (function () {
-    function TimesheetComponent(timesheetService, tasksService, constantService) {
+    function TimesheetComponent(email, timesheetService, tasksService, constantService, modalService) {
+        this.email = email;
         this.timesheetService = timesheetService;
         this.tasksService = tasksService;
         this.constantService = constantService;
-        // icons
-        this.editIcon = glyphicons__WEBPACK_IMPORTED_MODULE_6___default.a.pencil;
-        this.crossIcon = glyphicons__WEBPACK_IMPORTED_MODULE_6___default.a.crossHeavy;
-        this.mailIcon = glyphicons__WEBPACK_IMPORTED_MODULE_6___default.a.email;
-        this.plus = glyphicons__WEBPACK_IMPORTED_MODULE_6___default.a.plus;
-        this.check = glyphicons__WEBPACK_IMPORTED_MODULE_6___default.a.checkHeavy;
+        this.modalService = modalService;
+        // icons of glyphions used in the application using glyphicons package
+        this.editIcon = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.pencil;
+        this.crossIcon = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.crossHeavy;
+        this.mailIcon = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.email;
+        this.plus = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.plus;
+        this.check = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.checkHeavy;
+        // to disable the add and edit button in the timesheet table according to whether timesheet exist or not
         this.addAndEditButtonDisable = false;
+        // toggle edita nd save timesheet button visibility according to whether timesheet exist or not
         this.editButtonVisibility = false;
         this.saveButtonVisibility = true;
         this.isReadOnlyForTimesheetRow = false;
-        this.hourValidation = false;
-        this.mandatoryValidation = false;
+        // validation message show variable for hour validation and Validation message for hour Task.
+        this.hourValidationMessage = false;
+        this.validationMessageForMandatoryTaskName = false;
+        // sum of total weekly hour
         this.totalWeeklyHours = '';
+        // each date sum of hours
         this.firstDateTotal = '';
         this.secondDateTotal = '';
         this.thirdDateTotal = '';
@@ -589,19 +669,33 @@ var TimesheetComponent = /** @class */ (function () {
         this.fifthDateTotal = '';
         this.sixthDateTotal = '';
         this.seventhDateTotal = '';
+        // get resources and tasks coming from the apis
         this.resources = [];
         this.tasksData = [];
+        // timesheet array contains all teh timesheet of a single users
         this.timesheetArray = [];
-        this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
+        this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
         this.exportToExcelTimesheet = [];
         this.dates = [];
-        //defaultDate:Date;
+        // properties for client name button show hide
         this.clientEditButtonShowHide = true;
         this.clientUpdateButtonShowHide = false;
+        //properties for manger name button show hide
         this.managerEditButtonShowHide = true;
         this.managerUpdateButtonShowHide = false;
+        //properties for client email button show hide
+        this.clientEmailEditButtonShowHide = true;
+        this.clientEmailUpdateButtonShowHide = false;
+        //properties for user email button show hide
+        this.userEmailEditButtonShowHide = true;
+        this.userEmailUpdateButtonShowHide = false;
+        // make all the inout boxes of client and user credentials readonly
         this.isManagerReadOnly = true;
         this.isClientReadOnly = true;
+        this.isClientEmailReadOnly = true;
+        this.isUserEmailReadOnly = true;
+        // to enable send button if password is having at least one character
+        this.invalidMailAddress = true;
     }
     TimesheetComponent.prototype.ngOnInit = function () {
         // to get the resources name from the service
@@ -613,23 +707,22 @@ var TimesheetComponent = /** @class */ (function () {
         // get week from date 
         this.getWeekFromDate(this.startDate);
     };
+    // call when new resource/user is selected from the drop down box
     TimesheetComponent.prototype.getSelectedResourceValue = function () {
-        console.log(this.selectedResourceValue);
-        console.log(this.startDate);
         this.getExistingTimesheet();
     };
+    // get Monday From Present Date
     TimesheetComponent.prototype.getMonday = function () {
         var d = new Date();
         var day = d.getDay(), diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
         return new Date(d.setDate(diff - 7));
     };
+    // for getting existing timesheet accoring to user and week
     TimesheetComponent.prototype.getExistingTimesheet = function () {
         var _this = this;
         this.constantService.showLoader();
         this.timesheetService.getTimesheetAccordingToWeekAndUser(this.startDate, this.selectedResourceValue).subscribe(function (timesheet) {
-            console.log(timesheet);
             _this.constantService.hideLoader();
-            //this.completeTimesheet = timesheet;
             if (timesheet != null) {
                 _this.timesheetArray = [];
                 for (var i = 0; i < timesheet.tasks.length; i++) {
@@ -648,12 +741,10 @@ var TimesheetComponent = /** @class */ (function () {
                 _this.saveButtonVisibility = false;
                 // if user get timesheet
                 _this.addAndEditButtonDisable = true;
-                // if existing timesheet is present then show previous manager and client manager if present
-                //this.selectedResourceValue=timesheet.user;
             }
             else {
                 _this.timesheetArray = [];
-                _this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
+                _this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
                 _this.timesheetArray.push(_this.tasks);
                 _this.addAndEditButtonDisable = false;
                 _this.firstDateTotal = "";
@@ -674,6 +765,7 @@ var TimesheetComponent = /** @class */ (function () {
             setTimeout(function () { self.message = ""; }, 2000);
         });
     };
+    // get resources from the apis
     TimesheetComponent.prototype.getResources = function () {
         var _this = this;
         this.constantService.showLoader();
@@ -687,6 +779,7 @@ var TimesheetComponent = /** @class */ (function () {
             setTimeout(function () { self.message = ""; }, 2000);
         });
     };
+    // get tasks from the apis
     TimesheetComponent.prototype.getTasks = function () {
         var _this = this;
         this.tasksService.getTasks().subscribe(function (tasks) { return _this.tasksData = tasks; }, function (error) {
@@ -723,7 +816,6 @@ var TimesheetComponent = /** @class */ (function () {
         var _this = this;
         this.timesheetService.updateProjectManagerName(this.selectedResourceValue).subscribe(function (Message) {
             _this.responseForUpdatedClient = Message;
-            console.log(_this.responseForUpdatedClient.response);
             _this.clientUpdateButtonShowHide = false;
             _this.clientEditButtonShowHide = true;
             _this.isClientReadOnly = true;
@@ -733,21 +825,82 @@ var TimesheetComponent = /** @class */ (function () {
             setTimeout(function () { self.message = ""; }, 2000);
         });
     };
+    TimesheetComponent.prototype.hideClientEmailEditButton = function () {
+        this.clientEmailUpdateButtonShowHide = true;
+        this.clientEmailEditButtonShowHide = false;
+        this.isClientEmailReadOnly = false;
+    };
+    TimesheetComponent.prototype.hideClientEmailUpdateButton = function (event) {
+        var _this = this;
+        var pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (pattern.test(event.path[2].childNodes[0].value)) {
+            this.timesheetService.updateClientManagerEmail(this.selectedResourceValue).subscribe(function (Message) {
+                _this.responseForUpdatedClientEmail = Message;
+                _this.clientEmailUpdateButtonShowHide = false;
+                _this.clientEmailEditButtonShowHide = true;
+                _this.isClientEmailReadOnly = true;
+            }, function (error) {
+                _this.message = error;
+                var self = _this;
+                setTimeout(function () { self.message = ""; }, 2000);
+            });
+        }
+        else {
+            this.emailAddressNotValidated = "Please enter the Correct EmailAddress";
+            var self = this;
+            setTimeout(function () { self.emailAddressNotValidated = ""; }, 2000);
+        }
+    };
+    TimesheetComponent.prototype.hideUserEmailEditButton = function () {
+        this.userEmailUpdateButtonShowHide = true;
+        this.userEmailEditButtonShowHide = false;
+        this.isUserEmailReadOnly = false;
+    };
+    TimesheetComponent.prototype.hideUserEmailUpdateButton = function (event) {
+        var _this = this;
+        var pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        console.log(pattern.test(event.path[2].childNodes[0].value));
+        if (pattern.test(event.path[2].childNodes[0].value)) {
+            this.timesheetService.updateUserEmail(this.selectedResourceValue).subscribe(function (Message) {
+                _this.responseForUpdatedUserEmail = Message;
+                _this.userEmailUpdateButtonShowHide = false;
+                _this.userEmailEditButtonShowHide = true;
+                _this.isUserEmailReadOnly = true;
+            }, function (error) {
+                _this.message = error;
+                var self = _this;
+                setTimeout(function () { self.message = ""; }, 2000);
+            });
+        }
+        else {
+            this.emailAddressNotValidated = "Please enter the Correct EmailAddress";
+            var self = this;
+            setTimeout(function () { self.emailAddressNotValidated = ""; }, 2000);
+        }
+    };
+    // add stakeholder email in the stakeholders email list
     TimesheetComponent.prototype.addEmail = function () {
         var _this = this;
-        //var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        //this.stakeholderEmails.push(this.stakeholderEmail);
-        this.selectedResourceValue.stakeholdersEmail.push(this.stakeholderEmail);
-        this.timesheetService.addStakeholderEmail(this.selectedResourceValue).subscribe(function (Message) {
-            _this.responseForAddedStakeholder = Message;
-            console.log(_this.responseForAddedStakeholder.response);
-        }, function (error) {
-            _this.message = error;
-            var self = _this;
-            setTimeout(function () { self.message = ""; }, 2000);
-        });
-        this.stakeholderEmail = "";
+        var index = this.selectedResourceValue.stakeholdersEmail.indexOf(this.stakeholderEmail);
+        if (index > -1) {
+            this.EmailIdExistMessage = true;
+            var self = this;
+            setTimeout(function () { self.EmailIdExistMessage = false; }, 2000);
+        }
+        else {
+            this.selectedResourceValue.stakeholdersEmail.push(this.stakeholderEmail);
+            this.timesheetService.addStakeholderEmail(this.selectedResourceValue).subscribe(function (Message) {
+                _this.responseForAddedStakeholder = Message;
+                console.log(_this.responseForAddedStakeholder.response);
+            }, function (error) {
+                _this.message = error;
+                var self = _this;
+                setTimeout(function () { self.message = ""; }, 2000);
+            });
+            this.stakeholderEmail = "";
+        }
     };
+    // delete stakholder emails from list
     TimesheetComponent.prototype.deleteStakeHolderEmail = function (stakeholderEmail) {
         var _this = this;
         for (var i = this.selectedResourceValue.stakeholdersEmail.length - 1; i >= 0; i--) {
@@ -763,8 +916,8 @@ var TimesheetComponent = /** @class */ (function () {
             });
         }
     };
+    // get week from date
     TimesheetComponent.prototype.getWeekFromDate = function (selectedDate) {
-        console.log(selectedDate);
         var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         var startingDate = selectedDate.getDate();
         for (var i = 0; i < 7; i++) {
@@ -794,8 +947,7 @@ var TimesheetComponent = /** @class */ (function () {
             this.getExistingTimesheet();
     };
     TimesheetComponent.prototype.addRow = function () {
-        this.timesheetArray.push(new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', ''));
-        console.log(this.timesheetArray);
+        this.timesheetArray.push(new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_4__["WeeklyTask"]('', '', '', '', '', '', '', '', ''));
     };
     TimesheetComponent.prototype.deleteFieldValue = function (index) {
         this.timesheetArray.splice(index, 1);
@@ -825,16 +977,7 @@ var TimesheetComponent = /** @class */ (function () {
             this.seventhDateTotal = sumOfSeventhDate;
         }
     };
-    // checkTaskValidation(taskDesp, id, i) {
-    //   console.log(i);
-    //   console.log(this.timesheetArray[i]);
-    //   console.log(this.timesheetArray[i].taskDescription);
-    //   if (taskDesp.length > 20) {
-    //     alert("task length should not be greater than 20");
-    //     this.timesheetArray[i][id] = "";
-    //     return;
-    //   }
-    // }
+    //chcek hours for validation
     TimesheetComponent.prototype.checkHours = function (event, hours, key, index) {
         //Total Weekly Hours
         this.sumOfWeeklyHours();
@@ -844,9 +987,9 @@ var TimesheetComponent = /** @class */ (function () {
                 sumOfFirstDate += parseInt(this.timesheetArray[i].dayOneHours || 0);
                 if (sumOfFirstDate > 24) {
                     this.timesheetArray[index][key] = '';
-                    this.hourValidation = true;
+                    this.hourValidationMessage = true;
                     var self = this;
-                    setTimeout(function () { self.hourValidation = false; }, 2000);
+                    setTimeout(function () { self.hourValidationMessage = false; }, 2000);
                 }
                 else
                     this.firstDateTotal = sumOfFirstDate;
@@ -859,9 +1002,9 @@ var TimesheetComponent = /** @class */ (function () {
                 sumOfSecondDate += parseInt(this.timesheetArray[i].dayTwoHours || 0);
                 if (sumOfSecondDate > 24) {
                     this.timesheetArray[index][key] = '';
-                    this.hourValidation = true;
+                    this.hourValidationMessage = true;
                     var self = this;
-                    setTimeout(function () { self.hourValidation = false; }, 2000);
+                    setTimeout(function () { self.hourValidationMessage = false; }, 2000);
                 }
                 else
                     this.secondDateTotal = sumOfSecondDate;
@@ -873,9 +1016,9 @@ var TimesheetComponent = /** @class */ (function () {
                 sumOfThirdDate += parseInt(this.timesheetArray[i].dayThreeHours || 0);
                 if (sumOfThirdDate > 24) {
                     this.timesheetArray[index][key] = '';
-                    this.hourValidation = true;
+                    this.hourValidationMessage = true;
                     var self = this;
-                    setTimeout(function () { self.hourValidation = false; }, 2000);
+                    setTimeout(function () { self.hourValidationMessage = false; }, 2000);
                 }
                 else
                     this.thirdDateTotal = sumOfThirdDate;
@@ -887,9 +1030,9 @@ var TimesheetComponent = /** @class */ (function () {
                 sumOfFourthDate += parseInt(this.timesheetArray[i].dayFourHours || 0);
                 if (sumOfFourthDate > 24) {
                     this.timesheetArray[index][key] = '';
-                    this.hourValidation = true;
+                    this.hourValidationMessage = true;
                     var self = this;
-                    setTimeout(function () { self.hourValidation = false; }, 2000);
+                    setTimeout(function () { self.hourValidationMessage = false; }, 2000);
                 }
                 else
                     this.fourthDateTotal = sumOfFourthDate;
@@ -901,9 +1044,9 @@ var TimesheetComponent = /** @class */ (function () {
                 sumOfFifthDate += parseInt(this.timesheetArray[i].dayFiveHours || 0);
                 if (sumOfFifthDate > 24) {
                     this.timesheetArray[index][key] = '';
-                    this.hourValidation = true;
+                    this.hourValidationMessage = true;
                     var self = this;
-                    setTimeout(function () { self.hourValidation = false; }, 2000);
+                    setTimeout(function () { self.hourValidationMessage = false; }, 2000);
                 }
                 else
                     this.fifthDateTotal = sumOfFifthDate;
@@ -915,9 +1058,9 @@ var TimesheetComponent = /** @class */ (function () {
                 sumOfSixthDate += parseInt(this.timesheetArray[i].daySixHours || 0);
                 if (sumOfSixthDate > 24) {
                     this.timesheetArray[index][key] = '';
-                    this.hourValidation = true;
+                    this.hourValidationMessage = true;
                     var self = this;
-                    setTimeout(function () { self.hourValidation = false; }, 2000);
+                    setTimeout(function () { self.hourValidationMessage = false; }, 2000);
                 }
                 else
                     this.sixthDateTotal = sumOfSixthDate;
@@ -929,15 +1072,16 @@ var TimesheetComponent = /** @class */ (function () {
                 sumOfSeventhDate += parseInt(this.timesheetArray[i].daySevenHours || 0);
                 if (sumOfSeventhDate > 24) {
                     this.timesheetArray[index][key] = '';
-                    this.hourValidation = true;
+                    this.hourValidationMessage = true;
                     var self = this;
-                    setTimeout(function () { self.hourValidation = false; }, 2000);
+                    setTimeout(function () { self.hourValidationMessage = false; }, 2000);
                 }
                 else
                     this.seventhDateTotal = sumOfSeventhDate;
             }
         }
     };
+    // sum of weekly hours
     TimesheetComponent.prototype.sumOfWeeklyHours = function () {
         var totalWeekSum = 0;
         for (var i = 0; i < this.timesheetArray.length; i++) {
@@ -953,12 +1097,13 @@ var TimesheetComponent = /** @class */ (function () {
             }
         }
     };
+    // save timesheet
     TimesheetComponent.prototype.saveTimesheet = function () {
         var _this = this;
         var valueIsEmptyOrNot = this.checkForEmptyData();
         if (valueIsEmptyOrNot) {
-            this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
-            this.timesheetService.postTimesheet(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
+            this.totalHoursArrayOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+            this.timesheetService.postTimesheet(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursArrayOfEachDate)
                 .subscribe(function (message) {
                 _this.message = message.response;
                 var self = _this;
@@ -967,7 +1112,6 @@ var TimesheetComponent = /** @class */ (function () {
                 _this.editButtonVisibility = true;
                 _this.saveButtonVisibility = false;
                 _this.addAndEditButtonDisable = true;
-                //this.setTimesheetArrayToDefault();
             }, function (error) {
                 _this.message = error;
                 var self = _this;
@@ -975,14 +1119,15 @@ var TimesheetComponent = /** @class */ (function () {
             });
         }
     };
+    // export to excel timesheet
     TimesheetComponent.prototype.exportToExcel = function () {
         var _this = this;
         var valueIsEmptyOrNot = this.checkForEmptyData();
         if (valueIsEmptyOrNot) {
-            this.totalHoursOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+            this.totalHoursArrayOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
             //this.checkForEmptyData();
             this.constantService.showLoader();
-            this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursOfEachDate)
+            this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursArrayOfEachDate)
                 .subscribe(function (message) {
                 _this.message = message.response;
                 var self = _this;
@@ -991,7 +1136,7 @@ var TimesheetComponent = /** @class */ (function () {
                     self.constantService.hideLoader();
                 }, 2000);
                 try {
-                    window.open("" + _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].baseUrl + "downloadexcelsheet", "_parent");
+                    window.open("" + _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].baseUrl + "downloadexcelsheet", "_parent");
                     window.close();
                 }
                 catch (e) {
@@ -1010,33 +1155,22 @@ var TimesheetComponent = /** @class */ (function () {
             });
         }
     };
-    TimesheetComponent.prototype.setTimesheetArrayToDefault = function () {
-        this.firstDateTotal = '';
-        this.secondDateTotal = '';
-        this.thirdDateTotal = '';
-        this.fourthDateTotal = '';
-        this.fifthDateTotal = '';
-        this.sixthDateTotal = '';
-        this.seventhDateTotal = '';
-        this.timesheetArray = [];
-        this.tasks = new _models_weeklyTask__WEBPACK_IMPORTED_MODULE_3__["WeeklyTask"]('', '', '', '', '', '', '', '', '');
-        this.timesheetArray.push(this.tasks);
-        this.totalWeeklyHours = '';
-    };
+    // hours should not be greater than two
     TimesheetComponent.prototype.checkNoOfDigitsInHours = function (event) {
         if (event.target.value > 2 || !(event.keyCode >= 48 && event.keyCode <= 57))
             event.preventDefault();
     };
+    // check whether the selected task should not be empty
     TimesheetComponent.prototype.checkForEmptyData = function () {
         for (var i = 0; i < this.timesheetArray.length; i++) {
             for (var objectKey in this.timesheetArray[i]) {
                 if (this.timesheetArray[i].hasOwnProperty(objectKey)) {
                     if (this.timesheetArray[i]["taskName"] == '') {
                         //$("#validationlabel").show();
-                        this.mandatoryValidation = true;
+                        this.validationMessageForMandatoryTaskName = true;
                         var self = this;
                         setTimeout(function () {
-                            self.mandatoryValidation = false;
+                            self.validationMessageForMandatoryTaskName = false;
                         }, 2000);
                         return false;
                     }
@@ -1049,8 +1183,115 @@ var TimesheetComponent = /** @class */ (function () {
         this.isReadOnlyForTimesheetRow = false;
         this.editButtonVisibility = false;
         this.saveButtonVisibility = true;
-        // if user get timesheet
         this.addAndEditButtonDisable = false;
+    };
+    // set mail subject in the model
+    TimesheetComponent.prototype.setMailSubject = function () {
+        this.mailSubject = "Timesheet for approval from" + " " + this.startDate.toLocaleDateString() + "-" + this.endDate.toLocaleDateString();
+    };
+    // on key press check that both the email addresss is correct and password is not empty (called on keydown)
+    TimesheetComponent.prototype.checkPasswordLength = function (event) {
+        if (this.userPasswordForEmail != "") {
+            this.invalidMailAddress = false;
+        }
+        else {
+            this.invalidMailAddress = true;
+        }
+    };
+    // show validation messages (called on blur)
+    TimesheetComponent.prototype.showPasswordValidationMessageIfEmpty = function (event) {
+        //let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (event.target.value == "") {
+            this.emptyPasswordMessage = true;
+        }
+        else {
+            this.emptyPasswordMessage = false;
+        }
+    };
+    TimesheetComponent.prototype.open = function (content) {
+        var _this = this;
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+        });
+    };
+    TimesheetComponent.prototype.getDismissReason = function (reason) {
+        if (reason === _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ModalDismissReasons"].ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ModalDismissReasons"].BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
+    };
+    TimesheetComponent.prototype.sendMail = function (content) {
+        var _this = this;
+        this.clientMailId = "";
+        this.ccEmailAddresses = "";
+        this.userMailId = "";
+        this.userPasswordForEmail = "";
+        var valueIsEmptyOrNot = this.checkForEmptyData();
+        if (valueIsEmptyOrNot) {
+            this.totalHoursArrayOfEachDate = [this.firstDateTotal, this.secondDateTotal, this.thirdDateTotal, this.fourthDateTotal, this.fifthDateTotal, this.sixthDateTotal, this.seventhDateTotal];
+            //this.checkForEmptyData();
+            this.constantService.showLoader();
+            this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursArrayOfEachDate)
+                .subscribe(function (message) {
+                _this.message = message.response;
+                var self = _this;
+                var con = content;
+                setTimeout(function () {
+                    self.message = "";
+                    self.constantService.hideLoader();
+                }, 2000);
+                //mail functionality
+                _this.email.getEmailTemplate().subscribe(function (emailTemplate) {
+                    _this.userMailId = _this.selectedResourceValue.userMailAdd;
+                    _this.clientMailId = _this.selectedResourceValue.clientMailAdd;
+                    _this.setMailSubject();
+                    _this.emailTemplate = emailTemplate;
+                    var arrayLength = _this.selectedResourceValue.stakeholdersEmail.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        _this.ccEmailAddresses += _this.selectedResourceValue.stakeholdersEmail[i] + ";";
+                    }
+                    _this.ccEmailAddresses = _this.ccEmailAddresses.slice(0, _this.ccEmailAddresses.length - 1);
+                    _this.open(con);
+                }, function (error) {
+                    _this.message = error;
+                    var self = _this;
+                    setTimeout(function () { self.message = ""; }, 2000);
+                });
+                _this.isReadOnlyForTimesheetRow = true;
+                _this.addAndEditButtonDisable = true;
+                _this.editButtonVisibility = true;
+                _this.saveButtonVisibility = false;
+            }, function (error) {
+                _this.message = error;
+                var self = _this;
+                setTimeout(function () { self.message = ""; }, 2000);
+            });
+        }
+    };
+    // hide the modal
+    TimesheetComponent.prototype.mailSent = function () {
+        var _this = this;
+        //$(".modal").remove(); 
+        jquery__WEBPACK_IMPORTED_MODULE_1__(".modal-dialog").css("display", "none");
+        jquery__WEBPACK_IMPORTED_MODULE_1__(".modal-backdrop.show").css("opacity", "0");
+        this.constantService.showLoader();
+        this.email.postEmail(this.userMailId, this.userPasswordForEmail, this.clientMailId, this.selectedResourceValue.stakeholdersEmail, this.mailSubject, this.emailTemplate).subscribe(function (message) {
+            _this.constantService.hideLoader();
+            _this.message = message.response;
+            var self = _this;
+            setTimeout(function () { self.message = ""; }, 2000);
+        }, function (error) { return function (error) {
+            _this.message = error.response;
+            var self = _this;
+            setTimeout(function () { self.message = ""; }, 2000);
+        }; });
     };
     TimesheetComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1058,7 +1299,7 @@ var TimesheetComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./timesheet.component.html */ "./src/app/timesheet/timesheet.component.html"),
             styles: [__webpack_require__(/*! ./timesheet.component.css */ "./src/app/timesheet/timesheet.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_1__["TimesheetService"], _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_2__["TasksService"], _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_4__["ConstantService"]])
+        __metadata("design:paramtypes", [_services_email_email_service__WEBPACK_IMPORTED_MODULE_9__["EmailService"], _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_2__["TimesheetService"], _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_3__["TasksService"], _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_5__["ConstantService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["NgbModal"]])
     ], TimesheetComponent);
     return TimesheetComponent;
 }());

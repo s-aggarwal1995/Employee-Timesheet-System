@@ -48,7 +48,7 @@ public class EmailController {
             return "{\"response\":\"Mail Sent\"}";
         }
         catch(Exception ex) {
-            return "{\"response\":\"Error in sending email: Either Username or Password is Incorrect\"}";
+            return "{\"response\":\"Either Username or Password is Incorrect\"}";
         }
     }
 

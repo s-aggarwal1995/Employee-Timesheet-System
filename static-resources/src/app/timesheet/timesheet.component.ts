@@ -14,7 +14,11 @@ import icons from 'glyphicons';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-import { EmailService } from '../services/email/email.service'
+import { EmailService } from '../services/email/email.service';
+
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+
+import { Tasks } from '../models/tasks';
 
 
 
@@ -76,7 +80,7 @@ export class TimesheetComponent implements OnInit {
 
   // get resources and tasks coming from the apis
   resources = [];
-  tasksData = [];
+  tasksData: Tasks[];
 
   // select resource object when selected from the dropdown
   selectedResourceValue: any;
@@ -135,17 +139,29 @@ export class TimesheetComponent implements OnInit {
   // message for invalid email address if user not tyed correct email address while updation
   emailAddressNotValidated: string;
 
+  public tasksName: string[] = [];
 
+  searchForTaskName = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(100),
+    distinctUntilChanged(),
+    map(term => term.length < 1 ? []
+      : this.tasksName.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+  );
 
-  constructor(public email: EmailService, public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService, private modalService: NgbModal) { }
+  
+
+  constructor(public email: EmailService, public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService, private modalService: NgbModal) { 
+   
+    // to get task in dropdown from the service
+    this.getTasks();
+
+  }
 
   ngOnInit() {
 
     // to get the resources name from the service
     this.getResources();
-
-    // to get task in dropdown from the service
-    this.getTasks();
 
     // get the current monday of the week
     this.startDate = this.getMonday();
@@ -248,14 +264,7 @@ export class TimesheetComponent implements OnInit {
   }
 
 
-  // get tasks from the apis
-  getTasks() {
-    this.tasksService.getTasks().subscribe(tasks => this.tasksData = tasks, error => {
-      this.message = error;
-      var self = this;
-      setTimeout(function () { self.message = ""; }, 2000);
-    });
-  }
+
 
 
   hideManagerEditButton() {
@@ -671,12 +680,6 @@ export class TimesheetComponent implements OnInit {
 
       this.timesheetService.exportToExcel(this.timesheetArray, this.selectedResourceValue, this.startDate, this.endDate, this.dates, this.totalWeeklyHours, this.totalHoursArrayOfEachDate)
         .subscribe(message => {
-          this.message = message.response;
-          var self = this;
-          setTimeout(function () {
-            self.message = "";
-            self.constantService.hideLoader();
-          }, 2000);
 
           try {
             window.open(`${environment.baseUrl}` + "downloadexcelsheet", "_parent");
@@ -687,6 +690,14 @@ export class TimesheetComponent implements OnInit {
             var self = this;
             setTimeout(function () { self.message = ""; }, 2000);
           }
+
+          this.message = message.response;
+          var self = this;
+          setTimeout(function () {
+            self.message = "";
+            self.constantService.hideLoader();
+          }, 2000);
+
 
           this.isReadOnlyForTimesheetRow = true;
           this.addAndEditButtonDisable = true;
@@ -806,6 +817,8 @@ export class TimesheetComponent implements OnInit {
     this.userMailId = "";
     this.userPasswordForEmail = "";
 
+    this.invalidMailAddress = true;
+
 
     let valueIsEmptyOrNot: boolean = this.checkForEmptyData();
 
@@ -896,7 +909,67 @@ export class TimesheetComponent implements OnInit {
 
   }
 
+  expandDescriptionOnFocus(event) {
 
+    if (!this.editButtonVisibility) {
+
+      event.srcElement.parentNode.style.opacity = "0.9";
+      event.srcElement.parentNode.style.zIndex = "9999";
+      event.srcElement.parentNode.style.position = "fixed";
+
+      event.target.style.position = "relative";
+      event.target.style.width = "480px";
+
+    }
+
+  }
+
+  descriptionBoxBackToNormal(event) {
+
+    event.srcElement.parentNode.style.width = "";
+    event.srcElement.parentNode.style.height = "";
+    event.srcElement.parentNode.style.opacity = "";
+    event.srcElement.parentNode.style.width = "";
+    event.srcElement.parentNode.style.background = "";
+    event.srcElement.parentNode.style.position = "";
+
+    event.target.style.width = "100%";
+    event.target.style.height = "";
+    event.target.style.opacity = "";
+    event.target.style.position = "";
+    event.target.style.zIndex = 1;
+  }
+
+ 
+
+  
+
+ 
+  
+  // get tasks from the apis
+  getTasks() {
+    this.tasksService.getTasks().subscribe(tasks => {
+      this.tasksData = tasks;
+
+      //changes to be checked in
+      if (this.tasksData != []) {
+        for (let i = 0; i < this.tasksData.length; i++) {
+          this.tasksName.push(this.tasksData[i].taskName);
+        }
+      }
+
+    },
+      error => {
+        this.message = error;
+        var self = this;
+        setTimeout(function () { self.message = ""; }, 2000);
+      });
+  }
+
+  
+  
+
+  
 
 
 }

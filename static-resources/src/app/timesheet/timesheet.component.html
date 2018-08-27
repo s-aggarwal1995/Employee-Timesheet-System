@@ -60,7 +60,8 @@
                                     <option value="" selected disabled>Select the Task</option>
                                     <option *ngFor="let task of tasksData" [ngValue]="task.taskName">{{task.taskName}}</option>
                                 </select> -->
-                                <input id="typeahead-basic" placeholder="Task Name" type="text" class="form-control" [(ngModel)]="tasks.taskName" [ngbTypeahead]="searchForTaskName" [disabled]="isReadOnlyForTimesheetRow" />
+                                <input id="typeahead-basic" placeholder="Task Name" type="text" class="form-control" [(ngModel)]="tasks.taskName" [ngbTypeahead]="searchForTaskName"
+                                    [disabled]="isReadOnlyForTimesheetRow" />
                             </td>
                             <td>
                                 <!-- (blur)="checkTaskValidation(tasks.taskDescription,'taskDescription',i)" -->
@@ -303,6 +304,7 @@
                 <i class="fa fa-download" aria-hidden="true"></i> Generate Excel Sheet</button>
             <button class="btn btn-primary btn-md center-block btn-danger" style="margin:10px;" (click)="sendMail(content)">
                 <span class="glyphicon glyphicon-envelope"></span>{{mailIcon}} Send In Mail</button>
+            <!-- <button class="btn btn-primary btn-md center-block btn-danger" style="margin:10px;">Generate Reports</button> -->
         </div>
         <div class="col-md-3">
             <br>
@@ -411,4 +413,3 @@
     </div>
 
 </ng-template>
-

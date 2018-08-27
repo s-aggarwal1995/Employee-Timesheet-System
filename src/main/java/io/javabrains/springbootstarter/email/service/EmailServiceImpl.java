@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -45,7 +46,8 @@ public class EmailServiceImpl implements  EmailService {
     {
 
         try {
-               logger.info("Enter The  sendSimpleMessage Function In Service Layer");
+
+            logger.info("Enter The  sendSimpleMessage Function In Service Layer");
         String[]  emailsArray = cc.toArray(new String[cc.size()]);
 
         JavaMailSenderImpl jMailSender = (JavaMailSenderImpl) senderAuthentciation;
@@ -60,8 +62,12 @@ public class EmailServiceImpl implements  EmailService {
         helper.setSubject(subject);
         helper.setText(text,true);
 
+        int n = timesheetService.getExcelGeneratedUser().getStartDate().lastIndexOf("/");
+        String year = timesheetService.getExcelGeneratedUser().getStartDate().substring(n + 1);
+
+
         FileSystemResource file  = new FileSystemResource(new File("poi-generated-file.xlsx"));
-        helper.addAttachment("WeeklyTimesheet.xlsx", file);
+        helper.addAttachment("WeeklyTimesheet" + "_" + timesheetService.getExcelGeneratedUser().getUser().getUserName() + "_" + timesheetService.getExcelGeneratedUser().getDates().get(0) + "-" + year + ".xlsx", file);
 
         sender.send(message);
 
@@ -71,7 +77,6 @@ public class EmailServiceImpl implements  EmailService {
         catch (Exception e){
             logger.error("Exception Occurs At sendSimpleMessage Function In Service Layer"+e.getMessage());
             throw (e);
-
         }
 
 

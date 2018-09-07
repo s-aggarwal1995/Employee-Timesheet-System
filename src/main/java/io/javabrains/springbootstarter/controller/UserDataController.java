@@ -323,7 +323,7 @@ public class UserDataController implements UserDataControllerIfc{
             attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
             attributes.addAttribute("attribute", "redirectWithRedirectView");
             logger.info(" ");
-            return new RedirectView("redirect:/forward");
+            return new RedirectView("https://tfa-timesheet.herokuapp.com/timesheet");
 
         }
         catch (Exception e){

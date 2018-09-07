@@ -154,9 +154,9 @@ export class TimesheetComponent implements OnInit {
 
   otpValue: String;
 
-  showTimesheetOfSelectedUser:boolean = false;
+  showTimesheetOfSelectedUser: boolean = false;
 
-  otpFailMessage:String;
+  otpFailMessage: String;
 
   searchForTaskName = (text$: Observable<string>) =>
     text$.pipe(
@@ -194,8 +194,8 @@ export class TimesheetComponent implements OnInit {
       this.otpCheckEnabled = true;
     }
     if (otp.value.length >= 4 || !(event.keyCode >= 48 && event.keyCode <= 57))
-    if(!(event.keyCode==8 || event.keyCode==46))
-      event.preventDefault();
+      if (!(event.keyCode == 8 || event.keyCode == 46))
+        event.preventDefault();
 
   }
 
@@ -207,37 +207,38 @@ export class TimesheetComponent implements OnInit {
 
       this.constantService.hideLoader();
       console.log(message.response);
-      if(message.response=="OTP is verified successfullly"){
-        this.showTimesheetOfSelectedUser =  true;
+      if (message.response == "OTP is verified successfullly") {
+        this.showTimesheetOfSelectedUser = true;
         this.getExistingTimesheet();
       }
-      
+
     },
-    error => {
-      //this.otpCheckEnabled = false;
-      this.constantService.hideLoader();
-      this.otpFailMessage = error.error.response;
+      error => {
+        //this.otpCheckEnabled = false;
+        this.constantService.hideLoader();
+        this.otpFailMessage = error.error.response;
         var self = this;
         setTimeout(function () { self.otpFailMessage = ""; }, 3000);
-    })
+      })
   }
 
   // call when new resource/user is selected from the drop down box
   getSelectedResourceValue() {
 
-    this.otpValue="";
+    this.otpValue = "";
 
     this.constantService.showLoader();
 
     this.otpService.sendOtp(this.selectedResourceValue.userMailAdd).subscribe(message => {
 
-      this.constantService.hideLoader();
-      console.log(message.response);
-      this.showOtpInput = true;
-      this.otpSuccessMessage = message.response;
-      var self = this;
-      setTimeout(function () { self.otpSuccessMessage = ""; }, 2000);
-
+      if (message != null) {
+        this.constantService.hideLoader();
+        console.log(message.response);
+        this.showOtpInput = true;
+        this.otpSuccessMessage = message.response;
+        var self = this;
+        setTimeout(function () { self.otpSuccessMessage = ""; }, 2000);
+      }
     },
       error => {
         this.message = error;

@@ -50,6 +50,8 @@ public class OtpSystemRestController {
             jMailSender.setUsername(username);
             jMailSender.setPassword(password);
 
+            logger.info("username and password is set in sentotp function");
+
             OtpSystem otpSystem = new OtpSystem();
             otpSystem.setUserEmail(userEmail);
             otpSystem.setOtp(String.valueOf((int) (Math.random() * (10000 - 1000) + 1000)));
@@ -57,15 +59,19 @@ public class OtpSystemRestController {
 
             otp_data.put(userEmail, otpSystem);
 
+            logger.info("useremail is sent corresponding to otp system");
+
             MimeMessage message = sender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(userEmail);
             helper.setSubject("Timesheet Management System Login OTP");
             helper.setText(" your Verification Code is " + otpSystem.getOtp());
 
+            logger.info("setting of otp template send to user mail");
+
             sender.send(message);
 
-            logger.info("Exit From The Send Otp Function");
+            logger.info("Exit From The Send Otp Function after successfully send otp");
 
             return new ResponseEntity<>("{\"response\":\"Otp Is Send Successfully\"}", HttpStatus.OK);
 

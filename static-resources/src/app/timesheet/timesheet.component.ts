@@ -20,6 +20,10 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { Tasks } from '../models/tasks';
 
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { OtpService } from '../services/otp/otp.service';
+
 
 
 @Component({
@@ -36,6 +40,7 @@ export class TimesheetComponent implements OnInit {
   mailIcon = icons.email;
   plus = icons.plus;
   check = icons.checkHeavy;
+  refresh = icons.arrowCircleFull;
 
   // to disable the add and edit button in the timesheet table according to whether timesheet exist or not
   addAndEditButtonDisable: boolean = false;
@@ -139,20 +144,32 @@ export class TimesheetComponent implements OnInit {
   // message for invalid email address if user not tyed correct email address while updation
   emailAddressNotValidated: string;
 
-  public tasksName: string[] = [];
+  tasksName: string[] = [];
+
+  showOtpInput: boolean = false;
+
+  otpSuccessMessage: String;
+
+  otpCheckEnabled: boolean = false;
+
+  otpValue: String;
+
+  showTimesheetOfSelectedUser:boolean = false;
+
+  otpFailMessage:String;
 
   searchForTaskName = (text$: Observable<string>) =>
-  text$.pipe(
-    debounceTime(100),
-    distinctUntilChanged(),
-    map(term => term.length < 1 ? []
-      : this.tasksName.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-  );
+    text$.pipe(
+      debounceTime(100),
+      distinctUntilChanged(),
+      map(term => term.length < 1 ? []
+        : this.tasksName.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    );
 
-  
 
-  constructor(public email: EmailService, public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService, private modalService: NgbModal) { 
-   
+
+  constructor(public otpService: OtpService, public router: Router, public email: EmailService, public timesheetService: TimesheetService, public tasksService: TasksService, public constantService: ConstantService, private modalService: NgbModal) {
+
     // to get task in dropdown from the service
     this.getTasks();
 
@@ -171,9 +188,64 @@ export class TimesheetComponent implements OnInit {
 
   }
 
+  checkForOtpLength(otp, event) {
+    console.log(otp.value);
+    if (otp.value.length == 3) {
+      this.otpCheckEnabled = true;
+    }
+    if (otp.value.length >= 4 || !(event.keyCode >= 48 && event.keyCode <= 57))
+    if(!(event.keyCode==8 || event.keyCode==46))
+      event.preventDefault();
+
+  }
+
+  validateOtp(event) {
+
+    this.constantService.showLoader();
+
+    this.otpService.validateOtp(this.selectedResourceValue.userMailAdd, this.otpValue).subscribe(message => {
+
+      this.constantService.hideLoader();
+      console.log(message.response);
+      if(message.response=="OTP is verified successfullly"){
+        this.showTimesheetOfSelectedUser =  true;
+        this.getExistingTimesheet();
+      }
+      
+    },
+    error => {
+      //this.otpCheckEnabled = false;
+      this.constantService.hideLoader();
+      this.otpFailMessage = error.error.response;
+        var self = this;
+        setTimeout(function () { self.otpFailMessage = ""; }, 3000);
+    })
+  }
+
   // call when new resource/user is selected from the drop down box
   getSelectedResourceValue() {
-    this.getExistingTimesheet();
+
+    this.otpValue="";
+
+    this.constantService.showLoader();
+
+    this.otpService.sendOtp(this.selectedResourceValue.userMailAdd).subscribe(message => {
+
+      this.constantService.hideLoader();
+      console.log(message.response);
+      this.showOtpInput = true;
+      this.otpSuccessMessage = message.response;
+      var self = this;
+      setTimeout(function () { self.otpSuccessMessage = ""; }, 2000);
+
+    },
+      error => {
+        this.message = error;
+        var self = this;
+        setTimeout(function () { self.message = ""; }, 2000);
+      })
+
+    //this.getExistingTimesheet();
   }
 
   // get Monday From Present Date
@@ -940,12 +1012,12 @@ export class TimesheetComponent implements OnInit {
     event.target.style.zIndex = 1;
   }
 
- 
 
-  
 
- 
-  
+
+
+
+
   // get tasks from the apis
   getTasks() {
     this.tasksService.getTasks().subscribe(tasks => {
@@ -966,12 +1038,17 @@ export class TimesheetComponent implements OnInit {
       });
   }
 
-  
 
-  
-  
+  // redirectToReports() {
+  //   this.router.navigate(['/reports']);
+  // }
 
-  
+
+
+
+
+
+
 
 
 }

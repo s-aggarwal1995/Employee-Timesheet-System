@@ -9,17 +9,35 @@
 
 <div class="wrapper wrapperpadding">
     <div class="container">
-        <div *ngIf="!selectedResourceValue" class="col-md-6 centered text-center col-centered">
+        <div *ngIf="!showTimesheetOfSelectedUser" class="col-md-6 centered text-center col-centered">
             <p>
                 <select name="resource" class="form-control" [(ngModel)]="selectedResourceValue" (change)="getSelectedResourceValue()">
                     <option value="undefined" selected disabled>Select the resource name</option>
                     <option *ngFor="let resource of resources" [ngValue]="resource">{{resource.userName}}</option>
                 </select>
             </p>
+
+            <div>
+                <input #otp *ngIf="showOtpInput" class="form-control" [(ngModel)]="otpValue" (keydown)="checkForOtpLength(otp,$event)" placeholder="Enter OTP Sent To Your Mail Id">
+                <!-- <span *ngIf="otpCheckEnabled" style="cursor:pointer;" (click)="validateOtp($event)">{{check}}</span>
+                <span *ngIf="otpCheckEnabled" style="cursor:pointer;" (click)="getSelectedResourceValue()">{{refresh}}</span> -->
+                <div style="padding:15px;">
+                    <button  class="btn btn-success" *ngIf="otpCheckEnabled" style="cursor:pointer;margin:5px;" (click)="validateOtp($event)">Validate Otp</button>
+                    <button  class="btn btn-danger" *ngIf="otpCheckEnabled" style="cursor:pointer;margin:5px;" (click)="getSelectedResourceValue()">Resend Otp</button>
+                </div>
+            </div>
+
+
+
+            <div>
+                <label style="color:green;" *ngIf="otpSuccessMessage">{{otpSuccessMessage}}</label>
+                <label style="color:red;" *ngIf="otpFailMessage">{{otpFailMessage}}</label>
+            </div>
+
         </div>
     </div>
 </div>
-<div id="timesheetouterdiv" *ngIf="selectedResourceValue">
+<div id="timesheetouterdiv" *ngIf="showTimesheetOfSelectedUser">
     <div class="wrapper">
         <!-- first column of row -->
         <!-- second column of row -->
@@ -27,10 +45,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <p>Resource Name
-                        <select name="resource" class="form-control" [(ngModel)]="selectedResourceValue" (change)="getSelectedResourceValue()">
-                            <option value="" selected disabled>Select the resource name</option>
-                            <option *ngFor="let resource of resources" [ngValue]="resource">{{resource.userName}}</option>
-                        </select>
+                        <input type="text" class="form-control" [(ngModel)]="selectedResourceValue.userName" readonly>
                     </p>
                 </div>
                 <div class="col-md-4">
@@ -304,7 +319,7 @@
                 <i class="fa fa-download" aria-hidden="true"></i> Generate Excel Sheet</button>
             <button class="btn btn-primary btn-md center-block btn-danger" style="margin:10px;" (click)="sendMail(content)">
                 <span class="glyphicon glyphicon-envelope"></span>{{mailIcon}} Send In Mail</button>
-            <!-- <button class="btn btn-primary btn-md center-block btn-danger" style="margin:10px;">Generate Reports</button> -->
+            <!-- <button class="btn btn-primary btn-md center-block btn-danger" style="margin:10px;" (click)="redirectToReports()">Generate Reports</button> -->
         </div>
         <div class="col-md-3">
             <br>

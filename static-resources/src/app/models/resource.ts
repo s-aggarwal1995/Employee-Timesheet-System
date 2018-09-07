@@ -4,4 +4,6 @@ export class Resource {
     managerEmail:string;
     clientEmail:string;
     stakeholdersEmail:string[];
+    clientMailAdd:String;
+    userMailAdd:String;
 }

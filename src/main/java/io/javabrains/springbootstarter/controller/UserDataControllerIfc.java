@@ -21,6 +21,4 @@ public interface UserDataControllerIfc {
     public List<TaskData> getTasksData();
     public Timesheet getTimesheetsAccordingToWeek(@RequestBody ConditionalTimesheet conditionalTimesheet);
 
-
-
 }

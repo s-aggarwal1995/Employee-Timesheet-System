@@ -14,15 +14,15 @@ import {TimesheetService} from './services/timesheet/timesheet.service';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ReportsComponent } from './reports/reports.component';
 
-import { jqxBarGaugeComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxbargauge';
 
-// Import angular2-fusioncharts
-import { FusionChartsModule } from 'angular2-fusioncharts';
 
-// Import FusionCharts library
-import * as FusionCharts from 'fusioncharts';
-// Import FusionCharts Charts module
-import * as Charts from 'fusioncharts/fusioncharts.charts';
+// // Import angular2-fusioncharts
+// import { FusionChartsModule } from 'angular2-fusioncharts';
+
+// // Import FusionCharts library
+// import * as FusionCharts from 'fusioncharts';
+// // Import FusionCharts Charts module
+// import * as Charts from 'fusioncharts/fusioncharts.charts';
  
 
 
@@ -32,8 +32,7 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
     AppComponent,
     TimesheetComponent,
     PagenotfoundComponent,
-    ReportsComponent,
-    jqxBarGaugeComponent
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +43,7 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
     NgbModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    FusionChartsModule.forRoot(FusionCharts, Charts)
+    // FusionChartsModule.forRoot(FusionCharts, Charts)
   ],
   providers: [TimesheetService],
   bootstrap: [AppComponent]

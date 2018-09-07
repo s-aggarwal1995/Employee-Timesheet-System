@@ -51,8 +51,10 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+//import { ReportsComponent } from './reports/reports.component';
 var routes = [
     { path: 'timesheet', component: _timesheet_timesheet_component__WEBPACK_IMPORTED_MODULE_3__["TimesheetComponent"] },
+    // { path: 'reports', component: ReportsComponent },
     { path: '', redirectTo: '/timesheet', pathMatch: 'full' },
     { path: '**', component: _pagenotfound_pagenotfound_component__WEBPACK_IMPORTED_MODULE_5__["PagenotfoundComponent"] }
 ];
@@ -155,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _timesheet_timesheet_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./timesheet/timesheet.component */ "./src/app/timesheet/timesheet.component.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! .//app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var primeng_primeng__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! primeng/primeng */ "./node_modules/primeng/primeng.js");
@@ -164,6 +166,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./services/timesheet/timesheet.service */ "./src/app/services/timesheet/timesheet.service.ts");
 /* harmony import */ var _pagenotfound_pagenotfound_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pagenotfound/pagenotfound.component */ "./src/app/pagenotfound/pagenotfound.component.ts");
+/* harmony import */ var _reports_reports_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./reports/reports.component */ "./src/app/reports/reports.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -182,6 +185,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+// // Import angular2-fusioncharts
+// import { FusionChartsModule } from 'angular2-fusioncharts';
+// // Import FusionCharts library
+// import * as FusionCharts from 'fusioncharts';
+// // Import FusionCharts Charts module
+// import * as Charts from 'fusioncharts/fusioncharts.charts';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -190,7 +200,8 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
                 _timesheet_timesheet_component__WEBPACK_IMPORTED_MODULE_3__["TimesheetComponent"],
-                _pagenotfound_pagenotfound_component__WEBPACK_IMPORTED_MODULE_11__["PagenotfoundComponent"]
+                _pagenotfound_pagenotfound_component__WEBPACK_IMPORTED_MODULE_11__["PagenotfoundComponent"],
+                _reports_reports_component__WEBPACK_IMPORTED_MODULE_12__["ReportsComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -200,7 +211,7 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__["BrowserAnimationsModule"],
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__["NgbModule"],
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__["NgbModule"].forRoot(),
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
             ],
             providers: [_services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_10__["TimesheetService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
@@ -305,6 +316,143 @@ var PagenotfoundComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/reports/reports.component.css":
+/*!***********************************************!*\
+  !*** ./src/app/reports/reports.component.css ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/reports/reports.component.html":
+/*!************************************************!*\
+  !*** ./src/app/reports/reports.component.html ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!-- <p>\n  reports works!\n</p>\n\n<p>wjdwj</p> -->\n\n\n\n\n"
+
+/***/ }),
+
+/***/ "./src/app/reports/reports.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/reports/reports.component.ts ***!
+  \**********************************************/
+/*! exports provided: ReportsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportsComponent", function() { return ReportsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var ReportsComponent = /** @class */ (function () {
+    function ReportsComponent() {
+    }
+    //LineChart = [];
+    // barChart = [];
+    // chart = []; // This will hold our chart info
+    // chart = [];
+    // dataSource = {};
+    // values: number[] = [102, 115, 130, 137];
+    // constructor(private _report: ReportService) {
+    //   this.dataSource = {
+    //     chart: {
+    //       "caption": "Quarterly expenditure",
+    //       "xAxisname": "Quarter",
+    //       "yAxisName": "Expenditure (In USD)",
+    //       "numberPrefix": "$",
+    //       "baseFont": "Roboto",
+    //       "baseFontSize": "14",
+    //       "labelFontSize": "15",
+    //       "captionFontSize": "20",
+    //       "subCaptionFontSize": "16",
+    //       "paletteColors": "#2c7fb2,#6cc184,#fed466",
+    //       "bgColor": "#ffffff",
+    //       "legendShadow": "0",
+    //       "valueFontColor": "#ffffff",
+    //       "showXAxisLine": "1",
+    //       "xAxisLineColor": "#999999",
+    //       "divlineColor": "#999999",
+    //       "divLineIsDashed": "1",
+    //       "showAlternateHGridColor": "0",
+    //       "subcaptionFontBold": "0",
+    //       "subcaptionFontSize": "14",
+    //       "showHoverEffect": "1"
+    //     },
+    //     "categories": [{
+    //       "category": [{
+    //         "label": "Q1"
+    //       }, {
+    //         "label": "Q2"
+    //       }, {
+    //         "label": "Q3"
+    //       }, {
+    //         "label": "Q4"
+    //       }]
+    //     }],
+    //     "dataset": [{
+    //       "seriesname": "Marketing",
+    //       "data": [{
+    //         "value": "121000"
+    //       }, {
+    //         "value": "135000"
+    //       }, {
+    //         "value": "123500"
+    //       }, {
+    //         "value": "145000"
+    //       }]
+    //     }, {
+    //       "seriesname": "Management",
+    //       "data": [{
+    //         "value": "190000"
+    //       }, {
+    //         "value": "195000"
+    //       }, {
+    //         "value": "187000"
+    //       }, {
+    //         "value": "190000"
+    //       }]
+    //     }, {
+    //       "seriesname": "Operations",
+    //       "data": [{
+    //         "value": "225000"
+    //       }, {
+    //         "value": "260000"
+    //       }, {
+    //         "value": "245000"
+    //       }, {
+    //         "value": "250000"
+    //       }]
+    //     }]
+    //   };
+    // }
+    ReportsComponent.prototype.ngOnInit = function () {
+    };
+    ReportsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-reports',
+            template: __webpack_require__(/*! ./reports.component.html */ "./src/app/reports/reports.component.html"),
+            styles: [__webpack_require__(/*! ./reports.component.css */ "./src/app/reports/reports.component.css")]
+        })
+    ], ReportsComponent);
+    return ReportsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/constants/constants.service.ts":
 /*!*********************************************************!*\
   !*** ./src/app/services/constants/constants.service.ts ***!
@@ -402,6 +550,64 @@ var EmailService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], EmailService);
     return EmailService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/otp/otp.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/otp/otp.service.ts ***!
+  \*********************************************/
+/*! exports provided: OtpService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OtpService", function() { return OtpService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' })
+};
+var options = { responseType: 'text' };
+var OtpService = /** @class */ (function () {
+    function OtpService(http) {
+        this.http = http;
+        this.baseUrl = "" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].baseUrl;
+        this.sentOtpUrl = this.baseUrl + "sentotp";
+        this.verifyOtpUrl = this.baseUrl + "verifyotp";
+    }
+    OtpService.prototype.sendOtp = function (email) {
+        var postedData = email;
+        return this.http.post(this.sentOtpUrl, postedData, httpOptions);
+    };
+    OtpService.prototype.validateOtp = function (userEmail, otp) {
+        var postedData = { userEmail: userEmail, otp: otp, expiryTime: "" };
+        return this.http.post(this.verifyOtpUrl, postedData, httpOptions);
+    };
+    OtpService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], OtpService);
+    return OtpService;
 }());
 
 
@@ -592,7 +798,7 @@ module.exports = ".wrapperpadding{\r\n\t\tmargin-top: 60px;\r\n    /* padding:15
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- svam image header-->\r\n<div class=\"header\">\r\n    <img src=\"../assets/imgs/svam.png\" alt=\"SVAM INC\" class=\"responsive\" width=\"800\" height=\"400\">\r\n\r\n    <h6>WEEKLY TIMESHEET </h6>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"wrapper wrapperpadding\">\r\n    <div class=\"container\">\r\n        <div *ngIf=\"!selectedResourceValue\" class=\"col-md-6 centered text-center col-centered\">\r\n            <p>\r\n                <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                    <option value=\"undefined\" selected disabled>Select the resource name</option>\r\n                    <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                </select>\r\n            </p>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div id=\"timesheetouterdiv\" *ngIf=\"selectedResourceValue\">\r\n    <div class=\"wrapper\">\r\n        <!-- first column of row -->\r\n        <!-- second column of row -->\r\n        <div class=\"col-md-9\" style=\"background-color:#00303c; color:#ffffff\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4\">\r\n                    <p>Resource Name\r\n                        <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                            <option value=\"\" selected disabled>Select the resource name</option>\r\n                            <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                        </select>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Name of the Project\r\n                        <input type=\"text\" class=\"form-control\" value=\"Teach For America\" readonly>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Select Date:\r\n                        <p-calendar readonlyInput=\"true\" class=\"form-control\" [disabledDays]=\"[0,2,3,4,5,6]\" [(ngModel)]=\"startDate\" (onSelect)=\"getWeekFromDate(startDate)\"></p-calendar>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div class=\"timesheettablediv\" style=\"width:100%\">\r\n                <table style=\"width:100%;\" class=\"taskstable\">\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"width:15%;text-align:center\">Task Name</th>\r\n                            <th style=\"width:15%;text-align:center\">Description</th>\r\n                            <th style=\"width:10%\" *ngFor=\"let date of dates\">{{date}}</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor=\"let tasks of timesheetArray; let i = index\">\r\n                            <td>\r\n                                <!-- <select class=\"form-control\" [(ngModel)]=\"tasks.taskName\" [disabled]=\"isReadOnlyForTimesheetRow\">\r\n                                    <option value=\"\" selected disabled>Select the Task</option>\r\n                                    <option *ngFor=\"let task of tasksData\" [ngValue]=\"task.taskName\">{{task.taskName}}</option>\r\n                                </select> -->\r\n                                <input id=\"typeahead-basic\" placeholder=\"Task Name\" type=\"text\" class=\"form-control\" [(ngModel)]=\"tasks.taskName\" [ngbTypeahead]=\"searchForTaskName\" [disabled]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <!-- (blur)=\"checkTaskValidation(tasks.taskDescription,'taskDescription',i)\" -->\r\n\r\n                                <input class=\"form-control\" placeholder=\"Description\" type=\"text\" [(ngModel)]=\"tasks.taskDescription\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                    (focus)=\"expandDescriptionOnFocus($event)\" (blur)=descriptionBoxBackToNormal($event) />\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control firstDate\" id=\"firstDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.dayOneHours,'dayOneHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayOneHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control secondDate\" id=\"secondDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (keyup)=\"checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayTwoHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control thirdDate\" id=\"thirdDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" placeholder=\"hours\"\r\n                                    (keyup)=\"checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayThreeHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fourthDate\" id=\"fourthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    placeholder=\"hours\" placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.dayFourHours,'dayFourHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayFourHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fifthDate\" id=\"fifthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayFiveHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control sixthDate\" id=\"sixthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.daySixHours,'daySixHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.daySixHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control seventhDate\" id=\"seventhDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (keyup)=\"checkHours($event,tasks.daySevenHours,'daySevenHours',i)\" type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySevenHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <button id=\"addrowbuttonid\" style=\"box-shadow: none;background-color:#00303c;border-color:#00303c;\" *ngIf=\"i==0\" class=\"btn btn-default btn-success\"\r\n                                    type=\"button\" (click)=\"addRow()\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n\r\n\r\n                                <button style=\"background-color:#00303c;border-color:#00303c;\" *ngIf=\"i>0\" class=\"btn btn-default btn-danger\" type=\"button\"\r\n                                    (click)=\"deleteFieldValue(i)\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n                            </td>\r\n                        </tr>\r\n\r\n\r\n                        <tr>\r\n                            <td colspan=\"2\">\r\n                                Total Timesheet Hours\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"firstdatetotal\" type=\"text\" [(ngModel)]=\"firstDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seconddatetotal\" type=\"text\" [(ngModel)]=\"secondDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"thirddatetotaleHour\" type=\"text\" [(ngModel)]=\"thirdDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fouthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fourthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fifthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fifthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"sixthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"sixthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seventhdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"seventhDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n            </div>\r\n\r\n\r\n\r\n            <div class=\"row\" style=\"padding:50px 0px 0px 0px\">\r\n                <div class=\"col-md-6\">\r\n                    <p>Total Weekly Hours\r\n                        <input id=\"totalweeklyhours\" [value]=\"totalWeeklyHours\" class=\"form-control\" type=\"text\" readonly>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div>\r\n                <label style=\"color:red;\" *ngIf=\"validationMessageForMandatoryTaskName\">Task Name is Mandatory</label>\r\n                <label style=\"color:red;\" *ngIf=\"hourValidationMessage\">Hours Cannot be greater than 24</label>\r\n                <label style=\"color:red;\" *ngIf=\"EmailIdExistMessage\">Email Id Aready Exist</label>\r\n                <label style=\"color:red;\" *ngIf=\"emailAddressNotValidated\">{{emailAddressNotValidated}}</label>\r\n                <!-- <label style=\"color:green;\" *ngIf=\"message\">{{message}}</label> -->\r\n                <label style=\"padding:0px;\" *ngIf=\"message\" class=\"alert alert-success\">{{message}}</label>\r\n\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n        <!-- third column of row -->\r\n        <div class=\"col-md-3\">\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Project Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <div class=\"input-group\">\r\n                        <input id=\"managername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.managerEmail\" [readonly]=\"isManagerReadOnly\"\r\n                        />\r\n                        <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideManagerEditButton()\"\r\n                                class=\"edit-button\">{{editIcon}}</span>\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideManagerUpdateButton()\"\r\n                                class=\"update-button\">{{check}}</span>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmanagername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientEmail\" [readonly]=\"isClientReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideClientEditButton()\"\r\n                            class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideClientUpdateButton()\"\r\n                            class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Email</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmailid\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientMailAdd\" [readonly]=\"isClientEmailReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEmailEditButtonShowHide\" (click)=\"hideClientEmailEditButton()\" class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEmailUpdateButtonShowHide\" (click)=\"hideClientEmailUpdateButton($event)\" class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">User Email</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"usermailid\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.userMailAdd\" [readonly]=\"isUserEmailReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"userEmailEditButtonShowHide\" (click)=\"hideUserEmailEditButton()\" class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"userEmailUpdateButtonShowHide\" (click)=\"hideUserEmailUpdateButton($event)\" class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <table class=\"table\">\r\n                <tr>\r\n                    <th>StakeHolders Email</th>\r\n                </tr>\r\n                <tbody>\r\n                    <tr *ngFor=\"let stakeholderEmail of selectedResourceValue.stakeholdersEmail\">\r\n                        <td>{{stakeholderEmail}}</td>\r\n                        <!-- <button class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">Delete</button> -->\r\n                        <td>\r\n                            <span style=\"cursor:pointer;color:red;\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">\r\n                                <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                            </span>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n\r\n            <form (ngSubmit)=\"submit(userform)\" #userform=\"ngForm\">\r\n                <label>Add StakeHolder Email</label>\r\n                <div class=\"input-group\">\r\n                    <input required class=\"form-control\" id=\"stakeholderEmail\" name=\"emailaddress\" #emailaddress=\"ngModel\" pattern=\"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"\r\n                        ngModel [(ngModel)]=\"stakeholderEmail\" type=\"text\">\r\n                    <span class=\"input-group-btn\">\r\n                        <button style=\"background-color: white;border:none;\" class=\"btn btn-default btn-success add-stakeholder\" (click)=\"addEmail()\"\r\n                            [disabled]=\"!userform.valid\" type=\"submit\">\r\n                            <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                        </button>\r\n                    </span>\r\n                </div>\r\n                <div *ngIf=\"!emailaddress.valid && emailaddress.touched\">\r\n                    <p *ngIf=\"emailaddress?.errors?.pattern\" style=\"color:red\">Invalid Email Address</p>\r\n                </div>\r\n            </form>\r\n        </div>\r\n\r\n\r\n    </div>\r\n\r\n    <div class=\"wrapper\" style=\"padding:15px 0px 0px 0px;\">\r\n        <div class=\"col-md-3\">\r\n\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <button *ngIf=\"saveButtonVisibility\" style=\"background-color: #00303c;color:white;margin:10px;\" id=\"btnSave\" class=\"btn btn-md center-block\"\r\n                (click)=\"saveTimesheet()\">\r\n                <i class=\"fa fa-cloud\" aria-hidden=\"true\"></i> Save Timesheet</button>\r\n            <button *ngIf=\"editButtonVisibility\" style=\"margin:10px;\" (click)=\"toggleButton()\" id=\"btnSave\" class=\"btn btn-warning\">\r\n                <span class=\"glyphicon glyphicon-pencil\"></span>{{editIcon}} Edit Timesheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block\" style=\"margin:10px;\" (click)=\"exportToExcel()\">\r\n                <i class=\"fa fa-download\" aria-hidden=\"true\"></i> Generate Excel Sheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block btn-danger\" style=\"margin:10px;\" (click)=\"sendMail(content)\">\r\n                <span class=\"glyphicon glyphicon-envelope\"></span>{{mailIcon}} Send In Mail</button>\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n<div class=\"wrapper footer\">\r\n    <div class=\"col-md-12\">\r\n        <p style=\"margin:0px;\">Developed by Sanchit Aggarwal / Innovation By Tanuj Kathuria</p>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<ng-template id=\"hideDiv\" #content let-c=\"close\" let-d=\"dismiss\">\r\n\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\" id=\"modal-basic-title\">Send Email</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n\r\n\r\n    <div class=\"modal-body\">\r\n        <form>\r\n            <div class=\"form-group\">\r\n                <label for=\"useremail\">User Email</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"useremail\" #useremail name=\"useremail\" class=\"form-control\" placeholder=\"from\" [(ngModel)]=\"userMailId\" readonly>\r\n                </div>\r\n                <!-- <div>\r\n                    <span *ngIf=\"invalidEmailMessageForUser\">Invalid Email Address</span>\r\n                </div> -->\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"userpassword\">User Password</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"userpassword\" type=\"password\" #userpassword name=\"userpassword\" class=\"form-control\" placeholder=\"password\" (blur)=\"showPasswordValidationMessageIfEmpty($event)\"\r\n                        [(ngModel)]=\"userPasswordForEmail\" (keyup)=\"checkPasswordLength($event)\">\r\n                </div>\r\n                <div>\r\n                    <span *ngIf=\"emptyPasswordMessage\">Password Should not be Empty</span>\r\n                </div>\r\n\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"clientemail\">Client Email</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"clientemail\" #clientemail name=\"clientemail\" class=\"form-control\" placeholder=\"To\" [(ngModel)]=\"clientMailId\"\r\n                        readonly>\r\n                </div>\r\n                <!-- <div>\r\n                    <span *ngIf=\"emailValidationMessageForClient\">Invalid Email Address</span>\r\n                </div> -->\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"cc\">Stakeholders Email (Cc)</label>\r\n                <div class=\"input-group\">\r\n\r\n                    <input id=\"cc\" class=\"form-control\" placeholder=\"Cc\" name=\"ccemailaddress\" #ccemailaddress=\"ngModel\" [(ngModel)]=\"ccEmailAddresses\"\r\n                        readonly>\r\n\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"subject\">Subject</label>\r\n                <div class=\"input-group\">\r\n\r\n                    <input id=\"subject\" class=\"form-control\" placeholder=\"subject\" name=\"subject\" #subject=\"ngModel\" [(ngModel)]=\"mailSubject\"\r\n                        readonly>\r\n                    <!-- <div class=\"input-group-append\">\r\n                            <button class=\"btn btn-outline-secondary\" (click)=\"dp.toggle()\" type=\"button\">\r\n                              <img src=\"img/calendar-icon.svg\" style=\"width: 1.2rem; height: 1rem; cursor: pointer;\"/>\r\n                            </button>\r\n                          </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"mailbody\">Mail Body</label>\r\n                <div class=\"input-group\">\r\n                    <div readonly [innerHTML]=\"emailTemplate\"></div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n\r\n    <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"mailSent()\" [disabled]=\"invalidMailAddress\">Send</button>\r\n    </div>\r\n\r\n</ng-template>\r\n\r\n"
+module.exports = "<!-- svam image header-->\r\n<div class=\"header\">\r\n    <img src=\"../assets/imgs/svam.png\" alt=\"SVAM INC\" class=\"responsive\" width=\"800\" height=\"400\">\r\n\r\n    <h6>WEEKLY TIMESHEET </h6>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"wrapper wrapperpadding\">\r\n    <div class=\"container\">\r\n        <div *ngIf=\"!showTimesheetOfSelectedUser\" class=\"col-md-6 centered text-center col-centered\">\r\n            <p>\r\n                <select name=\"resource\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue\" (change)=\"getSelectedResourceValue()\">\r\n                    <option value=\"undefined\" selected disabled>Select the resource name</option>\r\n                    <option *ngFor=\"let resource of resources\" [ngValue]=\"resource\">{{resource.userName}}</option>\r\n                </select>\r\n            </p>\r\n\r\n            <div>\r\n                <input #otp *ngIf=\"showOtpInput\" class=\"form-control\" [(ngModel)]=\"otpValue\" (keydown)=\"checkForOtpLength(otp,$event)\" placeholder=\"Enter OTP Sent To Your Mail Id\">\r\n                <!-- <span *ngIf=\"otpCheckEnabled\" style=\"cursor:pointer;\" (click)=\"validateOtp($event)\">{{check}}</span>\r\n                <span *ngIf=\"otpCheckEnabled\" style=\"cursor:pointer;\" (click)=\"getSelectedResourceValue()\">{{refresh}}</span> -->\r\n                <div style=\"padding:15px;\">\r\n                    <button  class=\"btn btn-success\" *ngIf=\"otpCheckEnabled\" style=\"cursor:pointer;margin:5px;\" (click)=\"validateOtp($event)\">Validate Otp</button>\r\n                    <button  class=\"btn btn-danger\" *ngIf=\"otpCheckEnabled\" style=\"cursor:pointer;margin:5px;\" (click)=\"getSelectedResourceValue()\">Resend Otp</button>\r\n                </div>\r\n            </div>\r\n\r\n\r\n\r\n            <div>\r\n                <label style=\"color:green;\" *ngIf=\"otpSuccessMessage\">{{otpSuccessMessage}}</label>\r\n                <label style=\"color:red;\" *ngIf=\"otpFailMessage\">{{otpFailMessage}}</label>\r\n            </div>\r\n\r\n        </div>\r\n    </div>\r\n</div>\r\n<div id=\"timesheetouterdiv\" *ngIf=\"showTimesheetOfSelectedUser\">\r\n    <div class=\"wrapper\">\r\n        <!-- first column of row -->\r\n        <!-- second column of row -->\r\n        <div class=\"col-md-9\" style=\"background-color:#00303c; color:#ffffff\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4\">\r\n                    <p>Resource Name\r\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.userName\" readonly>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Name of the Project\r\n                        <input type=\"text\" class=\"form-control\" value=\"Teach For America\" readonly>\r\n                    </p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p>Select Date:\r\n                        <p-calendar readonlyInput=\"true\" class=\"form-control\" [disabledDays]=\"[0,2,3,4,5,6]\" [(ngModel)]=\"startDate\" (onSelect)=\"getWeekFromDate(startDate)\"></p-calendar>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div class=\"timesheettablediv\" style=\"width:100%\">\r\n                <table style=\"width:100%;\" class=\"taskstable\">\r\n                    <thead>\r\n                        <tr>\r\n                            <th style=\"width:15%;text-align:center\">Task Name</th>\r\n                            <th style=\"width:15%;text-align:center\">Description</th>\r\n                            <th style=\"width:10%\" *ngFor=\"let date of dates\">{{date}}</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr *ngFor=\"let tasks of timesheetArray; let i = index\">\r\n                            <td>\r\n                                <!-- <select class=\"form-control\" [(ngModel)]=\"tasks.taskName\" [disabled]=\"isReadOnlyForTimesheetRow\">\r\n                                    <option value=\"\" selected disabled>Select the Task</option>\r\n                                    <option *ngFor=\"let task of tasksData\" [ngValue]=\"task.taskName\">{{task.taskName}}</option>\r\n                                </select> -->\r\n                                <input id=\"typeahead-basic\" placeholder=\"Task Name\" type=\"text\" class=\"form-control\" [(ngModel)]=\"tasks.taskName\" [ngbTypeahead]=\"searchForTaskName\"\r\n                                    [disabled]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <!-- (blur)=\"checkTaskValidation(tasks.taskDescription,'taskDescription',i)\" -->\r\n\r\n                                <input class=\"form-control\" placeholder=\"Description\" type=\"text\" [(ngModel)]=\"tasks.taskDescription\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                    (focus)=\"expandDescriptionOnFocus($event)\" (blur)=descriptionBoxBackToNormal($event) />\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control firstDate\" id=\"firstDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.dayOneHours,'dayOneHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayOneHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control secondDate\" id=\"secondDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (keyup)=\"checkHours($event,tasks.dayTwoHours,'dayTwoHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayTwoHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control thirdDate\" id=\"thirdDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" placeholder=\"hours\"\r\n                                    (keyup)=\"checkHours($event,tasks.dayThreeHours,'dayThreeHours',i)\" type=\"text\" [(ngModel)]=\"tasks.dayThreeHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fourthDate\" id=\"fourthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    placeholder=\"hours\" placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.dayFourHours,'dayFourHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayFourHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control fifthDate\" id=\"fifthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.dayFiveHours,'dayFiveHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.dayFiveHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control sixthDate\" id=\"sixthDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\" (keyup)=\"checkHours($event,tasks.daySixHours,'daySixHours',i)\"\r\n                                    type=\"text\" [(ngModel)]=\"tasks.daySixHours\" name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\"\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control seventhDate\" id=\"seventhDateHour\" (keypress)=checkNoOfDigitsInHours($event) placeholder=\"hours\"\r\n                                    (keyup)=\"checkHours($event,tasks.daySevenHours,'daySevenHours',i)\" type=\"text\" id=\"\" [(ngModel)]=\"tasks.daySevenHours\"\r\n                                    name=\"\" [readonly]=\"isReadOnlyForTimesheetRow\" />\r\n                            </td>\r\n                            <td>\r\n                                <button id=\"addrowbuttonid\" style=\"box-shadow: none;background-color:#00303c;border-color:#00303c;\" *ngIf=\"i==0\" class=\"btn btn-default btn-success\"\r\n                                    type=\"button\" (click)=\"addRow()\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n\r\n\r\n                                <button style=\"background-color:#00303c;border-color:#00303c;\" *ngIf=\"i>0\" class=\"btn btn-default btn-danger\" type=\"button\"\r\n                                    (click)=\"deleteFieldValue(i)\" [disabled]=\"addAndEditButtonDisable\">\r\n                                    <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                                </button>\r\n                            </td>\r\n                        </tr>\r\n\r\n\r\n                        <tr>\r\n                            <td colspan=\"2\">\r\n                                Total Timesheet Hours\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"firstdatetotal\" type=\"text\" [(ngModel)]=\"firstDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seconddatetotal\" type=\"text\" [(ngModel)]=\"secondDateTotal\" name=\"\" readonly\r\n                                />\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"thirddatetotaleHour\" type=\"text\" [(ngModel)]=\"thirdDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fouthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fourthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"fifthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"fifthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"sixthdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"sixthDateTotal\" name=\"\"\r\n                                    readonly/>\r\n\r\n                            </td>\r\n                            <td>\r\n                                <input class=\"form-control\" placeholder=\"Total\" id=\"seventhdatetotal\" type=\"text\" id=\"\" [(ngModel)]=\"seventhDateTotal\" name=\"\"\r\n                                    readonly/>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n\r\n            </div>\r\n\r\n\r\n\r\n            <div class=\"row\" style=\"padding:50px 0px 0px 0px\">\r\n                <div class=\"col-md-6\">\r\n                    <p>Total Weekly Hours\r\n                        <input id=\"totalweeklyhours\" [value]=\"totalWeeklyHours\" class=\"form-control\" type=\"text\" readonly>\r\n                    </p>\r\n                </div>\r\n            </div>\r\n            <div>\r\n                <label style=\"color:red;\" *ngIf=\"validationMessageForMandatoryTaskName\">Task Name is Mandatory</label>\r\n                <label style=\"color:red;\" *ngIf=\"hourValidationMessage\">Hours Cannot be greater than 24</label>\r\n                <label style=\"color:red;\" *ngIf=\"EmailIdExistMessage\">Email Id Aready Exist</label>\r\n                <label style=\"color:red;\" *ngIf=\"emailAddressNotValidated\">{{emailAddressNotValidated}}</label>\r\n                <!-- <label style=\"color:green;\" *ngIf=\"message\">{{message}}</label> -->\r\n                <label style=\"padding:0px;\" *ngIf=\"message\" class=\"alert alert-success\">{{message}}</label>\r\n\r\n            </div>\r\n\r\n        </div>\r\n\r\n\r\n        <!-- third column of row -->\r\n        <div class=\"col-md-3\">\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Project Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <div class=\"input-group\">\r\n                        <input id=\"managername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.managerEmail\" [readonly]=\"isManagerReadOnly\"\r\n                        />\r\n                        <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideManagerEditButton()\"\r\n                                class=\"edit-button\">{{editIcon}}</span>\r\n                            <span style=\"cursor:pointer;\" *ngIf=\"managerUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideManagerUpdateButton()\"\r\n                                class=\"update-button\">{{check}}</span>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Name</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmanagername\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientEmail\" [readonly]=\"isClientReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEditButtonShowHide\" id=\"clientmanagereditbutton\" (click)=\"hideClientEditButton()\"\r\n                            class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientUpdateButtonShowHide\" id=\"clientmanagerupdatebutton\" (click)=\"hideClientUpdateButton()\"\r\n                            class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">Client Manager Email</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"clientmailid\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.clientMailAdd\" [readonly]=\"isClientEmailReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEmailEditButtonShowHide\" (click)=\"hideClientEmailEditButton()\" class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"clientEmailUpdateButtonShowHide\" (click)=\"hideClientEmailUpdateButton($event)\" class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"margin:10px 0px;\">\r\n                <label style=\"display:inline\">User Email</label>\r\n                <div class=\"input-group\">\r\n                    <input id=\"usermailid\" type=\"text\" class=\"form-control\" [(ngModel)]=\"selectedResourceValue.userMailAdd\" [readonly]=\"isUserEmailReadOnly\"\r\n                    />\r\n                    <span class=\"input-group-btn\" style=\"padding:10px;\">\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"userEmailEditButtonShowHide\" (click)=\"hideUserEmailEditButton()\" class=\"edit-button\">{{editIcon}}</span>\r\n\r\n\r\n                        <span style=\"cursor:pointer;\" *ngIf=\"userEmailUpdateButtonShowHide\" (click)=\"hideUserEmailUpdateButton($event)\" class=\"update-button\">{{check}}</span>\r\n\r\n                    </span>\r\n                </div>\r\n            </div>\r\n\r\n            <table class=\"table\">\r\n                <tr>\r\n                    <th>StakeHolders Email</th>\r\n                </tr>\r\n                <tbody>\r\n                    <tr *ngFor=\"let stakeholderEmail of selectedResourceValue.stakeholdersEmail\">\r\n                        <td>{{stakeholderEmail}}</td>\r\n                        <!-- <button class=\"btn btn-default btn-danger\" type=\"button\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">Delete</button> -->\r\n                        <td>\r\n                            <span style=\"cursor:pointer;color:red;\" (click)=\"deleteStakeHolderEmail(stakeholderEmail)\">\r\n                                <i style=\"color:red;\" class=\"fa fa-times\" aria-hidden=\"true\"></i>\r\n                            </span>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n\r\n            <form (ngSubmit)=\"submit(userform)\" #userform=\"ngForm\">\r\n                <label>Add StakeHolder Email</label>\r\n                <div class=\"input-group\">\r\n                    <input required class=\"form-control\" id=\"stakeholderEmail\" name=\"emailaddress\" #emailaddress=\"ngModel\" pattern=\"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"\r\n                        ngModel [(ngModel)]=\"stakeholderEmail\" type=\"text\">\r\n                    <span class=\"input-group-btn\">\r\n                        <button style=\"background-color: white;border:none;\" class=\"btn btn-default btn-success add-stakeholder\" (click)=\"addEmail()\"\r\n                            [disabled]=\"!userform.valid\" type=\"submit\">\r\n                            <i style=\"color:green;\" class=\"fa fa-plus\" aria-hidden=\"true\"></i>\r\n                        </button>\r\n                    </span>\r\n                </div>\r\n                <div *ngIf=\"!emailaddress.valid && emailaddress.touched\">\r\n                    <p *ngIf=\"emailaddress?.errors?.pattern\" style=\"color:red\">Invalid Email Address</p>\r\n                </div>\r\n            </form>\r\n        </div>\r\n\r\n\r\n    </div>\r\n\r\n    <div class=\"wrapper\" style=\"padding:15px 0px 0px 0px;\">\r\n        <div class=\"col-md-3\">\r\n\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <button *ngIf=\"saveButtonVisibility\" style=\"background-color: #00303c;color:white;margin:10px;\" id=\"btnSave\" class=\"btn btn-md center-block\"\r\n                (click)=\"saveTimesheet()\">\r\n                <i class=\"fa fa-cloud\" aria-hidden=\"true\"></i> Save Timesheet</button>\r\n            <button *ngIf=\"editButtonVisibility\" style=\"margin:10px;\" (click)=\"toggleButton()\" id=\"btnSave\" class=\"btn btn-warning\">\r\n                <span class=\"glyphicon glyphicon-pencil\"></span>{{editIcon}} Edit Timesheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block\" style=\"margin:10px;\" (click)=\"exportToExcel()\">\r\n                <i class=\"fa fa-download\" aria-hidden=\"true\"></i> Generate Excel Sheet</button>\r\n            <button class=\"btn btn-primary btn-md center-block btn-danger\" style=\"margin:10px;\" (click)=\"sendMail(content)\">\r\n                <span class=\"glyphicon glyphicon-envelope\"></span>{{mailIcon}} Send In Mail</button>\r\n            <!-- <button class=\"btn btn-primary btn-md center-block btn-danger\" style=\"margin:10px;\" (click)=\"redirectToReports()\">Generate Reports</button> -->\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n            <br>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n\r\n<div class=\"wrapper footer\">\r\n    <div class=\"col-md-12\">\r\n        <p style=\"margin:0px;\">Developed by Sanchit Aggarwal / Innovation By Tanuj Kathuria</p>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n<ng-template id=\"hideDiv\" #content let-c=\"close\" let-d=\"dismiss\">\r\n\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\" id=\"modal-basic-title\">Send Email</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n\r\n\r\n    <div class=\"modal-body\">\r\n        <form>\r\n            <div class=\"form-group\">\r\n                <label for=\"useremail\">User Email</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"useremail\" #useremail name=\"useremail\" class=\"form-control\" placeholder=\"from\" [(ngModel)]=\"userMailId\" readonly>\r\n                </div>\r\n                <!-- <div>\r\n                    <span *ngIf=\"invalidEmailMessageForUser\">Invalid Email Address</span>\r\n                </div> -->\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"userpassword\">User Password</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"userpassword\" type=\"password\" #userpassword name=\"userpassword\" class=\"form-control\" placeholder=\"password\" (blur)=\"showPasswordValidationMessageIfEmpty($event)\"\r\n                        [(ngModel)]=\"userPasswordForEmail\" (keyup)=\"checkPasswordLength($event)\">\r\n                </div>\r\n                <div>\r\n                    <span *ngIf=\"emptyPasswordMessage\">Password Should not be Empty</span>\r\n                </div>\r\n\r\n            </div>\r\n\r\n            <div class=\"form-group\">\r\n                <label for=\"clientemail\">Client Email</label>\r\n                <div class=\"input-group\">\r\n                    <!-- <input id=\"to\" class=\"form-control\" placeholder=\"To\" name=\"clientmailid\" #clientmailid=\"ngModel\" [(ngModel)]=\"clientMailId\"> -->\r\n                    <input id=\"clientemail\" #clientemail name=\"clientemail\" class=\"form-control\" placeholder=\"To\" [(ngModel)]=\"clientMailId\"\r\n                        readonly>\r\n                </div>\r\n                <!-- <div>\r\n                    <span *ngIf=\"emailValidationMessageForClient\">Invalid Email Address</span>\r\n                </div> -->\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"cc\">Stakeholders Email (Cc)</label>\r\n                <div class=\"input-group\">\r\n\r\n                    <input id=\"cc\" class=\"form-control\" placeholder=\"Cc\" name=\"ccemailaddress\" #ccemailaddress=\"ngModel\" [(ngModel)]=\"ccEmailAddresses\"\r\n                        readonly>\r\n\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"subject\">Subject</label>\r\n                <div class=\"input-group\">\r\n\r\n                    <input id=\"subject\" class=\"form-control\" placeholder=\"subject\" name=\"subject\" #subject=\"ngModel\" [(ngModel)]=\"mailSubject\"\r\n                        readonly>\r\n                    <!-- <div class=\"input-group-append\">\r\n                            <button class=\"btn btn-outline-secondary\" (click)=\"dp.toggle()\" type=\"button\">\r\n                              <img src=\"img/calendar-icon.svg\" style=\"width: 1.2rem; height: 1rem; cursor: pointer;\"/>\r\n                            </button>\r\n                          </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"mailbody\">Mail Body</label>\r\n                <div class=\"input-group\">\r\n                    <div readonly [innerHTML]=\"emailTemplate\"></div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n\r\n    <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"mailSent()\" [disabled]=\"invalidMailAddress\">Send</button>\r\n    </div>\r\n\r\n</ng-template>"
 
 /***/ }),
 
@@ -619,6 +825,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var _services_email_email_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/email/email.service */ "./src/app/services/email/email.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_otp_otp_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../services/otp/otp.service */ "./src/app/services/otp/otp.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -639,9 +847,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var TimesheetComponent = /** @class */ (function () {
-    function TimesheetComponent(email, timesheetService, tasksService, constantService, modalService) {
+    function TimesheetComponent(otpService, router, email, timesheetService, tasksService, constantService, modalService) {
         var _this = this;
+        this.otpService = otpService;
+        this.router = router;
         this.email = email;
         this.timesheetService = timesheetService;
         this.tasksService = tasksService;
@@ -653,6 +865,7 @@ var TimesheetComponent = /** @class */ (function () {
         this.mailIcon = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.email;
         this.plus = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.plus;
         this.check = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.checkHeavy;
+        this.refresh = glyphicons__WEBPACK_IMPORTED_MODULE_7___default.a.arrowCircleFull;
         // to disable the add and edit button in the timesheet table according to whether timesheet exist or not
         this.addAndEditButtonDisable = false;
         // toggle edita nd save timesheet button visibility according to whether timesheet exist or not
@@ -699,6 +912,9 @@ var TimesheetComponent = /** @class */ (function () {
         // to enable send button if password is having at least one character
         this.invalidMailAddress = true;
         this.tasksName = [];
+        this.showOtpInput = false;
+        this.otpCheckEnabled = false;
+        this.showTimesheetOfSelectedUser = false;
         this.searchForTaskName = function (text$) {
             return text$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["debounceTime"])(100), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["distinctUntilChanged"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["map"])(function (term) { return term.length < 1 ? []
                 : _this.tasksName.filter(function (v) { return v.toLowerCase().indexOf(term.toLowerCase()) > -1; }).slice(0, 10); }));
@@ -714,9 +930,51 @@ var TimesheetComponent = /** @class */ (function () {
         // get week from date 
         this.getWeekFromDate(this.startDate);
     };
+    TimesheetComponent.prototype.checkForOtpLength = function (otp, event) {
+        console.log(otp.value);
+        if (otp.value.length == 3) {
+            this.otpCheckEnabled = true;
+        }
+        if (otp.value.length >= 4 || !(event.keyCode >= 48 && event.keyCode <= 57))
+            if (!(event.keyCode == 8 || event.keyCode == 46))
+                event.preventDefault();
+    };
+    TimesheetComponent.prototype.validateOtp = function (event) {
+        var _this = this;
+        this.constantService.showLoader();
+        this.otpService.validateOtp(this.selectedResourceValue.userMailAdd, this.otpValue).subscribe(function (message) {
+            _this.constantService.hideLoader();
+            console.log(message.response);
+            if (message.response == "OTP is verified successfullly") {
+                _this.showTimesheetOfSelectedUser = true;
+                _this.getExistingTimesheet();
+            }
+        }, function (error) {
+            //this.otpCheckEnabled = false;
+            _this.constantService.hideLoader();
+            _this.otpFailMessage = error.error.response;
+            var self = _this;
+            setTimeout(function () { self.otpFailMessage = ""; }, 3000);
+        });
+    };
     // call when new resource/user is selected from the drop down box
     TimesheetComponent.prototype.getSelectedResourceValue = function () {
-        this.getExistingTimesheet();
+        var _this = this;
+        this.otpValue = "";
+        this.constantService.showLoader();
+        this.otpService.sendOtp(this.selectedResourceValue.userMailAdd).subscribe(function (message) {
+            _this.constantService.hideLoader();
+            console.log(message.response);
+            _this.showOtpInput = true;
+            _this.otpSuccessMessage = message.response;
+            var self = _this;
+            setTimeout(function () { self.otpSuccessMessage = ""; }, 2000);
+        }, function (error) {
+            _this.message = error;
+            var self = _this;
+            setTimeout(function () { self.message = ""; }, 2000);
+        });
+        //this.getExistingTimesheet();
     };
     // get Monday From Present Date
     TimesheetComponent.prototype.getMonday = function () {
@@ -1337,7 +1595,7 @@ var TimesheetComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./timesheet.component.html */ "./src/app/timesheet/timesheet.component.html"),
             styles: [__webpack_require__(/*! ./timesheet.component.css */ "./src/app/timesheet/timesheet.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_email_email_service__WEBPACK_IMPORTED_MODULE_9__["EmailService"], _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_2__["TimesheetService"], _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_3__["TasksService"], _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_5__["ConstantService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["NgbModal"]])
+        __metadata("design:paramtypes", [_services_otp_otp_service__WEBPACK_IMPORTED_MODULE_12__["OtpService"], _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"], _services_email_email_service__WEBPACK_IMPORTED_MODULE_9__["EmailService"], _services_timesheet_timesheet_service__WEBPACK_IMPORTED_MODULE_2__["TimesheetService"], _services_tasks_tasks_service__WEBPACK_IMPORTED_MODULE_3__["TasksService"], _services_constants_constants_service__WEBPACK_IMPORTED_MODULE_5__["ConstantService"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["NgbModal"]])
     ], TimesheetComponent);
     return TimesheetComponent;
 }());

@@ -18,12 +18,11 @@
             </p>
 
             <div>
-                <input #otp *ngIf="showOtpInput" class="form-control" [(ngModel)]="otpValue" (keydown)="checkForOtpLength(otp,$event)" placeholder="Enter OTP Sent To Your Mail Id">
-                <!-- <span *ngIf="otpCheckEnabled" style="cursor:pointer;" (click)="validateOtp($event)">{{check}}</span>
-                <span *ngIf="otpCheckEnabled" style="cursor:pointer;" (click)="getSelectedResourceValue()">{{refresh}}</span> -->
+                <input #otp *ngIf="showOtpInput" class="form-control" [(ngModel)]="otpValue" (keydown)="checkForOtpLength(otp,$event)" placeholder="Enter OTP Sent To Your Teach For America Mail Id">
+               
                 <div style="padding:15px;">
-                    <button  class="btn btn-success" *ngIf="otpCheckEnabled" style="cursor:pointer;margin:5px;" (click)="validateOtp($event)">Validate Otp</button>
-                    <button  class="btn btn-danger" *ngIf="otpCheckEnabled" style="cursor:pointer;margin:5px;" (click)="getSelectedResourceValue()">Resend Otp</button>
+                    <button  class="btn btn-success" *ngIf="showOtpInput"  style="cursor:pointer;margin:5px;" (click)="validateOtp($event)">Validate Otp</button>
+                    <button  class="btn btn-danger" *ngIf="showOtpInput"  style="cursor:pointer;margin:5px;" (click)="getSelectedResourceValue()">Resend Otp</button>
                 </div>
             </div>
 

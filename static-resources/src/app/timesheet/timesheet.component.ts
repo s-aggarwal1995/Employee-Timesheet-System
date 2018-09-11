@@ -150,7 +150,7 @@ export class TimesheetComponent implements OnInit {
 
   otpSuccessMessage: String;
 
-  otpCheckEnabled: boolean = false;
+  
 
   otpValue: String;
 
@@ -190,13 +190,12 @@ export class TimesheetComponent implements OnInit {
 
   checkForOtpLength(otp, event) {
     console.log(otp.value);
-    if (otp.value.length == 3) {
-      this.otpCheckEnabled = true;
-    }
-    if (otp.value.length >= 4 || !(event.keyCode >= 48 && event.keyCode <= 57))
+
+    // if (otp.value.length >= 4 || !(event.keyCode >= 48 && event.keyCode <= 57))
+    
+    if (otp.value.length >= 4 )
       if (!(event.keyCode == 8 || event.keyCode == 46))
         event.preventDefault();
-
   }
 
   validateOtp(event) {
@@ -214,7 +213,7 @@ export class TimesheetComponent implements OnInit {
 
     },
       error => {
-        //this.otpCheckEnabled = false;
+        
         this.constantService.hideLoader();
         this.otpFailMessage = error.error.response;
         var self = this;

@@ -33,6 +33,9 @@ public class OtpSystemRestController {
     @Value("${spring.mail.password}")
     String password;
 
+    @Value("${remote.connection.username}")
+    String remote_connection_username;
+
     private static final Logger logger = LoggerFactory.getLogger(OtpSystemRestController.class);
 
 
@@ -42,6 +45,9 @@ public class OtpSystemRestController {
     @RequestMapping(value = "/sentotp", method = RequestMethod.POST)
     public ResponseEntity<Object> sendOtp(@RequestBody String userEmail) {
         try {
+
+
+            logger.info(remote_connection_username);
 
             logger.info("Enter Into The Send Otp Function");
 
@@ -55,7 +61,7 @@ public class OtpSystemRestController {
             OtpSystem otpSystem = new OtpSystem();
             otpSystem.setUserEmail(userEmail);
             otpSystem.setOtp(String.valueOf((int) (Math.random() * (10000 - 1000) + 1000)));
-            otpSystem.setExpiryTime(System.currentTimeMillis() + 30000);
+            otpSystem.setExpiryTime(System.currentTimeMillis() + 60000 * 10);
 
             otp_data.put(userEmail, otpSystem);
 

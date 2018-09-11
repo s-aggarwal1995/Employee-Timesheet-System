@@ -985,13 +985,15 @@ export class TimesheetComponent implements OnInit {
 
     if (!this.editButtonVisibility) {
 
-      event.srcElement.parentNode.style.opacity = "0.9";
-      event.srcElement.parentNode.style.zIndex = "9999";
-      event.srcElement.parentNode.style.position = "fixed";
-
-      event.target.style.position = "relative";
+      //event.srcElement.parentNode.style.opacity = "0.9";
+      //event.srcElement.parentNode.style.zIndex = "9999";
+      event.srcElement.parentNode.style.position = "relative";
+     
+      event.target.style.position = "absolute";
+      event.target.style.zIndex = "9999";
+      event.target.style.opacity = "0.9";
       event.target.style.width = "480px";
-
+      
     }
 
   }
